@@ -1,0 +1,8 @@
+stages:
+  - test
+
+test-job:
+  stage: test
+  script:
+    - echo "Compiling the code..."
+    - echo "Compile complete."
