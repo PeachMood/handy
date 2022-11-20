@@ -1,8 +1,18 @@
 stages:
-  - test
+  - verify
+  - test-unit
 
-test-job:
-  stage: test
+checkstyle:
+  image: gradle:7-jdk17-jammy
   script:
-    - echo "Compiling..."
-    - echo "Compile complete."
+    - cd server
+    - apt update
+    - apt -y install checkstyle
+    - checkstyle src/ -c ./google_checks.xml
+
+junit:
+  image: gradle:7-jdk17-jammy
+  script:
+    - cd server
+    - chmod +x ./gradlew
+    - ./gradlew test
