@@ -7,9 +7,8 @@ checkstyle:
   image: gradle:7-jdk17-jammy
   script:
     - cd server
-    - apt update
-    - apt -y install checkstyle
-    - checkstyle src/ -c ./google_checks.xml
+    - curl -s https://api.github.com/repos/checkstyle/checkstyle/releases/latest | grep -wo 'https.*jar' | wget -q -O ./checkstyle.jar -i -
+    - java -jar ./checkstyle.jar src/ -c /google_checks.xml
 
 junit:
   stage: test-unit
