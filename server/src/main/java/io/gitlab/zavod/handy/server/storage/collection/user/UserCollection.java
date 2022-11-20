@@ -31,7 +31,7 @@ public interface UserCollection {
    *
    * @param id User's id to be found.
    * @return <code>UserEntity</code> instance with the specified id,
-   * or <code>null</code> if such user doesn't exist.
+    * or <code>null</code> if such user doesn't exist.
    */
   UserEntity findUser(int id);
 
@@ -47,7 +47,7 @@ public interface UserCollection {
    *
    * @param name Username to be found.
    * @return <code>UserEntity</code> instance with the specified name,
-   * or <code>null</code> if such user doesn't exist.
+    * or <code>null</code> if such user doesn't exist.
    */
   UserEntity findUserByName(String name);
 
@@ -56,7 +56,7 @@ public interface UserCollection {
    *
    * @param email User's e-mail address to be found.
    * @return <code>UserEntity</code> instance with the specified e-mail address,
-   * or <code>null</code> if such user doesn't exist.
+    * or <code>null</code> if such user doesn't exist.
    */
   UserEntity findUserByEmail(String email);
 
@@ -66,7 +66,7 @@ public interface UserCollection {
    * @param name         Username to be authenticated.
    * @param passwordHash Hash of user's password.
    * @return <code>UserEntity</code> instance if authentication was succeeded,
-   * or <code>null</code> otherwise.
+    * or <code>null</code> otherwise.
    */
   UserEntity authenticateUserByName(String name, String passwordHash);
 
@@ -76,7 +76,7 @@ public interface UserCollection {
    * @param email        User's e-mail address to be authenticated.
    * @param passwordHash Hash of user's password.
    * @return <code>UserEntity</code> instance if authentication was succeeded,
-   * or <code>null</code> otherwise.
+    * or <code>null</code> otherwise.
    */
   UserEntity authenticateUserByEmail(String email, String passwordHash);
 
@@ -85,7 +85,7 @@ public interface UserCollection {
    *
    * @param userEntity <code>UserEntity</code> instance to be updated.
    * @return <code>true</code> if user's data changed as a result of this call,
-   * or <code>false</code> otherwise.
+    * or <code>false</code> otherwise.
    */
   boolean updateUser(UserEntity userEntity);
 
@@ -94,7 +94,7 @@ public interface UserCollection {
    *
    * @param id User's id to be deleted.
    * @return <code>true</code> if user collection changed as a result of this call,
-   * or <code>false</code> otherwise.
+    * or <code>false</code> otherwise.
    */
   boolean deleteUser(int id);
 }
