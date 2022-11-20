@@ -2,7 +2,6 @@ package io.gitlab.zavod.handy.server.storage.collection.user;
 
 import io.gitlab.zavod.handy.server.storage.entity.user.SettingsEntity;
 import io.gitlab.zavod.handy.server.storage.entity.user.UserEntity;
-
 import java.nio.file.Path;
 import java.util.List;
 
@@ -20,13 +19,19 @@ public interface UserCollection {
    * @param passwordHash   Hash of user's password.
    * @param settingsEntity Instance of user's SettingsEntity.
    */
-  void createUser(int id, String name, String email, Path avatar, String passwordHash, SettingsEntity settingsEntity);
+  void createUser(int id,
+      String name,
+      String email,
+      Path avatar,
+      String passwordHash,
+      SettingsEntity settingsEntity);
 
   /**
    * <p>Finds user by id.</p>
    *
    * @param id User's id to be found.
-   * @return <code>UserEntity</code> instance with the specified id, or <code>null</code> if such user doesn't exist.
+   * @return <code>UserEntity</code> instance with the specified id,
+   * or <code>null</code> if such user doesn't exist.
    */
   UserEntity findUser(int id);
 
@@ -41,7 +46,8 @@ public interface UserCollection {
    * <p>Finds user by name.</p>
    *
    * @param name Username to be found.
-   * @return <code>UserEntity</code> instance with the specified name, or <code>null</code> if such user doesn't exist.
+   * @return <code>UserEntity</code> instance with the specified name,
+   * or <code>null</code> if such user doesn't exist.
    */
   UserEntity findUserByName(String name);
 
@@ -49,7 +55,8 @@ public interface UserCollection {
    * <p>Finds user by e-mail address.</p>
    *
    * @param email User's e-mail address to be found.
-   * @return <code>UserEntity</code> instance with the specified e-mail address, or <code>null</code> if such user doesn't exist.
+   * @return <code>UserEntity</code> instance with the specified e-mail address,
+   * or <code>null</code> if such user doesn't exist.
    */
   UserEntity findUserByEmail(String email);
 
@@ -58,7 +65,8 @@ public interface UserCollection {
    *
    * @param name         Username to be authenticated.
    * @param passwordHash Hash of user's password.
-   * @return <code>UserEntity</code> instance if authentication was succeeded, or <code>null</code> otherwise.
+   * @return <code>UserEntity</code> instance if authentication was succeeded,
+   * or <code>null</code> otherwise.
    */
   UserEntity authenticateUserByName(String name, String passwordHash);
 
@@ -67,7 +75,8 @@ public interface UserCollection {
    *
    * @param email        User's e-mail address to be authenticated.
    * @param passwordHash Hash of user's password.
-   * @return <code>UserEntity</code> instance if authentication was succeeded, or <code>null</code> otherwise.
+   * @return <code>UserEntity</code> instance if authentication was succeeded,
+   * or <code>null</code> otherwise.
    */
   UserEntity authenticateUserByEmail(String email, String passwordHash);
 
@@ -75,7 +84,8 @@ public interface UserCollection {
    * <p>Updates user's data. If the specified user doesn't exist, new user will be created.</p>
    *
    * @param userEntity <code>UserEntity</code> instance to be updated.
-   * @return <code>true</code> if user's data changed as a result of this call, or <code>false</code> otherwise.
+   * @return <code>true</code> if user's data changed as a result of this call,
+   * or <code>false</code> otherwise.
    */
   boolean updateUser(UserEntity userEntity);
 
@@ -83,7 +93,8 @@ public interface UserCollection {
    * <p>Deletes user by id.</p>
    *
    * @param id User's id to be deleted.
-   * @return <code>true</code> if user collection changed as a result of this call, or <code>false</code> otherwise.
+   * @return <code>true</code> if user collection changed as a result of this call,
+   * or <code>false</code> otherwise.
    */
   boolean deleteUser(int id);
 }

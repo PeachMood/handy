@@ -1,7 +1,6 @@
 package io.gitlab.zavod.handy.server.storage.collection.user;
 
 import io.gitlab.zavod.handy.server.storage.entity.user.SettingsEntity;
-
 import java.util.List;
 
 /**
@@ -20,7 +19,8 @@ public interface SettingsCollection {
    * <p>Finds settings by id.</p>
    *
    * @param id Settings id to be found.
-   * @return <code>SettingsEntity</code> instance with the specified id, or <code>null</code> if such settings doesn't exist.
+   * @return <code>SettingsEntity</code> instance with the specified id,
+   * or <code>null</code> if such settings doesn't exist.
    */
   SettingsEntity findSettings(int id);
 
@@ -36,7 +36,8 @@ public interface SettingsCollection {
    * created.</p>
    *
    * @param settingsEntity <code>SettingsEntity</code> instance to be updated.
-   * @return <code>true</code> if settings data changed as a result of this call, or <code>false</code> otherwise.
+   * @return <code>true</code> if settings data changed as a result of this call,
+   * or <code>false</code> otherwise.
    */
   boolean updateSettings(SettingsEntity settingsEntity);
 
@@ -44,7 +45,8 @@ public interface SettingsCollection {
    * <p>Deletes settings by id.</p>
    *
    * @param id Settings id to be deleted.
-   * @return <code>true</code> if settings collection changed as a result of this call, or <code>False</code> otherwise.
+   * @return <code>true</code> if settings collection changed as a result of this call,
+   * or <code>False</code> otherwise.
    */
   boolean deleteSettings(int id);
 }

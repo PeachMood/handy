@@ -1,7 +1,6 @@
 package io.gitlab.zavod.handy.server.storage.entity.note;
 
 import io.gitlab.zavod.handy.server.storage.entity.user.UserEntity;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -31,7 +30,14 @@ public class NoteEntity {
    * @param trashedDate      Date of permanent note deletion.
    * @param state            Current note state.
    */
-  public NoteEntity(int id, UserEntity userEntity, String name, Path content, LocalDateTime creationDate, LocalDateTime modificationDate, LocalDateTime trashedDate, NoteState state) {
+  public NoteEntity(int id,
+      UserEntity userEntity,
+      String name,
+      Path content,
+      LocalDateTime creationDate,
+      LocalDateTime modificationDate,
+      LocalDateTime trashedDate,
+      NoteState state) {
     this.id = id;
     this.userEntity = userEntity;
     this.name = name;
@@ -54,8 +60,22 @@ public class NoteEntity {
    * @param trashedDate      Date of permanent note deletion.
    * @param state            Current note state.
    */
-  public NoteEntity(int id, UserEntity userEntity, String name, String content, LocalDateTime creationDate, LocalDateTime modificationDate, LocalDateTime trashedDate, NoteState state) {
-    this(id, userEntity, name, Paths.get(content), creationDate, modificationDate, trashedDate, state);
+  public NoteEntity(int id,
+      UserEntity userEntity,
+      String name,
+      String content,
+      LocalDateTime creationDate,
+      LocalDateTime modificationDate,
+      LocalDateTime trashedDate,
+      NoteState state) {
+    this(id,
+        userEntity,
+        name,
+        Paths.get(content),
+        creationDate,
+        modificationDate,
+        trashedDate,
+        state);
   }
 
   /**
@@ -67,8 +87,19 @@ public class NoteEntity {
    * @param content    Path to note content.
    * @param state      Current note state.
    */
-  public NoteEntity(int id, UserEntity userEntity, String name, Path content, NoteState state) {
-    this(id, userEntity, name, content, LocalDateTime.now(), LocalDateTime.now(), null, state);
+  public NoteEntity(int id,
+      UserEntity userEntity,
+      String name,
+      Path content,
+      NoteState state) {
+    this(id,
+        userEntity,
+        name,
+        content,
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        null,
+        state);
   }
 
   /**
@@ -80,8 +111,19 @@ public class NoteEntity {
    * @param content    Path to note content.
    * @param state      Current note state.
    */
-  public NoteEntity(int id, UserEntity userEntity, String name, String content, NoteState state) {
-    this(id, userEntity, name, Paths.get(content), LocalDateTime.now(), LocalDateTime.now(), null, state);
+  public NoteEntity(int id,
+      UserEntity userEntity,
+      String name,
+      String content,
+      NoteState state) {
+    this(id,
+        userEntity,
+        name,
+        Paths.get(content),
+        LocalDateTime.now(),
+        LocalDateTime.now(),
+        null,
+        state);
   }
 
   /**
