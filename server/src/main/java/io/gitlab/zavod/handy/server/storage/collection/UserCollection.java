@@ -1,7 +1,7 @@
 package io.gitlab.zavod.handy.server.storage.collection;
 
-import io.gitlab.zavod.handy.server.storage.entity.SettingsEntity;
-import io.gitlab.zavod.handy.server.storage.entity.UserEntity;
+import io.gitlab.zavod.handy.server.storage.entity.user.SettingsEntity;
+import io.gitlab.zavod.handy.server.storage.entity.user.UserEntity;
 
 import java.nio.file.Path;
 import java.util.List;

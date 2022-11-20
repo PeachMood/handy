@@ -1,6 +1,6 @@
 package io.gitlab.zavod.handy.server.storage.collection;
 
-import io.gitlab.zavod.handy.server.storage.entity.UserEntity;
+import io.gitlab.zavod.handy.server.storage.entity.user.UserEntity;
 import io.gitlab.zavod.handy.server.storage.entity.note.NoteEntity;
 import io.gitlab.zavod.handy.server.storage.entity.note.NoteState;
 

@@ -1,6 +1,6 @@
 package io.gitlab.zavod.handy.server.storage.collection;
 
-import io.gitlab.zavod.handy.server.storage.entity.SettingsEntity;
+import io.gitlab.zavod.handy.server.storage.entity.user.SettingsEntity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package io.gitlab.zavod.handy.server.storage.entity;
+package io.gitlab.zavod.handy.server.storage.entity.user;
 
 /**
  * <p>Stores user settings.</p>

@@ -1,4 +1,4 @@
-package io.gitlab.zavod.handy.server.storage.entity;
+package io.gitlab.zavod.handy.server.storage.entity.user;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

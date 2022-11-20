@@ -1,6 +1,6 @@
 package io.gitlab.zavod.handy.server.storage.entity.note;
 
-import io.gitlab.zavod.handy.server.storage.entity.UserEntity;
+import io.gitlab.zavod.handy.server.storage.entity.user.UserEntity;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
