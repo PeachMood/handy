@@ -1,4 +1,4 @@
-package io.gitlab.zavod.handy.server.storage.collection;
+package io.gitlab.zavod.handy.server.storage.collection.user;
 
 import io.gitlab.zavod.handy.server.storage.entity.user.SettingsEntity;
 import io.gitlab.zavod.handy.server.storage.entity.user.UserEntity;
