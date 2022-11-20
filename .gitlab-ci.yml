@@ -4,7 +4,7 @@ stages:
 
 checkstyle:
   stage: verify
-  image: gradle:7-jdk17-jammy
+  image: eclipse-temurin:17-jdk-jammy
   script:
     - cd server
     - curl -s https://api.github.com/repos/checkstyle/checkstyle/releases/latest | grep -wo 'https.*jar' | wget -q -O ./checkstyle.jar -i -
@@ -12,7 +12,7 @@ checkstyle:
 
 junit:
   stage: test-unit
-  image: gradle:7-jdk17-jammy
+  image: eclipse-temurin:17-jdk-jammy
   script:
     - cd server
     - chmod +x ./gradlew
