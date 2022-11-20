@@ -1,19 +1,21 @@
-package io.gitlab.zavod.handy.server;
+package io.gitlab.zavod.handy.server.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
  * <p>Entry point for server application.</p>
  */
 @SpringBootApplication
-public class ServerApplication {
+@EnableConfigurationProperties(Config.class)
+public class HandyServer {
     /**
      * <p>Starts Spring WEB-Server.</p>
      *
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        SpringApplication.run(ServerApplication.class, args);
+        SpringApplication.run(HandyServer.class, args);
     }
 }
