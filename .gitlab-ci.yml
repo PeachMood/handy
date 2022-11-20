@@ -3,6 +3,7 @@ stages:
   - test-unit
 
 checkstyle:
+  stage: verify
   image: gradle:7-jdk17-jammy
   script:
     - cd server
@@ -11,6 +12,7 @@ checkstyle:
     - checkstyle src/ -c ./google_checks.xml
 
 junit:
+  stage: test-unit
   image: gradle:7-jdk17-jammy
   script:
     - cd server
