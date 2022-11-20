@@ -20,7 +20,7 @@ public interface SettingsCollection {
    *
    * @param id Settings id to be found.
    * @return <code>SettingsEntity</code> instance with the specified id,
-    * or <code>null</code> if such settings doesn't exist.
+   *         or <code>null</code> if such settings doesn't exist.
    */
   SettingsEntity findSettings(int id);
 
@@ -37,7 +37,7 @@ public interface SettingsCollection {
    *
    * @param settingsEntity <code>SettingsEntity</code> instance to be updated.
    * @return <code>true</code> if settings data changed as a result of this call,
-    * or <code>false</code> otherwise.
+   *         or <code>false</code> otherwise.
    */
   boolean updateSettings(SettingsEntity settingsEntity);
 
@@ -46,7 +46,7 @@ public interface SettingsCollection {
    *
    * @param id Settings id to be deleted.
    * @return <code>true</code> if settings collection changed as a result of this call,
-    * or <code>False</code> otherwise.
+   *         or <code>False</code> otherwise.
    */
   boolean deleteSettings(int id);
 }
