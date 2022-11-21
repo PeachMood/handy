@@ -4,9 +4,10 @@
   "description": "Client part of the Handy application",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack",
-    "start": "webpack serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --progress",
+    "dev": "webpack serve",
+    "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "eslint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix --quiet"
   },
   "repository": {
     "type": "git",
@@ -31,8 +32,19 @@
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
     "babel-loader": "^9.1.0",
     "css-loader": "^6.7.2",
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-import-resolver-webpack": "^0.13.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.0",
     "image-webpack-loader": "^8.1.0",
     "node-sass": "^8.0.0",

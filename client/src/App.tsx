@@ -1,5 +1,3 @@
 import React from 'react';
 
-export const App = () => {
-    return <h1>Handy</h1>
-}
+export const App = () => <h1>Application Handy</h1>;

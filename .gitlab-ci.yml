@@ -1,6 +1,21 @@
 stages:
   - verify
-  - test-unit
+  - build
+  - test
+
+cache:
+  - key: npm-cache
+    paths:
+      - client/node_modules
+
+# verify stage
+eslint:
+  stage: verify
+  image: node:18
+  script:
+    - cd client
+    - npm install
+    - npm run eslint
 
 checkstyle:
   stage: verify
@@ -10,8 +25,22 @@ checkstyle:
     - curl -s https://api.github.com/repos/checkstyle/checkstyle/releases/latest | grep -wo 'https.*jar' | wget -q -O ./checkstyle.jar -i -
     - java -jar ./checkstyle.jar src/ -c /google_checks.xml
 
+# build stage
+build-npm:
+  stage: build
+  image: node:18
+  script:
+    - cd client
+    - npm install
+    - npm run build
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - client/build/
+
+# test stage
 junit:
-  stage: test-unit
+  stage: test
   image: eclipse-temurin:17-jdk-jammy
   script:
     - cd server
