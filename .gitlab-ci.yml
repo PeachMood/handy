@@ -7,6 +7,11 @@ cache:
   - key: npm-cache
     paths:
       - client/node_modules
+  - key: gradle-cache
+    paths:
+      - server/.gradle/caches/
+      - server/.gradle/notifications/
+      - server/.gradle/wrapper/
 
 # verify stage
 eslint:
@@ -38,11 +43,34 @@ build-npm:
     paths:
       - client/build/
 
-# test stage
-junit:
-  stage: test
+build-gradle:
+  stage: build
+  needs:
+    - checkstyle
   image: eclipse-temurin:17-jdk-jammy
   script:
     - cd server
     - chmod +x ./gradlew
-    - ./gradlew test
+    - ./gradlew --gradle-user-home .gradle/ bootJar
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - server/build/libs/
+
+# test stage
+junit:
+  stage: test
+  needs:
+    - build-gradle
+  image: eclipse-temurin:17-jdk-jammy
+  script:
+    - cd server
+    - chmod +x ./gradlew
+    - ./gradlew --gradle-user-home .gradle/ test
+  dependencies:
+    - build-gradle
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - build/test-results/test/**/TEST-*.xml
