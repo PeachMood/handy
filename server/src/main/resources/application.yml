@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: handy-server
+  config:
+    import: optional:file:./config/handy_server.yml

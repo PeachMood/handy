@@ -1,45 +1,68 @@
-package io.gitlab.zavod.handy.server.storage.entity.note;
+package io.gitlab.zavod.handy.server.entity.note;
 
-import io.gitlab.zavod.handy.server.storage.entity.user.UserEntity;
+import io.gitlab.zavod.handy.server.entity.user.UserEntity;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * <p>Represents single note.</p>
  */
+@Entity(name = "Note")
+@Table(name = "note")
 public class NoteEntity {
-  private final int id;    // Unique note identifier
-  private final UserEntity userEntity;    // Instance of UserEntity
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;    // Unique note identifier
+  @ManyToOne
+  private UserEntity user;    // Instance of UserEntity
   private String name;    // Note name
-  private final Path content;    // Path to note content
-  private final LocalDateTime creationDate;    // Date of note creation
+  private String content;    // Path to note content
+  @Column(name = "creation_date")
+  private LocalDateTime creationDate;    // Date of note creation
+  @Column(name = "modification_date")
   private LocalDateTime modificationDate;    // Date of note last modification
+  @Column(name = "trashed_date")
   private LocalDateTime trashedDate;    // Date of permanent note deletion
+  @Enumerated(EnumType.STRING)
   private NoteState state;    // Current note state
 
   /**
    * <p>Creates instance of <code>NoteEntity</code> class.</p>
-   *
-   * @param id               Unique note identifier.
-   * @param userEntity       Instance of UserEntity.
-   * @param name             Note name.
-   * @param content          Path to note content.
-   * @param creationDate     Date of note creation.
-   * @param modificationDate Date of note last modification.
-   * @param trashedDate      Date of permanent note deletion.
-   * @param state            Current note state.
    */
-  public NoteEntity(int id,
-      UserEntity userEntity,
+  protected NoteEntity() {
+  }
+
+  /**
+   * <p>Creates instance of <code>NoteEntity</code> class.</p>
+   *
+   * @param id Unique note identifier.
+   * @param user Instance of UserEntity.
+   * @param name Note name.
+   * @param content Path to note content.
+   * @param creationDate Date of note creation.
+   * @param modificationDate Date of note last modification.
+   * @param trashedDate Date of permanent note deletion.
+   * @param state Current note state.
+   */
+  public NoteEntity(Long id,
+      UserEntity user,
       String name,
-      Path content,
+      String content,
       LocalDateTime creationDate,
       LocalDateTime modificationDate,
       LocalDateTime trashedDate,
       NoteState state) {
     this.id = id;
-    this.userEntity = userEntity;
+    this.user = user;
     this.name = name;
     this.content = content;
     this.creationDate = creationDate;
@@ -51,27 +74,27 @@ public class NoteEntity {
   /**
    * <p>Creates instance of <code>NoteEntity</code> class.</p>
    *
-   * @param id               Unique note identifier.
-   * @param userEntity       Instance of UserEntity.
-   * @param name             Note name.
-   * @param content          Path to note content.
-   * @param creationDate     Date of note creation.
+   * @param id Unique note identifier.
+   * @param user Instance of UserEntity.
+   * @param name Note name.
+   * @param content Path to note content.
+   * @param creationDate Date of note creation.
    * @param modificationDate Date of note last modification.
-   * @param trashedDate      Date of permanent note deletion.
-   * @param state            Current note state.
+   * @param trashedDate Date of permanent note deletion.
+   * @param state Current note state.
    */
-  public NoteEntity(int id,
-      UserEntity userEntity,
+  public NoteEntity(Long id,
+      UserEntity user,
       String name,
-      String content,
+      Path content,
       LocalDateTime creationDate,
       LocalDateTime modificationDate,
       LocalDateTime trashedDate,
       NoteState state) {
     this(id,
-        userEntity,
+        user,
         name,
-        Paths.get(content),
+        content.toString(),
         creationDate,
         modificationDate,
         trashedDate,
@@ -81,19 +104,19 @@ public class NoteEntity {
   /**
    * <p>Creates instance of <code>NoteEntity</code> class.</p>
    *
-   * @param id         Unique note identifier.
-   * @param userEntity Instance of UserEntity.
-   * @param name       Note name.
-   * @param content    Path to note content.
-   * @param state      Current note state.
+   * @param id Unique note identifier.
+   * @param user Instance of UserEntity.
+   * @param name Note name.
+   * @param content Path to note content.
+   * @param state Current note state.
    */
-  public NoteEntity(int id,
-      UserEntity userEntity,
+  public NoteEntity(Long id,
+      UserEntity user,
       String name,
-      Path content,
+      String content,
       NoteState state) {
     this(id,
-        userEntity,
+        user,
         name,
         content,
         LocalDateTime.now(),
@@ -105,21 +128,21 @@ public class NoteEntity {
   /**
    * <p>Creates instance of <code>NoteEntity</code> class.</p>
    *
-   * @param id         Unique note identifier.
-   * @param userEntity Instance of UserEntity.
-   * @param name       Note name.
-   * @param content    Path to note content.
-   * @param state      Current note state.
+   * @param id Unique note identifier.
+   * @param user Instance of UserEntity.
+   * @param name Note name.
+   * @param content Path to note content.
+   * @param state Current note state.
    */
-  public NoteEntity(int id,
-      UserEntity userEntity,
+  public NoteEntity(Long id,
+      UserEntity user,
       String name,
-      String content,
+      Path content,
       NoteState state) {
     this(id,
-        userEntity,
+        user,
         name,
-        Paths.get(content),
+        content.toString(),
         LocalDateTime.now(),
         LocalDateTime.now(),
         null,
@@ -131,17 +154,35 @@ public class NoteEntity {
    *
    * @return Unique note identifier.
    */
-  public int getId() {
+  public Long getId() {
     return this.id;
   }
 
   /**
-   * <p>Getter for <code>userEntity</code> field.</p>
+   * <p>Setter for <code>id</code> field.</p>
+   *
+   * @param id Unique note identifier.
+   */
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  /**
+   * <p>Getter for <code>user</code> field.</p>
    *
    * @return Instance of UserEntity.
    */
-  public UserEntity getUserEntity() {
-    return this.userEntity;
+  public UserEntity getUser() {
+    return this.user;
+  }
+
+  /**
+   * <p>Setter for <code>user</code> field.</p>
+   *
+   * @param user Instance of UserEntity.
+   */
+  public void setUser(UserEntity user) {
+    this.user = user;
   }
 
   /**
@@ -167,8 +208,26 @@ public class NoteEntity {
    *
    * @return Path to note content.
    */
-  public Path getContent() {
+  public String getContent() {
     return this.content;
+  }
+
+  /**
+   * <p>Setter for <code>content</code> field.</p>
+   *
+   * @param content Path to note content.
+   */
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  /**
+   * <p>Setter for <code>content</code> field.</p>
+   *
+   * @param content Path to note content.
+   */
+  public void setContent(Path content) {
+    setContent(content.toString());
   }
 
   /**
@@ -178,6 +237,15 @@ public class NoteEntity {
    */
   public LocalDateTime getCreationDate() {
     return this.creationDate;
+  }
+
+  /**
+   * <p>Setter for <code>creationDate</code> field.</p>
+   *
+   * @param creationDate Date of note creation.
+   */
+  public void setCreationDate(LocalDateTime creationDate) {
+    this.creationDate = creationDate;
   }
 
   /**

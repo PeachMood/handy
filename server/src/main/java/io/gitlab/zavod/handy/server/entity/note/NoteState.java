@@ -1,4 +1,4 @@
-package io.gitlab.zavod.handy.server.storage.entity.note;
+package io.gitlab.zavod.handy.server.entity.note;
 
 /**
  * <p>Represents current note state.</p>
