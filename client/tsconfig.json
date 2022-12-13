@@ -1,15 +1,25 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "baseUrl": "./",
+    "outDir": "./build/",
     "noImplicitAny": true,
     "module": "es6",
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
+    "paths": {
+      "assets/*": ["src/assets/*"],
+      "components/*": ["src/components/*"],
+      "pages/*": ["src/pages/*"],
+      "utils/*": ["src/utils/*"],
+      "types/*": ["src/types/*"]
+    },
     "plugins": [
-      { "name": "typescript-plugin-css-modules" },
-    ]
-  }
+      {
+        "name": "typescript-plugin-css-modules"
+      },
+    ],
+  },
 }

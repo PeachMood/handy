@@ -1,0 +1,25 @@
+@import 'assets/styles/colors';
+
+.iconButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color linear .2s;
+  width: 30px;
+  height: 30px;
+  background-color: $primary;
+
+  .icon {
+    max-width: 25px;
+    max-height: 15px;
+    object-fit: contain;
+  }
+}
+
+.iconButton:hover {
+  background-color: $darkPrimary;
+}

@@ -1,0 +1,58 @@
+@import 'assets/styles/colors';
+
+.button {
+  display: block;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color linear .2s;
+
+  &.primary {
+    background-color: $primary;
+    color: $onPrimary;
+  }
+
+  &.primary:hover {
+    background-color: $darkPrimary;
+  }
+
+  &.accent {
+    background-color: $accent;
+    color: $onAccent;
+  }
+
+  &.accent:hover {
+    background-color: $darkAccent;
+  }
+
+  &.medium {
+    font-size: 18px;
+    line-height: 28px;
+    width: 120px;
+    height: 40px;
+  }
+
+  &.large {
+    font-size: 24px;
+    line-height: 36px;
+    width: 180px;
+    height: 64px;
+  }
+
+  &.huge {
+    font-size: 32px;
+    line-height: 36px;
+    width: 224px;
+    height: 80px;
+  }
+}
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+@import 'assets/styles/colors';
+
+.page {
+  background-color: $background;
+
+  .content {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+}

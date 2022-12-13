@@ -1,8 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const SRC_PATH = path.resolve(__dirname, './src');
 const BUILD_PATH = path.resolve(__dirname, './build');
-const SRC_PATH = path.resolve(__dirname, './src/');
 const PUBLIC_PATH = path.resolve(__dirname, './public')
 
 module.exports = {
@@ -16,12 +16,22 @@ module.exports = {
   mode: process.env.NODE_ENV || 'development',
 
   resolve: {
-    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-    extensions: [ '.tsx', '.ts', '.js' ],
+    modules: [SRC_PATH, 'node_modules'],
+    extensions: [ '.tsx', '.ts', '.js'],
+    alias: {
+      'assets': SRC_PATH + '/assets',
+      'components': SRC_PATH + '/components',
+      'pages': SRC_PATH + '/pages',
+      'utils': SRC_PATH + '/utils',
+      'types': SRC_PATH + '/types',
+    }
   },
 
   devServer: {
     static: PUBLIC_PATH,
+    compress: true,
+    port: 8080,
+    open: true,
   },
 
   module: {
@@ -60,7 +70,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'public', 'index.html'),
+      template: PUBLIC_PATH + '/index.html',
     }),
   ],
 };

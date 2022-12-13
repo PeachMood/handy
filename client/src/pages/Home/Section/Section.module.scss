@@ -1,0 +1,22 @@
+@import 'assets/styles/colors';
+
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  padding: 135px 224px;
+
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 92px;
+    text-align: center;
+    color: $primary;
+    max-width: 692px;
+    width: 100%;
+    margin: 0;
+  }
+}

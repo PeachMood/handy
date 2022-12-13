@@ -20,7 +20,10 @@
   ],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
+    "react/require-default-props": "off",
     "react-hooks/exhaustive-deps": "warn",
+    "react/button-has-type": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/function-component-definition": [
       2,
       {

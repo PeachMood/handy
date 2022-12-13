@@ -1,0 +1,10 @@
+@import 'components/Link/Link.module';
+
+.textButton {
+  @extend .link;
+  text-decoration: none;
+  background-color: none;
+  border: none;
+  outline: none;
+  padding: 0;
+}

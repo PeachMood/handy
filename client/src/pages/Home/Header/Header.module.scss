@@ -1,0 +1,17 @@
+@import 'assets/styles/colors';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80px;
+  padding: 0 30px;
+  border-bottom: 1px solid $primary;
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+  }
+}

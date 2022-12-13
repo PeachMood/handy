@@ -1,0 +1,43 @@
+@import 'assets/styles/colors';
+
+.lead {
+  padding-top: 30px;
+
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 92px;
+    text-align: center;
+    color: $primary;
+    max-width: 850px;
+    width: 100%;
+    margin: 60px auto 0;
+
+    .accent {
+      color: $accent;
+    }
+  }
+
+  .subtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    color: $primary;
+    max-width: 650px;
+    width: 100%;
+    margin: 40px auto 0;
+  }
+
+  .button {
+    margin: 60px auto 0;
+  }
+
+  .image {
+    max-width: 100%;
+    width: 100%;
+    margin-top: 20px;
+  }
+}
