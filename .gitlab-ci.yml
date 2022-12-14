@@ -63,6 +63,12 @@ junit:
   needs:
     - build-gradle
   image: eclipse-temurin:17-jdk-jammy
+  variables:
+    MYSQL_DATABASE: test_database
+    MYSQL_HOST: localhost
+    MYSQL_PORT: 3000
+    MYSQL_USER: test_user
+    MYSQL_PASSWORD: test_password
   script:
     - cd server
     - chmod +x ./gradlew

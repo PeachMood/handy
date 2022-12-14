@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  server:
+    image: nginx:alpine
+    restart: always
+    depends_on:
+      - frontend
+      - backend
+      - db
+    ports:
+      - 80:80
+      - 443:443
+    env_file:
+      - .env
+    expose:
+      - 8080
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/nginx.conf
+      - ${BUILD_DIR}:/site
+      - ${LETSENCRYPT_DIR}:/etc/letsencrypt
+      - /var/www/html:/var/www/html
+
+  backend:
+    build: ./server
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - db
+    
+
+  db:
+    image: mysql:8.0
+    restart: always
+    ports:
+      - 3306:3306
+    env_file:
+      - .env
+    volumes:
+      - ${DB_DIR}/var/lib/mysql:/var/lib/mysql
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+
+  frontend:
+    build: ./client
+    env_file:
+      - .env
+    volumes:
+      - ${BUILD_DIR}:/client/build
