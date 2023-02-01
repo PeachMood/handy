@@ -12,9 +12,11 @@ export const Home = () => (
   <div className={styles.page}>
     <div className={styles.content}>
       <Header />
-      <Lead />
-      <Articles />
-      <Section />
+      <main>
+        <Lead />
+        <Articles />
+        <Section />
+      </main>
       <Footer />
     </div>
   </div>

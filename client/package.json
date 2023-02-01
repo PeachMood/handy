@@ -24,6 +24,18 @@
     "url": "https://gitlab.com/zavod-team/handy/issues"
   },
   "homepage": "https://gitlab.com/zavod-team/handy#readme",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.20.2",
     "@babel/node": "^7.20.2",
@@ -34,6 +46,7 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.0",
     "css-loader": "^6.7.2",
     "eslint": "^8.28.0",
@@ -51,6 +64,7 @@
     "image-webpack-loader": "^8.1.0",
     "node-sass": "^8.0.0",
     "path": "^0.12.7",
+    "postcss-loader": "^7.0.2",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.4.1",
@@ -60,14 +74,16 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "browserslist": "^4.21.4",
     "classnames": "^2.3.2",
+    "clean-webpack-plugin": "^4.0.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
+    "mini-css-extract-plugin": "^2.7.2",
     "module-alias": "^2.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
-    "sort-by": "^1.2.0",
-    "svg-url-loader": "^8.0.0"
+    "sort-by": "^1.2.0"
   }
 }
