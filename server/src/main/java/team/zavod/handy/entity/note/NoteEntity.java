@@ -1,7 +1,5 @@
 package team.zavod.handy.entity.note;
 
-import team.zavod.handy.entity.user.UserEntity;
-
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -13,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import team.zavod.handy.entity.user.UserEntity;
 
 /**
  * <p>Represents single note.</p>

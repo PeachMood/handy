@@ -1,8 +1,8 @@
 package team.zavod.handy.service.user;
 
-import team.zavod.handy.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import team.zavod.handy.repository.user.UserRepository;
 
 /**
  * <p>Implements complex logic related to user.</p>

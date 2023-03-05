@@ -1,8 +1,8 @@
 package team.zavod.handy.service;
 
-import team.zavod.handy.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import team.zavod.handy.repository.NoteRepository;
 
 /**
  * <p>Implements complex logic related to notes.</p>

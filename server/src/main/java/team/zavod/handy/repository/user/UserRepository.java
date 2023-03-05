@@ -1,12 +1,10 @@
 package team.zavod.handy.repository.user;
 
-import team.zavod.handy.entity.user.SettingsEntity;
-import team.zavod.handy.entity.user.UserEntity;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import team.zavod.handy.entity.user.UserEntity;
 
 /**
  * <p>Provides functionality to manage users.</p>
@@ -16,85 +14,67 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
   /**
    * <p>Creates new user with the specified data.</p>
    *
-   * @param id Unique user identifier.
-   * @param name Unique username.
-   * @param email User's e-mail address.
-   * @param avatar Path to user's avatar.
-   * @param passwordHash Hash of user's password.
-   * @param settings Instance of user's SettingsEntity.
+   * @param user User to be saved.
    */
-  void save(Long id,
-      String name,
-      String email,
-      String avatar,
-      String passwordHash,
-      SettingsEntity settings);
-
-  /**
-   * <p>Creates new user with the specified data.</p>
-   *
-   * @param id Unique user identifier.
-   * @param name Unique username.
-   * @param email User's e-mail address.
-   * @param avatar Path to user's avatar.
-   * @param passwordHash Hash of user's password.
-   * @param settings Instance of user's SettingsEntity.
-   */
-  void save(Long id,
-      String name,
-      String email,
-      Path avatar,
-      String passwordHash,
-      SettingsEntity settings);
+  @SuppressWarnings("unchecked")
+  UserEntity save(UserEntity user);
 
   /**
    * <p>Finds user by id.</p>
    *
    * @param id User's id to be found.
-   * @return <code>Optional&lt;UserEntity&gt;</code> instance with the specified id.
+   * @param type Class to be returned.
+   * @param <T> Type parameter for returning class.
+   * @return <code>Optional&lt;T&gt;</code> instance with the specified id.
    */
-  Optional<UserEntity> findById(Long id);
+  <T> Optional<T> findById(Long id, Class<T> type);
 
   /**
-   * <p>Gets <code>List</code> of all users.</p>
-   *
-   * @return <code>List</code> of all users.
-   */
-  List<UserEntity> findAll();
-
-  /**
-   * <p>Finds user by name.</p>
+   * <p>Finds user by username.</p>
    *
    * @param name Username to be found.
-   * @return <code>Optional&lt;UserEntity&gt;</code> instance with the specified name.
+   * @param type Class to be returned.
+   * @param <T> Type parameter for returning class.
+   * @return <code>Optional&lt;T&gt;</code> instance with the specified username.
    */
-  Optional<UserEntity> findByName(String name);
+  <T> Optional<T> findByName(String name, Class<T> type);
 
   /**
    * <p>Finds user by e-mail address.</p>
    *
    * @param email User's e-mail address to be found.
-   * @return <code>Optional&lt;UserEntity&gt;</code> instance with the specified e-mail address.
+   * @param type Class to be returned.
+   * @param <T> Type parameter for returning class.
+   * @return <code>Optional&lt;T&gt;</code> instance with the specified e-mail address.
    */
-  Optional<UserEntity> findByEmail(String email);
+  <T> Optional<T> findByEmail(String email, Class<T> type);
 
   /**
-   * <p>Tries to authenticate user with the specified username.</p>
+   * <p>Gets <code>List</code> of all users.</p>
    *
-   * @param name Username to be authenticated.
-   * @param passwordHash Hash of user's password.
-   * @return <code>Optional&lt;UserEntity&gt;</code> instance if authentication was succeeded.
+   * @param type Class to be returned.
+   * @param <T> Type parameter for returning class.
+   * @return <code>List</code> of all users.
    */
-  Optional<UserEntity> findByNameAndPasswordHash(String name, String passwordHash);
+  <T> List<T> findAllProjectedBy(Class<T> type);
 
   /**
-   * <p>Tries to authenticate user with the specified e-mail address.</p>
+   * <p>Checks whether user with the specified username exists.</p>
    *
-   * @param email User's e-mail address to be authenticated.
-   * @param passwordHash Hash of user's password.
-   * @return <code>Optional&lt;UserEntity&gt;</code> instance if authentication was succeeded.
+   * @param name Username to be checked.
+   * @return <code>true</code> if user with such username exists,
+   * or <code>false</code> otherwise.
    */
-  Optional<UserEntity> findByEmailAndPasswordHash(String email, String passwordHash);
+  boolean existsByName(String name);
+
+  /**
+   * <p>Checks whether user with the specified e-mail address exists.</p>
+   *
+   * @param email E-mail address to be checked.
+   * @return <code>true</code> if user with such e-mail address exists,
+   * or <code>false</code> otherwise.
+   */
+  boolean existsByEmail(String email);
 
   /**
    * <p>Deletes user by id.</p>

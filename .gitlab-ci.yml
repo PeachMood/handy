@@ -27,7 +27,8 @@ checkstyle:
   image: eclipse-temurin:17-jdk-jammy
   script:
     - cd server
-    - curl -s https://api.github.com/repos/checkstyle/checkstyle/releases/latest | grep -wo 'https.*jar' | wget -q -O ./checkstyle.jar -i -
+    # - curl -s https://api.github.com/repos/checkstyle/checkstyle/releases/latest | grep -wo 'https.*jar' | wget -q -O ./checkstyle.jar -i -    # Latest release is broken
+    - wget -q -O ./checkstyle.jar https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.7.0/checkstyle-10.7.0-all.jar    # So we manually specify previous version
     - java -jar ./checkstyle.jar src/ -c /google_checks.xml
 
 # build stage

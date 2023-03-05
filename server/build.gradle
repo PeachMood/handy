@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.5'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'org.graalvm.plugin.compiler' version '0.1.0-alpha2'
 }
 
 group = 'team.zavod.handy'
@@ -12,15 +13,26 @@ repositories {
     mavenCentral()
 }
 
+springBoot {
+    mainClass = 'team.zavod.handy.HandyServer'
+}
+
+graal {
+    version '22.3.1'
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'mysql:mysql-connector-java'
     implementation 'org.flywaydb:flyway-mysql'
-    testImplementation 'com.h2database:h2'
-    testImplementation 'org.hibernate:hibernate-core'
+    implementation("org.graalvm.sdk:graal-sdk:22.3.1")
+    implementation("org.graalvm.js:js:22.3.1")
     testImplementation 'org.springframework:spring-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.h2database:h2'
+    testImplementation 'org.hibernate:hibernate-core'
 }
 
 tasks.named('test') {
