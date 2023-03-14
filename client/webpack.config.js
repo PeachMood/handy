@@ -4,17 +4,22 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
-const SRC_PATH = path.resolve(__dirname, './src');
-const BUILD_PATH = path.resolve(__dirname, './build');
-const PUBLIC_PATH = path.resolve(__dirname, './public');
-
 const devMode = process.env.NODE_ENV !== 'production';
+// Source directory with React code
+const SRC_PATH = path.resolve(__dirname, './src');
+// Directory for webpack static files output (images, javascript, styles)
+const STATIC_PATH = path.resolve(__dirname, './../server/src/main/resources/static');
+// Directory for webpack html file output
+const HTML_PATH = path.resolve(__dirname, './../server/src/main/resources/templates');
+// Directory with html template for webpack
+const TEMPLATE_PATH = path.resolve(__dirname, './public');
 
 module.exports = {
   entry: SRC_PATH + '/index.tsx',
 
   output: {
-    path: BUILD_PATH,
+    publicPath: '',
+    path: STATIC_PATH,
     filename: 'bundle.js',
   },
 
@@ -33,7 +38,7 @@ module.exports = {
   },
 
   devServer: {
-    static: PUBLIC_PATH,
+    static: STATIC_PATH,
     compress: true,
     port: 8080,
     open: true,
@@ -96,7 +101,8 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: PUBLIC_PATH + '/index.html',
+      template: TEMPLATE_PATH + '/index.html',
+      filename: HTML_PATH + '/index.html',
     }),
     new MiniCssExtractPlugin(),
     new CleanWebpackPlugin(),
