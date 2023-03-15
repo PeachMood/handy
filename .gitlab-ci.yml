@@ -28,16 +28,18 @@ checkstyle:
   script:
     - cd server
     # - curl -s https://api.github.com/repos/checkstyle/checkstyle/releases/latest | grep -wo 'https.*jar' | wget -q -O ./checkstyle.jar -i -    # Latest release is broken
-    - wget -q -O ./checkstyle.jar https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.7.0/checkstyle-10.7.0-all.jar    # So we manually specify previous version
+    - wget -q -O ./checkstyle.jar https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.7.0/checkstyle-10.7.0-all.jar # So we manually specify previous version
     - java -jar ./checkstyle.jar src/ -c /google_checks.xml
 
 # build stage
 build-npm:
   stage: build
-  image: node:18
+  image: node:18.12.1-alpine
   script:
     - cd client
+    - npm install webpack-cli -g
     - npm install
+    - npm rebuild node-sass
     - npm run build
   artifacts:
     expire_in: 1 week

@@ -4,8 +4,8 @@
   "description": "Client part of the Handy application",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --progress",
-    "dev": "webpack serve",
+    "dev": "webpack serve --mode development",
+    "build": "webpack --mode production",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "eslint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix --quiet"
   },
