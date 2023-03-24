@@ -6,6 +6,7 @@ import { StaticRouter } from 'react-router-dom/server';
 
 import { App } from './App';
 
+/* eslint-disable */
 const global: any = window;
 
 // Called only in the browser
