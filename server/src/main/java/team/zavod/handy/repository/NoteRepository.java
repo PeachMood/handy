@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import team.zavod.handy.entity.note.NoteEntity;
+import team.zavod.handy.entity.note.Note;
 import team.zavod.handy.entity.note.NoteState;
 import team.zavod.handy.entity.user.UserEntity;
 
@@ -12,14 +12,14 @@ import team.zavod.handy.entity.user.UserEntity;
  * <p>Provides functionality to manage notes.</p>
  */
 @Repository
-public interface NoteRepository extends JpaRepository<NoteEntity, Long> {
+public interface NoteRepository extends JpaRepository<Note, Long> {
   /**
    * <p>Creates new note with the specified data.</p>
    *
    * @param note Note to be saved.
    */
   @SuppressWarnings("unchecked")
-  NoteEntity save(NoteEntity note);
+  Note save(Note note);
 
   /**
    * <p>Finds note by id.</p>

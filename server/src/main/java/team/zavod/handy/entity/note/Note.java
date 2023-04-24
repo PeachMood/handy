@@ -2,23 +2,16 @@ package team.zavod.handy.entity.note;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
+
 import team.zavod.handy.entity.user.UserEntity;
 
 /**
  * <p>Represents single note.</p>
  */
-@Entity(name = "Note")
-@Table(name = "note")
-public class NoteEntity {
+@Entity
+public class Note {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;    // Unique note identifier
@@ -26,6 +19,8 @@ public class NoteEntity {
   private UserEntity user;    // Instance of UserEntity
   private String name;    // Note name
   private String content;    // Path to note content
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "note")
+  private List<Operation> operations;
   @Column(name = "creation_date")
   private LocalDateTime creationDate;    // Date of note creation
   @Column(name = "modification_date")
@@ -38,7 +33,7 @@ public class NoteEntity {
   /**
    * <p>Creates instance of <code>NoteEntity</code> class.</p>
    */
-  protected NoteEntity() {
+  public Note() {
   }
 
   /**
@@ -53,14 +48,14 @@ public class NoteEntity {
    * @param trashedDate Date of permanent note deletion.
    * @param state Current note state.
    */
-  public NoteEntity(Long id,
-      UserEntity user,
-      String name,
-      String content,
-      LocalDateTime creationDate,
-      LocalDateTime modificationDate,
-      LocalDateTime trashedDate,
-      NoteState state) {
+  public Note(Long id,
+              UserEntity user,
+              String name,
+              String content,
+              LocalDateTime creationDate,
+              LocalDateTime modificationDate,
+              LocalDateTime trashedDate,
+              NoteState state) {
     this.id = id;
     this.user = user;
     this.name = name;
@@ -83,14 +78,14 @@ public class NoteEntity {
    * @param trashedDate Date of permanent note deletion.
    * @param state Current note state.
    */
-  public NoteEntity(Long id,
-      UserEntity user,
-      String name,
-      Path content,
-      LocalDateTime creationDate,
-      LocalDateTime modificationDate,
-      LocalDateTime trashedDate,
-      NoteState state) {
+  public Note(Long id,
+              UserEntity user,
+              String name,
+              Path content,
+              LocalDateTime creationDate,
+              LocalDateTime modificationDate,
+              LocalDateTime trashedDate,
+              NoteState state) {
     this(id,
         user,
         name,
@@ -110,11 +105,11 @@ public class NoteEntity {
    * @param content Path to note content.
    * @param state Current note state.
    */
-  public NoteEntity(Long id,
-      UserEntity user,
-      String name,
-      String content,
-      NoteState state) {
+  public Note(Long id,
+              UserEntity user,
+              String name,
+              String content,
+              NoteState state) {
     this(id,
         user,
         name,
@@ -134,11 +129,11 @@ public class NoteEntity {
    * @param content Path to note content.
    * @param state Current note state.
    */
-  public NoteEntity(Long id,
-      UserEntity user,
-      String name,
-      Path content,
-      NoteState state) {
+  public Note(Long id,
+              UserEntity user,
+              String name,
+              Path content,
+              NoteState state) {
     this(id,
         user,
         name,
@@ -230,6 +225,14 @@ public class NoteEntity {
     setContent(content.toString());
   }
 
+  public List<Operation> getOperations() {
+    return operations;
+  }
+
+  public void setOperations(List<Operation> operations) {
+    this.operations = operations;
+  }
+
   /**
    * <p>Getter for <code>creationDate</code> field.</p>
    *
@@ -301,4 +304,6 @@ public class NoteEntity {
   public void setState(NoteState state) {
     this.state = state;
   }
+
+
 }

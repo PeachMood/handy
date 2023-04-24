@@ -10,8 +10,7 @@ import javax.persistence.Table;
 /**
  * <p>Stores user settings.</p>
  */
-@Entity(name = "Settings")
-@Table(name = "settings")
+@Entity
 public class SettingsEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
