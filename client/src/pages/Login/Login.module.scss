@@ -1,0 +1,9 @@
+@import 'assets/styles/colors';
+
+.page {
+  background-color: $background;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

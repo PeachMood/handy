@@ -1,0 +1,49 @@
+@import 'assets/styles/colors';
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $primary;
+}
+
+.checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  clip-path: inset(0 0 0 0);
+}
+
+.span {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: $surface;
+  border: 1px solid $primary;
+  color: transparent;
+  transition: border linear .2s, background-color linear .2s;
+  cursor: pointer;
+}
+
+.span:hover {
+  border-color: $darkPrimary;
+}
+
+.checkbox:disabled+.span {
+  background-color: $disabled;
+  border-color: $onDisabled;
+  cursor: default;
+}
+
+.checkbox:checked+.span {
+  background: $primary url(assets/images/checkMarkIcon.svg) center / 16px;
+}
+
+.checkbox:checked+.span:hover {
+  background-color: $darkPrimary;
+}

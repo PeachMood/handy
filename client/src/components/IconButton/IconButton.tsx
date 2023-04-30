@@ -1,20 +1,16 @@
-import React from 'react';
+import React, { FC, ButtonHTMLAttributes } from 'react';
 import classNames from 'classnames';
-
-import { Image } from 'types/types';
 
 import styles from './IconButton.module.scss';
 
-interface IconButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  image: Image;
+export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  image: string;
 }
 
-export const IconButton = ({ image, className, ...props }: IconButtonProps): JSX.Element => {
-  const classes = classNames(styles.iconButton, className);
-
-  return (
-    <a className={classes} {...props}>
-      <img className={styles.icon} src={image.src} alt={image.alt} />
-    </a>
-  );
-};
+export const IconButton: FC<IconButtonProps> = ({ image, className, ...props }) => (
+  <button
+    className={classNames(styles.button, className)}
+    style={{ backgroundImage: `url(${image})` }}
+    {...props}
+  />
+);

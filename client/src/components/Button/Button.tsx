@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { FC, ButtonHTMLAttributes } from 'react';
 import classNames from 'classnames';
 
 import styles from './Button.module.scss';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: 'primary' | 'accent';
   size?: 'medium' | 'large' | 'huge';
 }
 
-export const Button = ({
+export const Button: FC<ButtonProps> = ({
   color = 'primary', size = 'medium', className, ...props
-}: ButtonProps): JSX.Element => {
+}) => {
   const classes = classNames(
     styles.button,
     styles[color],

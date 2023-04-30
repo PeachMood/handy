@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { Link } from 'components/Link/Link';
 import { List } from 'components/List/List';
 import { IconButton } from 'components/IconButton/IconButton';
-import { socialIcons } from 'utils/constants';
-import { Social } from 'types/types';
 
 import styles from './Footer.module.scss';
+import { socialIcons } from './constants';
 
-export const Footer = () => {
-  const rederIcon = (icon: Social): JSX.Element => <IconButton key={icon.image.alt} image={icon.image} href={icon.href} target="_blank" />;
+export const Footer: FC = () => {
+  const handleSocialClick = (href: string) => {
+    window.open(href, '_blank');
+  };
 
   return (
     <footer className={styles.footer}>
@@ -26,7 +27,17 @@ export const Footer = () => {
       </div>
       <nav>
         <h3 className={styles.title}>Follow us:</h3>
-        <List itemStyles={styles.icon}>{socialIcons.map(rederIcon)}</List>
+        <List itemStyles={styles.item}>
+          {socialIcons.map((icon) => (
+            <IconButton
+              className={styles.button}
+              key={icon.image}
+              image={icon.image}
+              type="button"
+              onClick={() => handleSocialClick(icon.href)}
+            />
+          ))}
+        </List>
       </nav>
     </footer>
   );

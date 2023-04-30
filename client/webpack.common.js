@@ -9,10 +9,11 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       'assets': SRC_PATH + '/assets',
+      'contexts': SRC_PATH + '/contexts',
+      'hooks': SRC_PATH + '/hooks',
       'components': SRC_PATH + '/components',
       'pages': SRC_PATH + '/pages',
-      'utils': SRC_PATH + '/utils',
-      'types': SRC_PATH + '/types',
+      'routes': SRC_PATH + '/routes',
     }
   },
 

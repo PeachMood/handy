@@ -1,0 +1,29 @@
+@import 'assets/styles/colors';
+
+.input {
+  width: 100%;
+  height: 40px;
+  background-color: $surface;
+  border: none;
+  border-bottom: 1px solid $accent;
+  outline: none;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $onSurface;
+  padding: 0;
+
+  &.invalid {
+    border-bottom: 1px solid $error;
+  }
+}
+
+.input:focus {
+  border-bottom: 1px solid $onSurface;
+}
+
+.input::placeholder {
+  color: $accent;
+  opacity: 1;
+}

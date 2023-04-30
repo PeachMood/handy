@@ -1,35 +1,35 @@
-import React from 'react';
+import React, { FC } from 'react';
 import classNames from 'classnames';
-
-import { ArticleContent } from 'types/types';
 
 import styles from './Article.module.scss';
 
 export interface ArticleProps {
-  content: ArticleContent;
+  title: string;
+  subtitle: string;
+  image: Image;
   theme?: 'dark' | 'light';
   side?: 'left' | 'right';
   className?: string;
 }
 
-export const Article = ({
-  content, theme = 'light', side = 'left', className,
-}: ArticleProps): JSX.Element => {
+export const Article: FC<ArticleProps> = ({
+  title, subtitle, image, theme = 'light', side = 'right', className,
+}) => {
   const classes = classNames(
     styles.article,
-    styles[theme],
-    styles[side],
+    styles[theme || 'light'],
+    styles[side || 'left'],
     className,
   );
 
   return (
     <article className={classes}>
       <div>
-        <h2 className={styles.title}>{content.title}</h2>
-        <p className={styles.subtitle}>{content.subtitle}</p>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.subtitle}>{subtitle}</p>
       </div>
       <div className={styles.imageContainer}>
-        <img className={styles.image} src={content.image.src} alt={content.image.alt} />
+        <img className={styles.image} src={image.src} alt={image.alt} />
       </div>
     </article>
   );

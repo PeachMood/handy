@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { Header } from './Header/Header';
 import { Lead } from './Lead/Lead';
@@ -8,7 +8,7 @@ import { Footer } from './Footer/Footer';
 
 import styles from './Home.module.scss';
 
-export const Home = () => (
+export const Home: FC = () => (
   <div className={styles.page}>
     <div className={styles.content}>
       <Header />

@@ -4,5 +4,5 @@ ADD . .
 RUN npm install webpack-cli -g
 RUN npm install
 # A temporary solution for a working build of the frontend
-RUN npm rebuild node-sass
+# RUN npm rebuild node-sass
 CMD npm run build

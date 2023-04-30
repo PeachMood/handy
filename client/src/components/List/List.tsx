@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { Children, FC, HTMLAttributes } from 'react';
 import classNames from 'classnames';
 
 import styles from './List.module.scss';
 
-interface ListProps extends React.ButtonHTMLAttributes<HTMLUListElement> {
+export interface ListProps extends HTMLAttributes<HTMLUListElement> {
   listStyles?: string,
   itemStyles?: string,
 }
 
-export const List = ({
+export const List: FC<ListProps> = ({
   listStyles, itemStyles, children, ...props
-}: ListProps): JSX.Element => (
-  <ul className={classNames(styles.list, listStyles)} {...props}>
-    {React.Children.map(children, (child) => (
-      <li className={classNames(styles.item, itemStyles)}>{child}</li>
-    ))}
-  </ul>
-);
+}) => {
+  const items = Children.map(children, (child) => (
+    <li className={classNames(styles.item, itemStyles)}>{child}</li>
+  ));
+
+  return (
+    <ul className={classNames(styles.list, listStyles)} {...props}>
+      {items}
+    </ul>
+  );
+};

@@ -1,0 +1,93 @@
+@import 'assets/styles/colors';
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  border-width: 1px;
+  border-style: solid;
+  height: 60px;
+  box-sizing: border-box;
+  padding: 8px 35px 8px 10px;
+
+  .icon {
+    min-width: 22px;
+    min-height: 22px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background-color: transparent;
+  }
+
+  &.error {
+    border-color: $error;
+
+    .icon {
+      background-image: url(assets/images/errorIcon.svg);
+    }
+
+    .text {
+      color: $error;
+    }
+
+    .close {
+      // Filter is neccessary, because fill, color and stroke properties don't change svg color
+      filter: invert(35%) sepia(33%) saturate(1952%) hue-rotate(323deg) brightness(98%) contrast(97%);
+    }
+
+    .close:hover {
+      filter: invert(21%) sepia(70%) saturate(1971%) hue-rotate(339deg) brightness(102%) contrast(94%);
+    }
+  }
+
+  &.waring {
+    border-color: $primary;
+
+    .icon {
+      background-image: url(assets/images/warningIcon.svg);
+    }
+
+    .close {
+      filter: invert(62%) sepia(4%) saturate(3029%) hue-rotate(347deg) brightness(90%) contrast(82%);
+    }
+
+    .close:hover {
+      filter: invert(43%) sepia(46%) saturate(318%) hue-rotate(346deg) brightness(93%) contrast(88%);
+    }
+  }
+
+  &.succes {
+    border-color: $success;
+
+    .icon {
+      background-image: url(assets/images/successIcon.svg);
+    }
+
+    .close {
+      filter: invert(60%) sepia(2%) saturate(1437%) hue-rotate(66deg) brightness(93%) contrast(88%);
+    }
+
+    .close:hover {
+      filter: invert(51%) sepia(11%) saturate(254%) hue-rotate(66deg) brightness(90%) contrast(89%);
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@import 'assets/styles/colors';
+
+.form {
+  background-color: $surface;
+  max-width: 430px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px;
+
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 40px;
+    color: $onSurface;
+    margin: 0 0 30px;
+    text-align: center;
+  }
+
+  .button {
+    width: 100%;
+    margin-top: 40px;
+  }
+}

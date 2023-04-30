@@ -1,17 +1,16 @@
-import React from 'react';
+import React, { FC, AnchorHTMLAttributes } from 'react';
 import classNames from 'classnames';
 
 import styles from './Link.module.scss';
 
-interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   color?: 'primary' | 'accent';
-  size?: 'medium' | 'large';
-  underlined?: boolean;
+  size?: 'medium' | 'large' | 'small';
 }
 
-export const Link = ({
-  className, color = 'primary', size = 'medium', href, children, ...props
-}: LinkProps): JSX.Element => {
+export const Link: FC<LinkProps> = ({
+  color = 'primary', size = 'medium', className, href, children, ...props
+}) => {
   const classes = classNames(
     styles.link,
     styles[color],

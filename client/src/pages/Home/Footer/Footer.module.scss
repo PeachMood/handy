@@ -15,11 +15,27 @@
     margin: 0 0 13px;
   }
 
-  .icon {
+  .item {
     display: inline-block;
   }
 
-  .icon+.icon {
+  .item+.item {
     margin-left: 20px;
+  }
+
+  .button {
+    width: 30px;
+    height: 30px;
+    background-color: $primary;
+    background-size: 20px 15px;
+  }
+
+  .button:hover {
+    background-color: $darkPrimary;
+  }
+
+  .icon {
+    max-width: 25px;
+    max-height: 15px;
   }
 }

@@ -3,13 +3,9 @@ import blackSquare from 'assets/images/blackSquare.jpg';
 import mentalCalculation from 'assets/images/mentalCalculation.jpg';
 import rally from 'assets/images/rally.jpg';
 
-import twitterIcon from 'assets/images/twitterIcon.svg';
-import telegramIcon from 'assets/images/telegramIcon.svg';
-import facebookIcon from 'assets/images/facebookIcon.svg';
+import { ArticleProps } from './Article/Article';
 
-import { ArticleContent, Social } from 'types/types';
-
-export const initialArticlesContent: ArticleContent[] = [
+export const initialArticles: ArticleProps[] = [
   {
     title: 'Use everywhere',
     subtitle: 'You can edit notes from your phone, tablet or computer.  Just the Internet is enough.',
@@ -17,6 +13,8 @@ export const initialArticlesContent: ArticleContent[] = [
       src: balcony,
       alt: 'Balcony. Edouard Manet',
     },
+    theme: 'light',
+    side: 'right',
   },
   {
     title: 'Edit easily',
@@ -25,6 +23,8 @@ export const initialArticlesContent: ArticleContent[] = [
       src: blackSquare,
       alt: 'Black Square. Kasimir Malevich',
     },
+    theme: 'dark',
+    side: 'left',
   },
   {
     title: 'Learn effectively',
@@ -33,6 +33,8 @@ export const initialArticlesContent: ArticleContent[] = [
       src: mentalCalculation,
       alt: 'Mental calculation. Nikolay Bogdanov-Belsky',
     },
+    theme: 'light',
+    side: 'right',
   },
   {
     title: 'Work fast',
@@ -41,29 +43,7 @@ export const initialArticlesContent: ArticleContent[] = [
       src: rally,
       alt: 'A Rally. Sir John Lavery',
     },
-  },
-];
-
-export const socialIcons: Social[] = [
-  {
-    image: {
-      src: twitterIcon,
-      alt: 'Twitter',
-    },
-    href: 'https://twitter.com/handy',
-  },
-  {
-    image: {
-      src: telegramIcon,
-      alt: 'Telegram',
-    },
-    href: 'https://t.me/handy',
-  },
-  {
-    image: {
-      src: facebookIcon,
-      alt: 'Facebook',
-    },
-    href: 'https://www.facebook.com/handy',
+    theme: 'dark',
+    side: 'left',
   },
 ];

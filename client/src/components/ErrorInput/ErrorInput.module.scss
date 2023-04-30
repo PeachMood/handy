@@ -1,0 +1,15 @@
+@import 'assets/styles/colors';
+
+.error {
+  display: block;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: 20px;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  color: $error;
+  margin: 6px 0 0;
+}

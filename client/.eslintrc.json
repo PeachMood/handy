@@ -47,7 +47,9 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    // Yandex said that both options are valid, so we exclude the rule!
+    "jsx-a11y/label-has-associated-control": "off"
   },
   "settings": {
     "import/resolver": {

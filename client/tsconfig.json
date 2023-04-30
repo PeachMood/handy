@@ -13,18 +13,21 @@
       "assets/*": [
         "src/assets/*"
       ],
+      "contexts/*": [
+        "src/contexts/*"
+      ],
+      "hooks/*": [
+        "src/hooks/*"
+      ],
       "components/*": [
         "src/components/*"
       ],
       "pages/*": [
         "src/pages/*"
       ],
-      "utils/*": [
-        "src/utils/*"
+      "routes/*": [
+        "src/routes/*"
       ],
-      "types/*": [
-        "src/types/*"
-      ]
     },
     "plugins": [
       {

@@ -19,6 +19,12 @@
     background-color: $darkPrimary;
   }
 
+  &.primary:disabled {
+    background-color: transparent;
+    color: $primary;
+    border: 1px solid $primary;
+  }
+
   &.accent {
     background-color: $accent;
     color: $onAccent;
@@ -26,6 +32,12 @@
 
   &.accent:hover {
     background-color: $darkAccent;
+  }
+
+  &.primary:disabled {
+    background-color: transparent;
+    color: $accent;
+    border: 1px solid $accent;
   }
 
   &.medium {
@@ -50,9 +62,6 @@
   }
 }
 
-
-
-
-
-
-
+.button:disabled {
+  cursor: default;
+}

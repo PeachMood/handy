@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-import creationOfAdam from 'assets/images/creationOfAdam.png';
 import { Button } from 'components/Button/Button';
 
+import creationOfAdam from 'assets/images/creationOfAdam.png';
 import styles from './Lead.module.scss';
 
-export const Lead = (): JSX.Element => (
+export const Lead: FC = () => (
   <section className={styles.lead}>
     <h1 className={styles.title}>
       Let your&nbsp;

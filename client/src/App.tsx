@@ -1,12 +1,12 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { FC } from 'react';
 
-import { Home } from './pages/Home/Home';
+import { AuthProvider } from 'contexts/AuthContext';
+import { Router } from 'routes/Router';
 
 import './App.scss';
 
-export const App = (): JSX.Element => (
-  <Routes>
-    <Route path="/" element={<Home />} />
-  </Routes>
+export const App: FC = () => (
+  <AuthProvider>
+    <Router />
+  </AuthProvider>
 );
