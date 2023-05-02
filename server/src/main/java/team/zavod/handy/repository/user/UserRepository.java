@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import team.zavod.handy.entity.user.UserEntity;
+import team.zavod.handy.model.entity.user.UserEntity;
 
 /**
  * <p>Provides functionality to manage users.</p>
@@ -32,12 +32,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
   /**
    * <p>Finds user by username.</p>
    *
-   * @param name Username to be found.
+   * @param username Username to be found.
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
    * @return <code>Optional&lt;T&gt;</code> instance with the specified username.
    */
-  <T> Optional<T> findByName(String name, Class<T> type);
+  <T> Optional<T> findByUsername(String username, Class<T> type);
 
   /**
    * <p>Finds user by e-mail address.</p>
@@ -61,11 +61,11 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
   /**
    * <p>Checks whether user with the specified username exists.</p>
    *
-   * @param name Username to be checked.
+   * @param username Username to be checked.
    * @return <code>true</code> if user with such username exists,
    * or <code>false</code> otherwise.
    */
-  boolean existsByName(String name);
+  boolean existsByUsername(String username);
 
   /**
    * <p>Checks whether user with the specified e-mail address exists.</p>

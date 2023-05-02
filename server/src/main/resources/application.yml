@@ -1,0 +1,14 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
+spring:
+  application:
+    name: handy-server
+  config:
+    import: file:./config/handy_server.yml
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}

@@ -1,6 +1,7 @@
 package team.zavod.handy.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.zavod.handy.service.user.SettingsService;
@@ -11,15 +12,18 @@ import team.zavod.handy.service.user.SettingsService;
 @RestController
 @RequestMapping(value = "/api/user/settings")
 public class SettingsController {
-  private final SettingsService service;    // Instance of SettingsService
+  private final ConversionService conversionService;    // For type conversion purposes
+  private final SettingsService settingsService;    // Instance of user SettingsService
 
   /**
-   * <p>Creates instance of <code>SettingsController</code> class.</p>
+   * <p>Constructs new instance of <code>SettingsController</code> class.</p>
    *
-   * @param service Instance of SettingsService.
+   * @param conversionService For type conversion Purposes.
+   * @param settingsService Instance of user SettingsService.
    */
   @Autowired
-  public SettingsController(SettingsService service) {
-    this.service = service;
+  public SettingsController(ConversionService conversionService, SettingsService settingsService) {
+    this.conversionService = conversionService;
+    this.settingsService = settingsService;
   }
 }

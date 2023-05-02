@@ -1,11 +1,11 @@
-package team.zavod.handy.entity.user;
+package team.zavod.handy.model.entity.user;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  * <p>Stores user settings.</p>
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "settings")
 public class SettingsEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;    // Unique settings identifier
   @Column(name = "trashed_period")
   private int trashedPeriod;    // Time for storing data in trash
@@ -22,7 +22,7 @@ public class SettingsEntity {
   /**
    * <p>Constructs new instance of <code>SettingsEntity</code> class.</p>
    */
-  protected SettingsEntity() {
+  public SettingsEntity() {
   }
 
   /**

@@ -1,17 +1,16 @@
-package team.zavod.handy.entity.note;
+package team.zavod.handy.model.entity.note;
 
-import java.nio.file.Path;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import team.zavod.handy.entity.user.UserEntity;
+import team.zavod.handy.model.entity.user.UserEntity;
 
 /**
  * <p>Represents single note.</p>
@@ -20,7 +19,7 @@ import team.zavod.handy.entity.user.UserEntity;
 @Table(name = "note")
 public class NoteEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;    // Unique note identifier
   @ManyToOne
   private UserEntity user;    // Instance of UserEntity
@@ -38,7 +37,34 @@ public class NoteEntity {
   /**
    * <p>Creates instance of <code>NoteEntity</code> class.</p>
    */
-  protected NoteEntity() {
+  public NoteEntity() {
+  }
+
+  /**
+   * <p>Creates instance of <code>NoteEntity</code> class.</p>
+   *
+   * @param id Unique note identifier.
+   * @param user Instance of UserEntity.
+   * @param name Note name.
+   * @param content Path to note content.
+   * @param state Current note state.
+   */
+  public NoteEntity(Long id,
+      UserEntity user,
+      String name,
+      String content,
+      NoteState state) {
+    this(id,
+        user,
+        name,
+        content,
+        null,
+        null,
+        null,
+        state);
+    LocalDateTime now = LocalDateTime.now();
+    this.creationDate = now;
+    this.modificationDate = now;
   }
 
   /**
@@ -69,84 +95,6 @@ public class NoteEntity {
     this.modificationDate = modificationDate;
     this.trashedDate = trashedDate;
     this.state = state;
-  }
-
-  /**
-   * <p>Creates instance of <code>NoteEntity</code> class.</p>
-   *
-   * @param id Unique note identifier.
-   * @param user Instance of UserEntity.
-   * @param name Note name.
-   * @param content Path to note content.
-   * @param creationDate Date of note creation.
-   * @param modificationDate Date of note last modification.
-   * @param trashedDate Date of permanent note deletion.
-   * @param state Current note state.
-   */
-  public NoteEntity(Long id,
-      UserEntity user,
-      String name,
-      Path content,
-      LocalDateTime creationDate,
-      LocalDateTime modificationDate,
-      LocalDateTime trashedDate,
-      NoteState state) {
-    this(id,
-        user,
-        name,
-        content.toString(),
-        creationDate,
-        modificationDate,
-        trashedDate,
-        state);
-  }
-
-  /**
-   * <p>Creates instance of <code>NoteEntity</code> class.</p>
-   *
-   * @param id Unique note identifier.
-   * @param user Instance of UserEntity.
-   * @param name Note name.
-   * @param content Path to note content.
-   * @param state Current note state.
-   */
-  public NoteEntity(Long id,
-      UserEntity user,
-      String name,
-      String content,
-      NoteState state) {
-    this(id,
-        user,
-        name,
-        content,
-        LocalDateTime.now(),
-        LocalDateTime.now(),
-        null,
-        state);
-  }
-
-  /**
-   * <p>Creates instance of <code>NoteEntity</code> class.</p>
-   *
-   * @param id Unique note identifier.
-   * @param user Instance of UserEntity.
-   * @param name Note name.
-   * @param content Path to note content.
-   * @param state Current note state.
-   */
-  public NoteEntity(Long id,
-      UserEntity user,
-      String name,
-      Path content,
-      NoteState state) {
-    this(id,
-        user,
-        name,
-        content.toString(),
-        LocalDateTime.now(),
-        LocalDateTime.now(),
-        null,
-        state);
   }
 
   /**
@@ -219,15 +167,6 @@ public class NoteEntity {
    */
   public void setContent(String content) {
     this.content = content;
-  }
-
-  /**
-   * <p>Setter for <code>content</code> field.</p>
-   *
-   * @param content Path to note content.
-   */
-  public void setContent(Path content) {
-    setContent(content.toString());
   }
 
   /**

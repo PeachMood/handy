@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import team.zavod.handy.entity.user.SettingsEntity;
+import team.zavod.handy.model.entity.user.SettingsEntity;
 
 /**
  * <p>Provides functionality to manage settings.</p>

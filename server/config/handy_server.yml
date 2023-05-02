@@ -1,0 +1,11 @@
+application:
+  config:
+    domain: ${HANDY_DOMAIN}
+    cors:
+      allowed-origins:
+        - http://${HANDY_DOMAIN}:3000
+        - http://${HANDY_DOMAIN}:4200
+    jwt:
+      access-token-expiration-time: 60
+      refresh-token-expiration-time: 30
+      secret: ${HANDY_JWT_SECRET}

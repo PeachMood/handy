@@ -1,4 +1,4 @@
-package team.zavod.handy.entity.note;
+package team.zavod.handy.model.entity.note;
 
 /**
  * <p>Represents current note state.</p>

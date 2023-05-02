@@ -1,7 +1,8 @@
 package team.zavod.handy;
 
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.Banner.Mode;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import team.zavod.handy.configuration.ApplicationConfiguration;
 
@@ -17,6 +18,9 @@ public class HandyServer {
    * @param args Command line arguments.
    */
   public static void main(String[] args) {
-    SpringApplication.run(HandyServer.class, args);
+    new SpringApplicationBuilder(HandyServer.class)
+        .logStartupInfo(false)
+        .bannerMode(Mode.OFF)
+        .run(args);
   }
 }

@@ -21,6 +21,7 @@ module.exports = merger.merge(common, {
   },
 
   devServer: {
+    port: 3000,
     static: PUBLIC_PATH,
     historyApiFallback: true,
     compress: true,
