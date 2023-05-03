@@ -1,19 +1,32 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const SRC_PATH = path.resolve(__dirname, './src');
+const paths = {
+  src: path.resolve(__dirname, './src'),
+  build: path.resolve(__dirname, './build'),
+  public: path.resolve(__dirname, './public'),
+}
 
-module.exports = {
+const webpackConfig = {
+  entry: paths.src + '/index.tsx',
+
+  output: {
+    publicPath: '',
+    path: paths.build,
+    filename: 'bundle.js',
+  },
+
   resolve: {
-    modules: [SRC_PATH, 'node_modules'],
+    modules: [paths.src, 'node_modules'],
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      'assets': SRC_PATH + '/assets',
-      'contexts': SRC_PATH + '/contexts',
-      'hooks': SRC_PATH + '/hooks',
-      'components': SRC_PATH + '/components',
-      'pages': SRC_PATH + '/pages',
-      'routes': SRC_PATH + '/routes',
+      'assets': paths.src + '/assets',
+      'contexts': paths.src + '/contexts',
+      'hooks': paths.src + '/hooks',
+      'components': paths.src + '/components',
+      'pages': paths.src + '/pages',
+      'routes': paths.src + '/routes',
     }
   },
 
@@ -47,6 +60,11 @@ module.exports = {
   },
 
   plugins: [
+    new HtmlWebpackPlugin({
+      template: paths.public + '/index.html',
+    }),
     new CleanWebpackPlugin(),
   ],
 };
+
+module.exports = { paths, webpackConfig };

@@ -1,28 +1,15 @@
-const path = require('path');
 const merger = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const common = require('./webpack.common.js');
+const { paths, webpackConfig } = require('./webpack.common.js');
 
-const SRC_PATH = path.resolve(__dirname, './src');
-const BUILD_PATH = path.resolve(__dirname, './build');
-const PUBLIC_PATH = path.resolve(__dirname, './public')
-
-module.exports = merger.merge(common, {
+module.exports = merger.merge(webpackConfig, {
   mode: 'development',
 
   devtool: 'inline-source-map',
 
-  entry: SRC_PATH + '/index.dev.tsx',
-
-  output: {
-    path: BUILD_PATH,
-    filename: 'bundle.js',
-  },
-
   devServer: {
     port: 3000,
-    static: PUBLIC_PATH,
+    static: paths.public,
     historyApiFallback: true,
     compress: true,
     open: true
@@ -48,10 +35,4 @@ module.exports = merger.merge(common, {
       }
     ],
   },
-
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: PUBLIC_PATH + '/index.html',
-    }),
-  ],
 });

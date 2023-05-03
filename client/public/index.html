@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
   <title>Handy</title>
@@ -11,12 +11,7 @@
 </head>
 
 <body>
-  <div id="root" th:utext="${content}"></div>
-  <script defer type="module">
-    if (window.renderClient) {
-      window.renderClient();
-    }
-  </script>
+  <div id="root"></div>
 </body>
 
 </html>
