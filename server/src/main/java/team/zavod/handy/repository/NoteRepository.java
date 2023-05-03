@@ -8,13 +8,11 @@ import team.zavod.handy.model.entity.note.NoteEntity;
 import team.zavod.handy.model.entity.note.NoteState;
 import team.zavod.handy.model.entity.user.UserEntity;
 
-/**
- * <p>Provides functionality to manage notes.</p>
- */
+/** Provides functionality to manage notes. */
 @Repository
 public interface NoteRepository extends JpaRepository<NoteEntity, Long> {
   /**
-   * <p>Creates new note with the specified data.</p>
+   * Creates new note with the specified data.
    *
    * @param note Note to be saved.
    */
@@ -22,7 +20,7 @@ public interface NoteRepository extends JpaRepository<NoteEntity, Long> {
   NoteEntity save(NoteEntity note);
 
   /**
-   * <p>Finds note by id.</p>
+   * Finds note by id.
    *
    * @param id Note id to be found.
    * @param type Class to be returned.
@@ -32,7 +30,7 @@ public interface NoteRepository extends JpaRepository<NoteEntity, Long> {
   <T> Optional<T> findById(Long id, Class<T> type);
 
   /**
-   * <p>Gets <code>List</code> of all notes.</p>
+   * Gets <code>List</code> of all notes.
    *
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
@@ -41,17 +39,16 @@ public interface NoteRepository extends JpaRepository<NoteEntity, Long> {
   <T> List<T> findAllProjectedBy(Class<T> type);
 
   /**
-   * <p>Checks weather note with the specified name exists.</p>
+   * Checks weather note with the specified name exists.
    *
    * @param user User whose note will be checked.
    * @param name Note name to be checked.
-   * @return <code>true</code> if note with such name exists,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if note with such name exists, or <code>false</code> otherwise.
    */
   boolean existsByUserAndName(UserEntity user, String name);
 
   /**
-   * <p>Finds note by name.</p>
+   * Finds note by name.
    *
    * @param user User whose note will be found.
    * @param name Note name to be found.
@@ -62,7 +59,7 @@ public interface NoteRepository extends JpaRepository<NoteEntity, Long> {
   <T> Optional<T> findByUserAndName(UserEntity user, String name, Class<T> type);
 
   /**
-   * <p>Gets <code>List</code> of all notes for the specified user.</p>
+   * Gets <code>List</code> of all notes for the specified user.
    *
    * @param user User whose notes will be returned.
    * @param type Class to be returned.
@@ -72,7 +69,7 @@ public interface NoteRepository extends JpaRepository<NoteEntity, Long> {
   <T> List<T> findAllByUser(UserEntity user, Class<T> type);
 
   /**
-   * <p>Gets <code>List</code> of all notes for the specified user and state.</p>
+   * Gets <code>List</code> of all notes for the specified user and state.
    *
    * @param user User whose notes will be returned.
    * @param state Note state to be found.
@@ -83,7 +80,7 @@ public interface NoteRepository extends JpaRepository<NoteEntity, Long> {
   <T> List<T> findAllByUserAndState(UserEntity user, NoteState state, Class<T> type);
 
   /**
-   * <p>Deletes note by id.</p>
+   * Deletes note by id.
    *
    * @param id Note id to be deleted.
    */

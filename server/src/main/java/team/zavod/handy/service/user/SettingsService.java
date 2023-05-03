@@ -8,15 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 import team.zavod.handy.model.entity.user.SettingsEntity;
 import team.zavod.handy.repository.user.SettingsRepository;
 
-/**
- * <p>Implements complex logic related to user settings.</p>
- */
+/** Implements complex logic related to user settings. */
 @Service
 public class SettingsService {
-  private final SettingsRepository settingsRepository;    // instance of user SettingsRepository
+  private final SettingsRepository settingsRepository; // instance of user SettingsRepository
 
   /**
-   * <p>Constructs new instance of <code>SettingsService</code> class.</p>
+   * Constructs new instance of <code>SettingsService</code> class.
    *
    * @param settingsRepository Instance of user SettingsRepository.
    */
@@ -26,11 +24,11 @@ public class SettingsService {
   }
 
   /**
-   * <p>Creates new user settings with the specified data.</p>
+   * Creates new user settings with the specified data.
    *
    * @param settings User settings to be created.
-   * @return <code>true</code> if SettingsRepository was changed as a result of this call,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if SettingsRepository was changed as a result of this call, or <code>
+   *     false</code> otherwise.
    */
   @Transactional
   public boolean createSettings(SettingsEntity settings) {
@@ -39,21 +37,20 @@ public class SettingsService {
   }
 
   /**
-   * <p>Finds settings by id.</p>
+   * Finds settings by id.
    *
    * @param id Settings id to be found.
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
-   * @return User settings with the specified id if such settings exist,
-   * or <code>null</code> otherwise.
+   * @return User settings with the specified id if such settings exist, or <code>null</code>
+   *     otherwise.
    */
   public <T> T findSettings(Long id, Class<T> type) {
-    return this.settingsRepository.findById(id, type)
-        .orElse(null);
+    return this.settingsRepository.findById(id, type).orElse(null);
   }
 
   /**
-   * <p>Gets <code>List</code> of all settings.</p>
+   * Gets <code>List</code> of all settings.
    *
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
@@ -64,16 +61,16 @@ public class SettingsService {
   }
 
   /**
-   * <p>Updates settings with the specified data.</p>
+   * Updates settings with the specified data.
    *
    * @param with Settings to be updated.
-   * @return <code>true</code> if SettingsRepository was changed as a result of this call,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if SettingsRepository was changed as a result of this call, or <code>
+   *     false</code> otherwise.
    */
   @Transactional
   public boolean updateSettings(SettingsEntity with) {
     SettingsEntity current = findSettings(with.getId(), SettingsEntity.class);
-    if(Objects.isNull(current)) {
+    if (Objects.isNull(current)) {
       return false;
     }
     this.settingsRepository.save(with);
@@ -81,15 +78,15 @@ public class SettingsService {
   }
 
   /**
-   * <p>Deletes settings by id.</p>
+   * Deletes settings by id.
    *
    * @param id Settings id to be deleted.
-   * @return <code>true</code> if SettingsRepository was changed as a result of this call,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if SettingsRepository was changed as a result of this call, or <code>
+   *     false</code> otherwise.
    */
   @Transactional
   public boolean deleteSettings(Long id) {
-    if(Objects.isNull(findSettings(id, SettingsEntity.class))) {
+    if (Objects.isNull(findSettings(id, SettingsEntity.class))) {
       return false;
     }
     this.settingsRepository.deleteById(id);

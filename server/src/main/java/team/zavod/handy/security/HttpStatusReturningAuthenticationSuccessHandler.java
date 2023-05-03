@@ -8,21 +8,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-/**
- * <p>Authentication success handler which simply returns appropriate HTTP status.</p>
- */
-public class HttpStatusReturningAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-  protected final Log logger = LogFactory.getLog(getClass());    // For logging purposes
+/** Authentication success handler which simply returns appropriate HTTP status. */
+public class HttpStatusReturningAuthenticationSuccessHandler
+    implements AuthenticationSuccessHandler {
+  protected final Log logger = LogFactory.getLog(getClass()); // For logging purposes
 
   /**
-   * <p>Called when a user has been successfully authenticated.</p>
+   * Called when a user has been successfully authenticated.
    *
    * @param request the request which caused the successful authentication
    * @param response the response
-   * @param authentication the Authentication object which was created during the authentication process.
+   * @param authentication the Authentication object which was created during the authentication
+   *     process.
    */
   @Override
-  public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+  public void onAuthenticationSuccess(
+      HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
     this.logger.debug("Sending 200 OK status");
     response.setStatus(HttpStatus.OK.value());
   }

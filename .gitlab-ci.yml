@@ -9,9 +9,9 @@ cache:
       - client/node_modules
   - key: gradle-cache
     paths:
-      - server/.gradle/caches/
-      - server/.gradle/notifications/
-      - server/.gradle/wrapper/
+      - server/.gradle/caches
+      - server/.gradle/notifications
+      - server/.gradle/wrapper
 
 # verify stage
 eslint:
@@ -21,15 +21,6 @@ eslint:
     - cd client
     - npm install
     - npm run eslint
-
-checkstyle:
-  stage: verify
-  image: eclipse-temurin:17-jdk-jammy
-  script:
-    - cd server
-    # - curl -s https://api.github.com/repos/checkstyle/checkstyle/releases/latest | grep -wo 'https.*jar' | wget -q -O ./checkstyle.jar -i -    # Latest release is broken
-    - wget -q -O ./checkstyle.jar https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.7.0/checkstyle-10.7.0-all.jar # So we manually specify previous version
-    - java -jar ./checkstyle.jar src/ -c /google_checks.xml
 
 # build stage
 build-npm:
@@ -46,25 +37,23 @@ build-npm:
     paths:
       - client/build/
 
-build-gradle:
+build-server:
   stage: build
-  needs:
-    - checkstyle
   image: eclipse-temurin:17-jdk-jammy
   script:
     - cd server
     - chmod +x ./gradlew
-    - ./gradlew --gradle-user-home .gradle/ bootJar
+    - ./gradlew --gradle-user-home .gradle/ build -x test
   artifacts:
     expire_in: 1 week
     paths:
       - server/build/libs/
 
 # test stage
-junit:
+test-server:
   stage: test
   needs:
-    - build-gradle
+    - build-server
   image: eclipse-temurin:17-jdk-jammy
   variables:
     MYSQL_DATABASE: test_database
@@ -77,7 +66,7 @@ junit:
     - chmod +x ./gradlew
     - ./gradlew --gradle-user-home .gradle/ test
   dependencies:
-    - build-gradle
+    - build-server
   artifacts:
     when: always
     reports:

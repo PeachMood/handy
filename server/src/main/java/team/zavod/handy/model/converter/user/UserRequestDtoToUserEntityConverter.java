@@ -4,12 +4,10 @@ import org.springframework.core.convert.converter.Converter;
 import team.zavod.handy.model.dto.user.UserRequestDto;
 import team.zavod.handy.model.entity.user.UserEntity;
 
-/**
- * <p>Converts UserRequestDto to UserEntity.</p>
- */
+/** Converts UserRequestDto to UserEntity. */
 public class UserRequestDtoToUserEntityConverter implements Converter<UserRequestDto, UserEntity> {
   /**
-   * <p>Converts <code>UserRequestDto</code> to <code>UserEntity</code>.</p>
+   * Converts <code>UserRequestDto</code> to <code>UserEntity</code>.
    *
    * @param source UserRequestDto to convert.
    * @return Converted UserEntity.

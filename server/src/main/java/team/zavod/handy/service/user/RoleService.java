@@ -8,15 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 import team.zavod.handy.model.entity.user.RoleEntity;
 import team.zavod.handy.repository.user.RoleRepository;
 
-/**
- * <p>Implements complex logic related to user roles.</p>
- */
+/** Implements complex logic related to user roles. */
 @Service
 public class RoleService {
-  private final RoleRepository roleRepository;    // Instance of user RoleRepository
+  private final RoleRepository roleRepository; // Instance of user RoleRepository
 
   /**
-   * <p>Constructs new instance of <code>RoleService</code> class.</p>
+   * Constructs new instance of <code>RoleService</code> class.
    *
    * @param roleRepository Instance of user RoleRepository.
    */
@@ -26,15 +24,15 @@ public class RoleService {
   }
 
   /**
-   * <p>Creates new user role with the specified data.</p>
+   * Creates new user role with the specified data.
    *
    * @param role User role to be created.
-   * @return <code>true</code> if RoleRepository was changed as a result of this call,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if RoleRepository was changed as a result of this call, or <code>
+   *     false</code> otherwise.
    */
   @Transactional
   public boolean createRole(RoleEntity role) {
-    if(isRoleExists(role.getName())) {
+    if (isRoleExists(role.getName())) {
       return false;
     }
     this.roleRepository.save(role);
@@ -42,31 +40,27 @@ public class RoleService {
   }
 
   /**
-   * <p>Finds role by id.</p>
+   * Finds role by id.
    *
    * @param id role id to be found.
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
-   * @return User role with the specified id if such role exists,
-   * or <code>null</code> otherwise.
+   * @return User role with the specified id if such role exists, or <code>null</code> otherwise.
    */
   public <T> T findRole(Long id, Class<T> type) {
-    return this.roleRepository.findById(id, type)
-        .orElse(null);
+    return this.roleRepository.findById(id, type).orElse(null);
   }
 
   /**
-   * <p>Finds role by name.</p>
+   * Finds role by name.
    *
    * @param name Role name to be found.
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
-   * @return User role with the specified name if such role exists,
-   * or <code>null</code> otherwise.
+   * @return User role with the specified name if such role exists, or <code>null</code> otherwise.
    */
   public <T> T findRole(String name, Class<T> type) {
-    return this.roleRepository.findByName(name, type)
-        .orElse(null);
+    return this.roleRepository.findByName(name, type).orElse(null);
   }
 
   /**
@@ -81,30 +75,29 @@ public class RoleService {
   }
 
   /**
-   * <p>Checks weather user role with the specified name exists.</p>
+   * Checks weather user role with the specified name exists.
    *
    * @param name User role to be checked.
-   * @return <code>true</code> if such user role exists,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if such user role exists, or <code>false</code> otherwise.
    */
   public boolean isRoleExists(String name) {
     return this.roleRepository.existsByName(name);
   }
 
   /**
-   * <p>Updates user role with the specified data.</p>
+   * Updates user role with the specified data.
    *
    * @param with User role to be updated.
-   * @return <code>true</code> if RoleRepository was changed as a result of this call,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if RoleRepository was changed as a result of this call, or <code>
+   *     false</code> otherwise.
    */
   @Transactional
   public boolean updateRole(RoleEntity with) {
     RoleEntity current = findRole(with.getId(), RoleEntity.class);
-    if(Objects.isNull(current)) {
+    if (Objects.isNull(current)) {
       return false;
     }
-    if(!with.getName().equals(current.getName()) && isRoleExists(with.getName())) {
+    if (!with.getName().equals(current.getName()) && isRoleExists(with.getName())) {
       return false;
     }
     this.roleRepository.save(with);
@@ -112,15 +105,15 @@ public class RoleService {
   }
 
   /**
-   * <p>Deletes role by id.</p>
+   * Deletes role by id.
    *
    * @param id Role id to be deleted.
-   * @return <code>true</code> if RoleRepository was changed as a result of this call,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if RoleRepository was changed as a result of this call, or <code>
+   *     false</code> otherwise.
    */
   @Transactional
   public boolean deleteRole(Long id) {
-    if(Objects.isNull(findRole(id, RoleEntity.class))) {
+    if (Objects.isNull(findRole(id, RoleEntity.class))) {
       return false;
     }
     this.roleRepository.deleteById(id);

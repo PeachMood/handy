@@ -1,10 +1,9 @@
 package team.zavod.handy.model.entity.usernamepassword;
 
 /**
- * <p>Represents username and password token.</p>
+ * Represents username and password token.
  *
  * @param username Username.
  * @param password Password.
  */
-public record UsernamePasswordToken(String username, String password) {
-}
+public record UsernamePasswordToken(String username, String password) {}

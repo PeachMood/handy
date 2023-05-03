@@ -8,27 +8,25 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import org.springframework.security.core.GrantedAuthority;
 
-/**
- * <p>Represents user authority.</p>
- */
+/** Represents user authority. */
 @Entity(name = "Role")
 @Table(name = "role")
 public class RoleEntity implements GrantedAuthority {
   @Transient
-  public static final String DEFAULT_ROLE = "ROLE_USER";    // Role which will be assigned as a default value
+  public static final String DEFAULT_ROLE =
+      "ROLE_USER"; // Role which will be assigned as a default value
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;    // Unique role identifier
-  private String name;    // Role name
+  private Long id; // Unique role identifier
+
+  private String name; // Role name
+
+  /** Constructs new instance of <code>RoleEntity</code> class. */
+  public RoleEntity() {}
 
   /**
-   * <p>Constructs new instance of <code>RoleEntity</code> class.</p>
-   */
-  public RoleEntity() {
-  }
-
-  /**
-   * <p>Constructs new instance of <code>RoleEntity</code> class.</p>
+   * Constructs new instance of <code>RoleEntity</code> class.
    *
    * @param id Unique role identifier.
    * @param name Role name.
@@ -39,7 +37,7 @@ public class RoleEntity implements GrantedAuthority {
   }
 
   /**
-   * <p>Getter for <code>id</code> field.</p>
+   * Getter for <code>id</code> field.
    *
    * @return Unique role identifier.
    */
@@ -48,7 +46,7 @@ public class RoleEntity implements GrantedAuthority {
   }
 
   /**
-   * <p>Setter for <code>id</code> field.</p>
+   * Setter for <code>id</code> field.
    *
    * @param id Unique role identifier.
    */
@@ -57,7 +55,7 @@ public class RoleEntity implements GrantedAuthority {
   }
 
   /**
-   * <p>Getter for <code>name</code> field.</p>
+   * Getter for <code>name</code> field.
    *
    * @return Role name.
    */
@@ -66,7 +64,7 @@ public class RoleEntity implements GrantedAuthority {
   }
 
   /**
-   * <p>Setter for <code>name</code> field.</p>
+   * Setter for <code>name</code> field.
    *
    * @param name Role name.
    */
@@ -75,7 +73,7 @@ public class RoleEntity implements GrantedAuthority {
   }
 
   /**
-   * <p>Returns <code>String</code> representation of the <code>GrantedAuthority</code>.</p>
+   * Returns <code>String</code> representation of the <code>GrantedAuthority</code>.
    *
    * @return <code>String</code> representation of the <code>GrantedAuthority</code>.
    */

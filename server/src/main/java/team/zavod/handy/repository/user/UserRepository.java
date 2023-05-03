@@ -6,13 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import team.zavod.handy.model.entity.user.UserEntity;
 
-/**
- * <p>Provides functionality to manage users.</p>
- */
+/** Provides functionality to manage users. */
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
   /**
-   * <p>Creates new user with the specified data.</p>
+   * Creates new user with the specified data.
    *
    * @param user User to be saved.
    */
@@ -20,7 +18,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
   UserEntity save(UserEntity user);
 
   /**
-   * <p>Finds user by id.</p>
+   * Finds user by id.
    *
    * @param id User's id to be found.
    * @param type Class to be returned.
@@ -30,7 +28,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
   <T> Optional<T> findById(Long id, Class<T> type);
 
   /**
-   * <p>Finds user by username.</p>
+   * Finds user by username.
    *
    * @param username Username to be found.
    * @param type Class to be returned.
@@ -40,7 +38,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
   <T> Optional<T> findByUsername(String username, Class<T> type);
 
   /**
-   * <p>Finds user by e-mail address.</p>
+   * Finds user by e-mail address.
    *
    * @param email User's e-mail address to be found.
    * @param type Class to be returned.
@@ -50,7 +48,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
   <T> Optional<T> findByEmail(String email, Class<T> type);
 
   /**
-   * <p>Gets <code>List</code> of all users.</p>
+   * Gets <code>List</code> of all users.
    *
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
@@ -59,25 +57,24 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
   <T> List<T> findAllProjectedBy(Class<T> type);
 
   /**
-   * <p>Checks whether user with the specified username exists.</p>
+   * Checks whether user with the specified username exists.
    *
    * @param username Username to be checked.
-   * @return <code>true</code> if user with such username exists,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if user with such username exists, or <code>false</code> otherwise.
    */
   boolean existsByUsername(String username);
 
   /**
-   * <p>Checks whether user with the specified e-mail address exists.</p>
+   * Checks whether user with the specified e-mail address exists.
    *
    * @param email E-mail address to be checked.
-   * @return <code>true</code> if user with such e-mail address exists,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if user with such e-mail address exists, or <code>false</code>
+   *     otherwise.
    */
   boolean existsByEmail(String email);
 
   /**
-   * <p>Deletes user by id.</p>
+   * Deletes user by id.
    *
    * @param id User's id to be deleted.
    */

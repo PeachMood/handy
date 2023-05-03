@@ -21,28 +21,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import team.zavod.handy.configuration.ApplicationConfiguration;
 
-/**
- * <p>An authentication provider implementation that retrieves user details from a JWT token.</p>
- */
+/** An authentication provider implementation that retrieves user details from a JWT token. */
 public class JwtAuthenticationProvider implements AuthenticationProvider {
-  protected final Log logger;    // For logging purposes
-  private final ApplicationConfiguration applicationConfiguration;    // Instance of ApplicationConfig
-  private final UserDetailsService userDetailsService;    // Instance of UserDetailsService
+  protected final Log logger; // For logging purposes
+  private final ApplicationConfiguration applicationConfiguration; // Instance of ApplicationConfig
+  private final UserDetailsService userDetailsService; // Instance of UserDetailsService
 
   /**
-   * <p>Constructs new instance of <code>JwtAuthenticationProvider</code> class.</p>
+   * Constructs new instance of <code>JwtAuthenticationProvider</code> class.
    *
    * @param applicationConfiguration Instance of ApplicationConfig.
    * @param userDetailsService Instance of UserDetailsService.
    */
-  public JwtAuthenticationProvider(ApplicationConfiguration applicationConfiguration, UserDetailsService userDetailsService) {
+  public JwtAuthenticationProvider(
+      ApplicationConfiguration applicationConfiguration, UserDetailsService userDetailsService) {
     this.logger = LogFactory.getLog(getClass());
     this.applicationConfiguration = applicationConfiguration;
     this.userDetailsService = userDetailsService;
   }
 
   /**
-   * <p>Attempts to authenticate the past authentication object, returning a fully populated authentication object.</p>
+   * Attempts to authenticate the past authentication object, returning a fully populated
+   * authentication object.
    *
    * @param authentication the authentication request object.
    * @return Fully authenticated object.
@@ -56,18 +56,19 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
       UserDetails userDetails = retrieveUser(username);
       additionalAuthenticationChecks(jwtAuthenticationToken);
       return createSuccessAuthentication(userDetails, jwtAuthenticationToken, userDetails);
-    } catch(UsernameNotFoundException e) {
+    } catch (UsernameNotFoundException e) {
       this.logger.debug("Failed to find user '" + username + "'");
       throw new BadCredentialsException("Bad credentials");
     }
   }
 
   /**
-   * <p>Returns <code>true</code> if this authentication provider supports the indicated authentication object.</p>
+   * Returns <code>true</code> if this authentication provider supports the indicated authentication
+   * object.
    *
    * @param authentication Authentication object to be checked.
-   * @return <code>true</code> if this authentication provider supports the indicated authentication object,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if this authentication provider supports the indicated authentication
+   *     object, or <code>false</code> otherwise.
    */
   @Override
   public boolean supports(Class<?> authentication) {
@@ -82,30 +83,34 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
   /* Tries to retrieve user from UserDetailsService */
   private UserDetails retrieveUser(String username) throws AuthenticationException {
     UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-    if(Objects.isNull(userDetails)) {
-      throw new InternalAuthenticationServiceException("UserDetailsService returned null, which is an interface contract violation");
+    if (Objects.isNull(userDetails)) {
+      throw new InternalAuthenticationServiceException(
+          "UserDetailsService returned null, which is an interface contract violation");
     }
     return userDetails;
   }
 
   /* Performs additional checks for user authentication */
-  private void additionalAuthenticationChecks(JwtAuthenticationToken authentication) throws AuthenticationException {
-    if(Objects.isNull(authentication.getCredentials())) {
+  private void additionalAuthenticationChecks(JwtAuthenticationToken authentication)
+      throws AuthenticationException {
+    if (Objects.isNull(authentication.getCredentials())) {
       this.logger.debug("Failed to authenticate since no credentials provided");
       throw new BadCredentialsException("Bad credentials");
     }
     try {
       SignedJWT signedJwt = SignedJWT.parse(authentication.getCredentials().toString());
-      if(!signedJwt.verify(new MACVerifier(this.applicationConfiguration.jwt().secret().getBytes()))) {
+      if (!signedJwt.verify(
+          new MACVerifier(this.applicationConfiguration.jwt().secret().getBytes()))) {
         this.logger.debug("Failed to authenticate since the JWT signature was invalid");
         throw new BadCredentialsException("Bad credentials");
       }
-      JWTClaimsSetVerifier<SecurityContext> claimsSetVerifier = new DefaultJWTClaimsVerifier<>(null, null);
+      JWTClaimsSetVerifier<SecurityContext> claimsSetVerifier =
+          new DefaultJWTClaimsVerifier<>(null, null);
       claimsSetVerifier.verify(signedJwt.getJWTClaimsSet(), null);
-    } catch(ParseException e) {
+    } catch (ParseException e) {
       this.logger.debug("Failed to authenticate since the JWT was invalid");
       throw new BadCredentialsException("Bad credentials");
-    } catch(BadJOSEException e) {
+    } catch (BadJOSEException e) {
       this.logger.debug("Failed to authenticate since JWT claims set was invalid");
       throw new BadCredentialsException("Bad credentials");
     } catch (JOSEException e) {
@@ -114,8 +119,11 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
   }
 
   /* Creates authentication object for successfully authenticated user */
-  private Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails userDetails) {
-    JwtAuthenticationToken jwtAuthenticationToken = JwtAuthenticationToken.authenticated(principal, authentication.getCredentials(), userDetails.getAuthorities());
+  private Authentication createSuccessAuthentication(
+      Object principal, Authentication authentication, UserDetails userDetails) {
+    JwtAuthenticationToken jwtAuthenticationToken =
+        JwtAuthenticationToken.authenticated(
+            principal, authentication.getCredentials(), userDetails.getAuthorities());
     jwtAuthenticationToken.setDetails(authentication.getDetails());
     this.logger.debug("Authenticated user");
     return jwtAuthenticationToken;

@@ -1,14 +1,12 @@
 package team.zavod.handy.model.entity.jwt;
 
-/**
- * <p>Represents abstract JWT token.</p>
- */
+/** Represents abstract JWT token. */
 public class AbstractJwtToken {
-  private final String type;    // Type of the token
-  private final String token;    // Value of the token
+  private final String type; // Type of the token
+  private final String token; // Value of the token
 
   /**
-   * <p>Constructs new instance of <code>AbstractJwtToken</code> class.</p>
+   * Constructs new instance of <code>AbstractJwtToken</code> class.
    *
    * @param type Type of the token.
    * @param token Value of the token.
@@ -19,7 +17,7 @@ public class AbstractJwtToken {
   }
 
   /**
-   * <p>Getter for <code>type</code> field.</p>
+   * Getter for <code>type</code> field.
    *
    * @return Type of the token.
    */
@@ -28,7 +26,7 @@ public class AbstractJwtToken {
   }
 
   /**
-   * <p>Getter for <code>token</code> field.</p>
+   * Getter for <code>token</code> field.
    *
    * @return Value of the token.
    */

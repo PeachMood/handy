@@ -6,17 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.zavod.handy.service.user.SettingsService;
 
-/**
- * <p>Handles endpoints related to user settings.</p>
- */
+/** Handles endpoints related to user settings. */
 @RestController
 @RequestMapping(value = "/api/user/settings")
 public class SettingsController {
-  private final ConversionService conversionService;    // For type conversion purposes
-  private final SettingsService settingsService;    // Instance of user SettingsService
+  private final ConversionService conversionService; // For type conversion purposes
+  private final SettingsService settingsService; // Instance of user SettingsService
 
   /**
-   * <p>Constructs new instance of <code>SettingsController</code> class.</p>
+   * Constructs new instance of <code>SettingsController</code> class.
    *
    * @param conversionService For type conversion Purposes.
    * @param settingsService Instance of user SettingsService.

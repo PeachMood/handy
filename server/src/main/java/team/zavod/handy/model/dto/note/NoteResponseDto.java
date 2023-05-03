@@ -3,7 +3,7 @@ package team.zavod.handy.model.dto.note;
 import java.time.LocalDateTime;
 
 /**
- * <p>Represents single note as a response for the client.</p>
+ * Represents single note as a response for the client.
  *
  * @param id Unique note identifier.
  * @param name Note name.
@@ -11,5 +11,9 @@ import java.time.LocalDateTime;
  * @param creationDate Date of note creation.
  * @param modificationDate Date of note last modification.
  */
-public record NoteResponseDto(Long id, String name, String content, LocalDateTime creationDate, LocalDateTime modificationDate) {
-}
+public record NoteResponseDto(
+    Long id,
+    String name,
+    String content,
+    LocalDateTime creationDate,
+    LocalDateTime modificationDate) {}

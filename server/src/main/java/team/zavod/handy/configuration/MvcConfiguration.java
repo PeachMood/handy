@@ -16,13 +16,11 @@ import team.zavod.handy.model.converter.user.SettingsResponseDtoToSettingsEntity
 import team.zavod.handy.model.converter.user.UserRequestDtoToUserEntityConverter;
 import team.zavod.handy.model.converter.user.UserResponseDtoToUserEntityConverter;
 
-/**
- * <p>Configures various MVC related aspects.</p>
- */
+/** Configures various MVC related aspects. */
 @Configuration
 @EnableWebMvc
 public class MvcConfiguration implements WebMvcConfigurer {
-  private static final long MAX_AGE = 30;    // Max age for cors (in minutes)
+  private static final long MAX_AGE = 30; // Max age for cors (in minutes)
   private final ApplicationConfiguration applicationConfiguration;
 
   @Autowired
@@ -44,7 +42,8 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
   @Override
   public void addCorsMappings(CorsRegistry registry) {
-    registry.addMapping("/**")
+    registry
+        .addMapping("/**")
         .allowedOrigins(this.applicationConfiguration.cors().allowedOrigins())
         .allowCredentials(true)
         .maxAge(TimeUnit.MINUTES.toSeconds(MAX_AGE));

@@ -15,47 +15,49 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import team.zavod.handy.model.entity.usernamepassword.UsernamePasswordToken;
 
-/**
- * <p>Handles requests with username and password as authentication credentials.</p>
- */
-public class UsernamePasswordDtoAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
-  /**
-   * <p>Constructs new instance of <code>UsernamePasswordDtoAuthenticationFilter</code> class.</p>
-   */
+/** Handles requests with username and password as authentication credentials. */
+public class UsernamePasswordDtoAuthenticationFilter
+    extends AbstractAuthenticationProcessingFilter {
+  /** Constructs new instance of <code>UsernamePasswordDtoAuthenticationFilter</code> class. */
   public UsernamePasswordDtoAuthenticationFilter() {
     super(new AntPathRequestMatcher("/api/auth/login"));
   }
 
   /**
-   * <p>Constructs new instance of <code>UsernamePasswordDtoAuthenticationFilter</code> class.</p>
+   * Constructs new instance of <code>UsernamePasswordDtoAuthenticationFilter</code> class.
    *
-   * @param authenticationManager AuthenticationManager used to authenticate an authentication object.
+   * @param authenticationManager AuthenticationManager used to authenticate an authentication
+   *     object.
    */
   public UsernamePasswordDtoAuthenticationFilter(AuthenticationManager authenticationManager) {
     super(new AntPathRequestMatcher("/api/auth/login"), authenticationManager);
   }
 
   /**
-   * <p>Performs actual authentication.</p>
+   * Performs actual authentication.
    *
    * @param request from which to extract parameters and perform the authentication
-   * @param response the response, which may be needed if the implementation has to do a redirect as part of a multi-stage authentication process (such as OIDC).
-   * @return The authenticated user token,
-   * or <code>null</code> if authentication is incomplete.
+   * @param response the response, which may be needed if the implementation has to do a redirect as
+   *     part of a multi-stage authentication process (such as OIDC).
+   * @return The authenticated user token, or <code>null</code> if authentication is incomplete.
    * @throws AuthenticationException If authentication fails.
    */
   @Override
-  public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+  public Authentication attemptAuthentication(
+      HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
     UsernamePasswordToken usernamePasswordToken = obtainToken(request);
-    String username = Objects.nonNull(usernamePasswordToken) ? usernamePasswordToken.username() : "";
-    String password = Objects.nonNull(usernamePasswordToken) ? usernamePasswordToken.password() : "";
-    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken.unauthenticated(username, password);
+    String username =
+        Objects.nonNull(usernamePasswordToken) ? usernamePasswordToken.username() : "";
+    String password =
+        Objects.nonNull(usernamePasswordToken) ? usernamePasswordToken.password() : "";
+    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+        UsernamePasswordAuthenticationToken.unauthenticated(username, password);
     setDetails(request, usernamePasswordAuthenticationToken);
     return this.getAuthenticationManager().authenticate(usernamePasswordAuthenticationToken);
   }
 
   /**
-   * <p>Default handler for successful authentication.</p>
+   * Default handler for successful authentication.
    *
    * @param request HTTP request to use.
    * @param response HTTP response to use.
@@ -65,7 +67,12 @@ public class UsernamePasswordDtoAuthenticationFilter extends AbstractAuthenticat
    * @throws ServletException If method fails.
    */
   @Override
-  protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
+  protected void successfulAuthentication(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      FilterChain chain,
+      Authentication authentication)
+      throws IOException, ServletException {
     super.successfulAuthentication(request, response, chain, authentication);
     chain.doFilter(request, response);
   }
@@ -81,7 +88,10 @@ public class UsernamePasswordDtoAuthenticationFilter extends AbstractAuthenticat
   }
 
   /* Sets the authentication request details property */
-  private void setDetails(HttpServletRequest request, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) {
-    usernamePasswordAuthenticationToken.setDetails(this.authenticationDetailsSource.buildDetails(request));
+  private void setDetails(
+      HttpServletRequest request,
+      UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) {
+    usernamePasswordAuthenticationToken.setDetails(
+        this.authenticationDetailsSource.buildDetails(request));
   }
 }

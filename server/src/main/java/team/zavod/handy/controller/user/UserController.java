@@ -6,17 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.zavod.handy.service.user.UserService;
 
-/**
- * <p>Handles endpoints related to users.</p>
- */
+/** Handles endpoints related to users. */
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserController {
-  private final ConversionService conversionService;    // For type conversion purposes
-  private final UserService userService;    // Instance of UserService
+  private final ConversionService conversionService; // For type conversion purposes
+  private final UserService userService; // Instance of UserService
 
   /**
-   * <p>Constructs new instance of <code>UserController</code> class.</p>
+   * Constructs new instance of <code>UserController</code> class.
    *
    * @param conversionService For type conversion Purposes.
    * @param userService Instance of UserService.

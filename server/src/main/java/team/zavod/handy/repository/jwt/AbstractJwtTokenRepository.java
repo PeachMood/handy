@@ -21,15 +21,14 @@ import org.springframework.stereotype.Repository;
 import team.zavod.handy.configuration.ApplicationConfiguration;
 import team.zavod.handy.model.entity.jwt.AbstractJwtToken;
 
-/**
- * <p>Provides common functionality to manage JWT tokens.</p>
- */
+/** Provides common functionality to manage JWT tokens. */
 @Repository
 public abstract class AbstractJwtTokenRepository {
-  protected final ApplicationConfiguration applicationConfiguration;    // Instance of ApplicationConfig
+  protected final ApplicationConfiguration
+      applicationConfiguration; // Instance of ApplicationConfig
 
   /**
-   * <p>Constructs new instance of <code>AbstractJwtTokenRepository</code> class.</p>
+   * Constructs new instance of <code>AbstractJwtTokenRepository</code> class.
    *
    * @param applicationConfiguration Instance of ApplicationConfig.
    */
@@ -38,7 +37,7 @@ public abstract class AbstractJwtTokenRepository {
   }
 
   /**
-   * <p>Generates JWT token.</p>
+   * Generates JWT token.
    *
    * @param request HttpServletRequest to use.
    * @return Generated JWT token.
@@ -46,54 +45,58 @@ public abstract class AbstractJwtTokenRepository {
   public abstract AbstractJwtToken generateToken(HttpServletRequest request);
 
   /**
-   * <p>Saves specified JWT access token, or deletes it if <code>null</code> is specified.</p>
+   * Saves specified JWT access token, or deletes it if <code>null</code> is specified.
    *
    * @param token JWT token to save, or null to delete.
    * @param request HttpServletRequest to use.
    * @param response HttpServletResponse to use.
    */
-  public abstract void saveToken(AbstractJwtToken token, HttpServletRequest request, HttpServletResponse response);
+  public abstract void saveToken(
+      AbstractJwtToken token, HttpServletRequest request, HttpServletResponse response);
 
   /**
-   * <p>Loads JWT token.</p>
+   * Loads JWT token.
    *
    * @param request HTTP request to use.
-   * @return Loaded JWT token,
-   * or <code>null</code> if it doesn't exist.
+   * @return Loaded JWT token, or <code>null</code> if it doesn't exist.
    */
   public abstract AbstractJwtToken loadToken(HttpServletRequest request);
 
   /**
-   * <p>Returns expiration time for this token based on the application configuration (in seconds).<./p>
+   * Returns expiration time for this token based on the application configuration (in
+   * seconds).<./p>
    *
    * @return Expiration time for this token.
    */
   public abstract long getExpirationTime();
 
   /**
-   * <p>Generates JWT token.</p>
+   * Generates JWT token.
    *
    * @return Generated JWT token.
    */
   protected SignedJWT generateJwtToken() {
-      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-      Object principal = Objects.nonNull(authentication) ? authentication.getPrincipal() : null;
-      UserDetails userDetails = principal instanceof UserDetails ? (UserDetails) principal : null;
-      if(Objects.isNull(userDetails)) {
-        return null;
-      }
-      LocalDateTime now = LocalDateTime.now();
-      LocalDateTime expirationTime = now.plusHours(getExpirationTime());
-      JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
-      JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-          .subject(userDetails.getUsername())
-          .expirationTime(Date.from(expirationTime.atZone(ZoneId.systemDefault()).toInstant()))
-          .notBeforeTime(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()))
-          .issueTime(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()))
-          .jwtID(UUID.randomUUID().toString().replace("-", ""))
-          .claim("roles", userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
-          .build();
-      SignedJWT signedJwt = new SignedJWT(header, claimsSet);
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    Object principal = Objects.nonNull(authentication) ? authentication.getPrincipal() : null;
+    UserDetails userDetails = principal instanceof UserDetails ? (UserDetails) principal : null;
+    if (Objects.isNull(userDetails)) {
+      return null;
+    }
+    LocalDateTime now = LocalDateTime.now();
+    LocalDateTime expirationTime = now.plusHours(getExpirationTime());
+    JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
+    JWTClaimsSet claimsSet =
+        new JWTClaimsSet.Builder()
+            .subject(userDetails.getUsername())
+            .expirationTime(Date.from(expirationTime.atZone(ZoneId.systemDefault()).toInstant()))
+            .notBeforeTime(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()))
+            .issueTime(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()))
+            .jwtID(UUID.randomUUID().toString().replace("-", ""))
+            .claim(
+                "roles",
+                userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
+            .build();
+    SignedJWT signedJwt = new SignedJWT(header, claimsSet);
     try {
       signedJwt.sign(new MACSigner(this.applicationConfiguration.jwt().secret()));
       return signedJwt;

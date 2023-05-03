@@ -6,17 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.zavod.handy.service.user.RoleService;
 
-/**
- * <p>Handles endpoints related to user roles.</p>
- */
+/** Handles endpoints related to user roles. */
 @RestController
 @RequestMapping(value = "/api/user/role")
 public class RoleController {
-  private final ConversionService conversionService;    // For type conversion purposes
-  private final RoleService roleService;    // Instance of user RoleService.
+  private final ConversionService conversionService; // For type conversion purposes
+  private final RoleService roleService; // Instance of user RoleService.
 
   /**
-   * <p>Constructs new instance of <code>RoleController</code> class.</p>
+   * Constructs new instance of <code>RoleController</code> class.
    *
    * @param conversionService For type conversion Purposes.
    * @param roleService Instance of user RoleService.

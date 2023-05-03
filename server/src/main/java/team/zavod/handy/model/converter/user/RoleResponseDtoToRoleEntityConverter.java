@@ -4,12 +4,11 @@ import org.springframework.core.convert.converter.Converter;
 import team.zavod.handy.model.dto.user.RoleResponseDto;
 import team.zavod.handy.model.entity.user.RoleEntity;
 
-/**
- * <p>Converts RoleResponseDto to RoleEntity.</p>
- */
-public class RoleResponseDtoToRoleEntityConverter implements Converter<RoleResponseDto, RoleEntity> {
+/** Converts RoleResponseDto to RoleEntity. */
+public class RoleResponseDtoToRoleEntityConverter
+    implements Converter<RoleResponseDto, RoleEntity> {
   /**
-   * <p>Converts <code>RoleResponseDto</code> to <code>RoleEntity</code>.</p>
+   * Converts <code>RoleResponseDto</code> to <code>RoleEntity</code>.
    *
    * @param source RoleResponseDto to convert.
    * @return Converted RoleEntity.

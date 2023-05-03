@@ -12,36 +12,35 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import team.zavod.handy.model.entity.user.UserEntity;
 
-/**
- * <p>Represents single note.</p>
- */
+/** Represents single note. */
 @Entity(name = "Note")
 @Table(name = "note")
 public class NoteEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;    // Unique note identifier
-  @ManyToOne
-  private UserEntity user;    // Instance of UserEntity
-  private String name;    // Note name
-  private String content;    // Path to note content
+  private Long id; // Unique note identifier
+
+  @ManyToOne private UserEntity user; // Instance of UserEntity
+  private String name; // Note name
+  private String content; // Path to note content
+
   @Column(name = "creation_date")
-  private LocalDateTime creationDate;    // Date of note creation
+  private LocalDateTime creationDate; // Date of note creation
+
   @Column(name = "modification_date")
-  private LocalDateTime modificationDate;    // Date of note last modification
+  private LocalDateTime modificationDate; // Date of note last modification
+
   @Column(name = "trashed_date")
-  private LocalDateTime trashedDate;    // Date of permanent note deletion
+  private LocalDateTime trashedDate; // Date of permanent note deletion
+
   @Enumerated(EnumType.STRING)
-  private NoteState state;    // Current note state
+  private NoteState state; // Current note state
+
+  /** Creates instance of <code>NoteEntity</code> class. */
+  public NoteEntity() {}
 
   /**
-   * <p>Creates instance of <code>NoteEntity</code> class.</p>
-   */
-  public NoteEntity() {
-  }
-
-  /**
-   * <p>Creates instance of <code>NoteEntity</code> class.</p>
+   * Creates instance of <code>NoteEntity</code> class.
    *
    * @param id Unique note identifier.
    * @param user Instance of UserEntity.
@@ -49,26 +48,15 @@ public class NoteEntity {
    * @param content Path to note content.
    * @param state Current note state.
    */
-  public NoteEntity(Long id,
-      UserEntity user,
-      String name,
-      String content,
-      NoteState state) {
-    this(id,
-        user,
-        name,
-        content,
-        null,
-        null,
-        null,
-        state);
+  public NoteEntity(Long id, UserEntity user, String name, String content, NoteState state) {
+    this(id, user, name, content, null, null, null, state);
     LocalDateTime now = LocalDateTime.now();
     this.creationDate = now;
     this.modificationDate = now;
   }
 
   /**
-   * <p>Creates instance of <code>NoteEntity</code> class.</p>
+   * Creates instance of <code>NoteEntity</code> class.
    *
    * @param id Unique note identifier.
    * @param user Instance of UserEntity.
@@ -79,7 +67,8 @@ public class NoteEntity {
    * @param trashedDate Date of permanent note deletion.
    * @param state Current note state.
    */
-  public NoteEntity(Long id,
+  public NoteEntity(
+      Long id,
       UserEntity user,
       String name,
       String content,
@@ -98,7 +87,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Getter for <code>id</code> field.</p>
+   * Getter for <code>id</code> field.
    *
    * @return Unique note identifier.
    */
@@ -107,7 +96,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Setter for <code>id</code> field.</p>
+   * Setter for <code>id</code> field.
    *
    * @param id Unique note identifier.
    */
@@ -116,7 +105,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Getter for <code>user</code> field.</p>
+   * Getter for <code>user</code> field.
    *
    * @return Instance of UserEntity.
    */
@@ -125,7 +114,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Setter for <code>user</code> field.</p>
+   * Setter for <code>user</code> field.
    *
    * @param user Instance of UserEntity.
    */
@@ -134,7 +123,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Getter for <code>name</code> field.</p>
+   * Getter for <code>name</code> field.
    *
    * @return Note name.
    */
@@ -143,7 +132,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Setter for <code>name</code> field.</p>
+   * Setter for <code>name</code> field.
    *
    * @param name Note name.
    */
@@ -152,7 +141,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Getter for <code>content</code> field.</p>
+   * Getter for <code>content</code> field.
    *
    * @return Path to note content.
    */
@@ -161,7 +150,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Setter for <code>content</code> field.</p>
+   * Setter for <code>content</code> field.
    *
    * @param content Path to note content.
    */
@@ -170,7 +159,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Getter for <code>creationDate</code> field.</p>
+   * Getter for <code>creationDate</code> field.
    *
    * @return Date of note creation.
    */
@@ -179,7 +168,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Setter for <code>creationDate</code> field.</p>
+   * Setter for <code>creationDate</code> field.
    *
    * @param creationDate Date of note creation.
    */
@@ -188,7 +177,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Getter for <code>modificationDate</code> field.</p>
+   * Getter for <code>modificationDate</code> field.
    *
    * @return Date of note last modification.
    */
@@ -197,7 +186,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Setter for <code>modificationDate</code> field.</p>
+   * Setter for <code>modificationDate</code> field.
    *
    * @param modificationDate Date of note last modification.
    */
@@ -206,7 +195,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Getter for <code>trashedDate</code> field.</p>
+   * Getter for <code>trashedDate</code> field.
    *
    * @return Date of permanent note deletion.
    */
@@ -215,7 +204,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Setter for <code>trashedDate</code> field.</p>
+   * Setter for <code>trashedDate</code> field.
    *
    * @param trashedDate Date of permanent note deletion.
    */
@@ -224,7 +213,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Getter for <code>state</code> field.</p>
+   * Getter for <code>state</code> field.
    *
    * @return Current note state.
    */
@@ -233,7 +222,7 @@ public class NoteEntity {
   }
 
   /**
-   * <p>Setter for <code>state</code> field.</p>
+   * Setter for <code>state</code> field.
    *
    * @param state Current note state.
    */

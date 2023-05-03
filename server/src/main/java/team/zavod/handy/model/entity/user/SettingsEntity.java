@@ -7,26 +7,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/**
- * <p>Stores user settings.</p>
- */
+/** Stores user settings. */
 @Entity(name = "Settings")
 @Table(name = "settings")
 public class SettingsEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;    // Unique settings identifier
+  private Long id; // Unique settings identifier
+
   @Column(name = "trashed_period")
-  private int trashedPeriod;    // Time for storing data in trash
+  private int trashedPeriod; // Time for storing data in trash
+
+  /** Constructs new instance of <code>SettingsEntity</code> class. */
+  public SettingsEntity() {}
 
   /**
-   * <p>Constructs new instance of <code>SettingsEntity</code> class.</p>
-   */
-  public SettingsEntity() {
-  }
-
-  /**
-   * <p>Constructs new instance of <code>SettingsEntity</code> class.</p>
+   * Constructs new instance of <code>SettingsEntity</code> class.
    *
    * @param id Unique settings identifier.
    * @param trashedPeriod Time for storing data in trash.
@@ -37,7 +33,7 @@ public class SettingsEntity {
   }
 
   /**
-   * <p>Getter for <code>id</code> field.</p>
+   * Getter for <code>id</code> field.
    *
    * @return Unique settings identifier.
    */
@@ -46,7 +42,7 @@ public class SettingsEntity {
   }
 
   /**
-   * <p>Setter for <code>trashedPeriod</code> field.</p>
+   * Setter for <code>trashedPeriod</code> field.
    *
    * @param id Unique settings identifier.
    */
@@ -55,7 +51,7 @@ public class SettingsEntity {
   }
 
   /**
-   * <p>Getter for <code>trashedPeriod</code> field.</p>
+   * Getter for <code>trashedPeriod</code> field.
    *
    * @return Time for storing data in trash.
    */
@@ -64,7 +60,7 @@ public class SettingsEntity {
   }
 
   /**
-   * <p>Setter for <code>trashedPeriod</code> field.</p>
+   * Setter for <code>trashedPeriod</code> field.
    *
    * @param trashedPeriod Time for storing data in trash.
    */

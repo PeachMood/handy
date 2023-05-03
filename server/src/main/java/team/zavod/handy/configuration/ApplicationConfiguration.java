@@ -3,7 +3,7 @@ package team.zavod.handy.configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * <p>Stores application configuration.</p>
+ * Stores application configuration.
  *
  * @param domain Domain name of the service.
  * @param cors Cors configuration.
@@ -12,20 +12,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application.config")
 public record ApplicationConfiguration(String domain, Cors cors, Jwt jwt) {
   /**
-   * <p>Stores cors configuration.</p>
+   * Stores cors configuration.
    *
    * @param allowedOrigins List of allowed origins.
    */
-  public record Cors(String[] allowedOrigins) {
-  }
+  public record Cors(String[] allowedOrigins) {}
 
   /**
-   * <p>Stores JWT configuration.</p>
+   * Stores JWT configuration.
    *
    * @param accessTokenExpirationTime Expiration time for access token (in minutes).
    * @param refreshTokenExpirationTime Expiration time for refresh token (in days).
    * @param secret Encryption key.
    */
-  public record Jwt(long accessTokenExpirationTime, long refreshTokenExpirationTime, String secret) {
-  }
+  public record Jwt(
+      long accessTokenExpirationTime, long refreshTokenExpirationTime, String secret) {}
 }

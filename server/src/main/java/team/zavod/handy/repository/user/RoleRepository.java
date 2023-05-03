@@ -6,13 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import team.zavod.handy.model.entity.user.RoleEntity;
 
-/**
- * <p>Provides functionality to manage user roles.</p>
- */
+/** Provides functionality to manage user roles. */
 @Repository
 public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
   /**
-   * <p>Creates new user role with the specified data.</p>
+   * Creates new user role with the specified data.
    *
    * @param role User role to be saved.
    */
@@ -20,7 +18,7 @@ public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
   RoleEntity save(RoleEntity role);
 
   /**
-   * <p>Finds role by id.</p>
+   * Finds role by id.
    *
    * @param id role id to be found.
    * @param type Class to be returned.
@@ -30,7 +28,7 @@ public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
   <T> Optional<T> findById(Long id, Class<T> type);
 
   /**
-   * <p>Finds role by name.</p>
+   * Finds role by name.
    *
    * @param name Role name to be found.
    * @param type Class to be returned.
@@ -49,16 +47,15 @@ public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
   <T> List<T> findAllProjectedBy(Class<T> type);
 
   /**
-   * <p>Checks weather user role with the specified name exists.</p>
+   * Checks weather user role with the specified name exists.
    *
    * @param name User role to be checked.
-   * @return <code>true</code> if such user role exists,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if such user role exists, or <code>false</code> otherwise.
    */
   boolean existsByName(String name);
 
   /**
-   * <p>Deletes role by id.</p>
+   * Deletes role by id.
    *
    * @param id Role id to be deleted.
    */

@@ -14,34 +14,33 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-/**
- * <p>Represents single user.</p>
- */
+/** Represents single user. */
 @Entity(name = "User")
 @Table(name = "user")
 public class UserEntity implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;    // Unique user identifier
+  private Long id; // Unique user identifier
+
   @Column(name = "name")
-  private String username;    // Unique username
-  private String email;    // User's e-mail address
-  private String avatar;    // Path to user's avatar
+  private String username; // Unique username
+
+  private String email; // User's e-mail address
+  private String avatar; // Path to user's avatar
+
   @Column(name = "password_hash")
-  private String password;    // Hash of user's password
-  @OneToOne
-  private SettingsEntity settings;    // Instance of user SettingsEntity
+  private String password; // Hash of user's password
+
+  @OneToOne private SettingsEntity settings; // Instance of user SettingsEntity
+
   @ManyToMany(fetch = FetchType.EAGER)
-  private Set<RoleEntity> roles;    // Set with user RoleEntity instances
+  private Set<RoleEntity> roles; // Set with user RoleEntity instances
+
+  /** Constructs new instance of <code>UserEntity</code> class. */
+  public UserEntity() {}
 
   /**
-   * <p>Constructs new instance of <code>UserEntity</code> class.</p>
-   */
-  public UserEntity() {
-  }
-
-  /**
-   * <p>Constructs new instance of <code>UserEntity</code> class.</p>
+   * Constructs new instance of <code>UserEntity</code> class.
    *
    * @param id Unique user identifier.
    * @param username Unique user name.
@@ -51,7 +50,8 @@ public class UserEntity implements UserDetails {
    * @param settings Instance of user SettingsEntity.
    * @param roles Set with user RoleEntity instances.
    */
-  public UserEntity(Long id,
+  public UserEntity(
+      Long id,
       String username,
       String email,
       String avatar,
@@ -68,7 +68,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Getter for <code>id</code> field.</p>
+   * Getter for <code>id</code> field.
    *
    * @return Unique user identifier.
    */
@@ -77,7 +77,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Setter for <code>id</code> field.</p>
+   * Setter for <code>id</code> field.
    *
    * @param id Unique user identifier.
    */
@@ -86,7 +86,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Getter for <code>username</code> field.</p>
+   * Getter for <code>username</code> field.
    *
    * @return Unique username.
    */
@@ -96,7 +96,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Setter for <code>username</code> field.</p>
+   * Setter for <code>username</code> field.
    *
    * @param username Unique username.
    */
@@ -105,7 +105,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Getter for <code>email</code> field.</p>
+   * Getter for <code>email</code> field.
    *
    * @return User's e-mail address.
    */
@@ -114,7 +114,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Setter for <code>email</code> field.</p>
+   * Setter for <code>email</code> field.
    *
    * @param email User's e-mail address.
    */
@@ -123,7 +123,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Getter for <code>avatar</code> field.</p>
+   * Getter for <code>avatar</code> field.
    *
    * @return Path to user's avatar.
    */
@@ -132,7 +132,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Setter for <code>avatar</code> field.</p>
+   * Setter for <code>avatar</code> field.
    *
    * @param avatar Path to user's avatar.
    */
@@ -141,7 +141,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Getter for <code>password</code> field.</p>
+   * Getter for <code>password</code> field.
    *
    * @return Hash of user's password.
    */
@@ -151,7 +151,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Setter for <code>password</code> field.</p>
+   * Setter for <code>password</code> field.
    *
    * @param password Hash of user's password.
    */
@@ -160,7 +160,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Getter for <code>settings</code> field.</p>
+   * Getter for <code>settings</code> field.
    *
    * @return Instance of user SettingsEntity.
    */
@@ -169,7 +169,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Setter for <code>settings</code> field.</p>
+   * Setter for <code>settings</code> field.
    *
    * @param settings Instance of user SettingsEntity.
    */
@@ -178,7 +178,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Getter for <code>roles</code> field.</p>
+   * Getter for <code>roles</code> field.
    *
    * @return Set with user RoleEntity instances.
    */
@@ -187,7 +187,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Setter for <code>roles</code> field.</p>
+   * Setter for <code>roles</code> field.
    *
    * @param roles Set with user RoleEntity instances.
    */
@@ -196,7 +196,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Returns the authorities granted to the user.</p>
+   * Returns the authorities granted to the user.
    *
    * @return User authorities.
    */
@@ -206,7 +206,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Indicates whether the user's account has expired.</p>
+   * Indicates whether the user's account has expired.
    *
    * @return <code>true</code> if the user's account is valid.
    */
@@ -216,7 +216,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Indicates whether the user is locked or unlocked.</p>
+   * Indicates whether the user is locked or unlocked.
    *
    * @return <code>true</code> if the user is not locked.
    */
@@ -226,7 +226,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Indicates whether the user's credentials has expired.</p>
+   * Indicates whether the user's credentials has expired.
    *
    * @return <code>true</code> if the user's credentials are valid.
    */
@@ -236,7 +236,7 @@ public class UserEntity implements UserDetails {
   }
 
   /**
-   * <p>Indicates whether the user is enabled or disabled.</p>
+   * Indicates whether the user is enabled or disabled.
    *
    * @return <code>true</code> if the user is enabled.
    */

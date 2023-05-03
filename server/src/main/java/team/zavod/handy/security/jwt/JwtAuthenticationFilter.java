@@ -19,59 +19,72 @@ import team.zavod.handy.model.entity.jwt.AbstractJwtToken;
 import team.zavod.handy.repository.jwt.JwtAccessTokenRepository;
 import team.zavod.handy.repository.jwt.JwtRefreshTokenRepository;
 
-/**
- * <p>Handles requests with JWT tokens as authentication credentials.</p>
- */
+/** Handles requests with JWT tokens as authentication credentials. */
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
-  private final JwtAccessTokenRepository jwtAccessTokenRepository;    // Instance of JwtAccessTokenRepository
-  private final JwtRefreshTokenRepository jwtRefreshTokenRepository;    // Instance of JwtRefreshTokenRepository
+  private final JwtAccessTokenRepository
+      jwtAccessTokenRepository; // Instance of JwtAccessTokenRepository
+  private final JwtRefreshTokenRepository
+      jwtRefreshTokenRepository; // Instance of JwtRefreshTokenRepository
 
   /**
-   * <p>Constructs new instance of <code>JwtAuthenticationFilter</code> class.</p>
+   * Constructs new instance of <code>JwtAuthenticationFilter</code> class.
    *
    * @param jwtAccessTokenRepository Instance of JwtAccessTokenRepository.
    * @param jwtRefreshTokenRepository Instance of JwtRefreshTokenRepository.
    */
-  public JwtAuthenticationFilter(JwtAccessTokenRepository jwtAccessTokenRepository, JwtRefreshTokenRepository jwtRefreshTokenRepository) {
+  public JwtAuthenticationFilter(
+      JwtAccessTokenRepository jwtAccessTokenRepository,
+      JwtRefreshTokenRepository jwtRefreshTokenRepository) {
     super(new NegatedRequestMatcher(new AntPathRequestMatcher("/api/auth/login")));
     this.jwtAccessTokenRepository = jwtAccessTokenRepository;
     this.jwtRefreshTokenRepository = jwtRefreshTokenRepository;
   }
 
   /**
-   * <p>Constructs new instance of <code>JwtAuthenticationFilter</code> class.</p>
+   * Constructs new instance of <code>JwtAuthenticationFilter</code> class.
    *
-   * @param authenticationManager AuthenticationManager used to authenticate an authentication object.
+   * @param authenticationManager AuthenticationManager used to authenticate an authentication
+   *     object.
    * @param jwtAccessTokenRepository Instance of JwtAccessTokenRepository.
    * @param jwtRefreshTokenRepository Instance of JwtRefreshTokenRepository.
    */
-  public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtAccessTokenRepository jwtAccessTokenRepository, JwtRefreshTokenRepository jwtRefreshTokenRepository) {
-    super(new NegatedRequestMatcher(new AntPathRequestMatcher("/api/auth/login")), authenticationManager);
+  public JwtAuthenticationFilter(
+      AuthenticationManager authenticationManager,
+      JwtAccessTokenRepository jwtAccessTokenRepository,
+      JwtRefreshTokenRepository jwtRefreshTokenRepository) {
+    super(
+        new NegatedRequestMatcher(new AntPathRequestMatcher("/api/auth/login")),
+        authenticationManager);
     this.jwtAccessTokenRepository = jwtAccessTokenRepository;
     this.jwtRefreshTokenRepository = jwtRefreshTokenRepository;
   }
 
   /**
-   * <p>Performs actual authentication.</p>
+   * Performs actual authentication.
    *
    * @param request from which to extract parameters and perform the authentication
-   * @param response the response, which may be needed if the implementation has to do a redirect as part of a multi-stage authentication process (such as OpenID).
-   * @return The authenticated user token,
-   * or <code>null</code> if authentication is incomplete.
+   * @param response the response, which may be needed if the implementation has to do a redirect as
+   *     part of a multi-stage authentication process (such as OpenID).
+   * @return The authenticated user token, or <code>null</code> if authentication is incomplete.
    * @throws AuthenticationException If authentication fails.
    */
   @Override
-  public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-    AbstractJwtToken abstractJwtToken = request.getServletPath().equals("/api/auth/refresh-token") ? this.jwtRefreshTokenRepository.loadToken(request) : this.jwtAccessTokenRepository.loadToken(request);
+  public Authentication attemptAuthentication(
+      HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    AbstractJwtToken abstractJwtToken =
+        request.getServletPath().equals("/api/auth/refresh-token")
+            ? this.jwtRefreshTokenRepository.loadToken(request)
+            : this.jwtAccessTokenRepository.loadToken(request);
     String token = Objects.nonNull(abstractJwtToken) ? abstractJwtToken.getToken() : "";
     String username = Objects.nonNull(token) ? obtainUsername(token) : "";
-    JwtAuthenticationToken jwtAuthenticationToken = JwtAuthenticationToken.unauthenticated(username, token);
+    JwtAuthenticationToken jwtAuthenticationToken =
+        JwtAuthenticationToken.unauthenticated(username, token);
     setDetails(request, jwtAuthenticationToken);
     return this.getAuthenticationManager().authenticate(jwtAuthenticationToken);
   }
 
   /**
-   * <p>Default handler for successful authentication.</p>
+   * Default handler for successful authentication.
    *
    * @param request HTTP request to use.
    * @param response HTTP response to use.
@@ -81,7 +94,12 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
    * @throws ServletException If method fails.
    */
   @Override
-  protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
+  protected void successfulAuthentication(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      FilterChain chain,
+      Authentication authentication)
+      throws IOException, ServletException {
     super.successfulAuthentication(request, response, chain, authentication);
     chain.doFilter(request, response);
   }
@@ -92,13 +110,14 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
       SignedJWT signedJwt = SignedJWT.parse(token);
       JWTClaimsSet claimsSet = signedJwt.getJWTClaimsSet();
       return claimsSet.getSubject();
-    } catch(ParseException e) {
+    } catch (ParseException e) {
       return "";
     }
   }
 
   /* Sets the authentication request details property */
-  private void setDetails(HttpServletRequest request, JwtAuthenticationToken jwtAuthenticationToken) {
+  private void setDetails(
+      HttpServletRequest request, JwtAuthenticationToken jwtAuthenticationToken) {
     jwtAuthenticationToken.setDetails(this.authenticationDetailsSource.buildDetails(request));
   }
 }

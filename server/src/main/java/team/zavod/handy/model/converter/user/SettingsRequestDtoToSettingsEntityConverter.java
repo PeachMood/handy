@@ -4,12 +4,11 @@ import org.springframework.core.convert.converter.Converter;
 import team.zavod.handy.model.dto.user.SettingsRequestDto;
 import team.zavod.handy.model.entity.user.SettingsEntity;
 
-/**
- * <p>Converts SettingsRequestDto to SettingsEntity.</p>
- */
-public class SettingsRequestDtoToSettingsEntityConverter implements Converter<SettingsRequestDto, SettingsEntity> {
+/** Converts SettingsRequestDto to SettingsEntity. */
+public class SettingsRequestDtoToSettingsEntityConverter
+    implements Converter<SettingsRequestDto, SettingsEntity> {
   /**
-   * <p>Converts <code>SettingsRequestDto</code> to <code>SettingsEntity</code>.</p>
+   * Converts <code>SettingsRequestDto</code> to <code>SettingsEntity</code>.
    *
    * @param source SettingsRequestDto to convert.
    * @return Converted SettingsEntity.

@@ -9,28 +9,30 @@ import team.zavod.handy.model.entity.jwt.JwtRefreshToken;
 import team.zavod.handy.repository.jwt.JwtAccessTokenRepository;
 import team.zavod.handy.repository.jwt.JwtRefreshTokenRepository;
 
-/**
- * <p>Implements complex logic related to authorization.</p>
- */
+/** Implements complex logic related to authorization. */
 @Service
 public class AuthorizationService {
-  private final JwtAccessTokenRepository jwtAccessTokenRepository;    // Instance of JwtAccessTokenRepository
-  private final JwtRefreshTokenRepository jwtRefreshTokenRepository;    // Instance of JwtRefreshTokenRepository
+  private final JwtAccessTokenRepository
+      jwtAccessTokenRepository; // Instance of JwtAccessTokenRepository
+  private final JwtRefreshTokenRepository
+      jwtRefreshTokenRepository; // Instance of JwtRefreshTokenRepository
 
   /**
-   * <p>Constructs new instance of <code>AuthorizationService</code> class.</p>
+   * Constructs new instance of <code>AuthorizationService</code> class.
    *
    * @param jwtAccessTokenRepository Instance of JwtAccessTokenRepository.
    * @param jwtRefreshTokenRepository Instance of JwtRefreshTokenRepository.
    */
   @Autowired
-  public AuthorizationService(JwtAccessTokenRepository jwtAccessTokenRepository, JwtRefreshTokenRepository jwtRefreshTokenRepository) {
+  public AuthorizationService(
+      JwtAccessTokenRepository jwtAccessTokenRepository,
+      JwtRefreshTokenRepository jwtRefreshTokenRepository) {
     this.jwtAccessTokenRepository = jwtAccessTokenRepository;
     this.jwtRefreshTokenRepository = jwtRefreshTokenRepository;
   }
 
   /**
-   * <p>Generates JWT access token.</p>
+   * Generates JWT access token.
    *
    * @param request HttpServletRequest to use.
    * @return Generated JWT access token.
@@ -40,7 +42,7 @@ public class AuthorizationService {
   }
 
   /**
-   * <p>Generates JWT refresh token.</p>
+   * Generates JWT refresh token.
    *
    * @param request HttpServletRequest to use.
    * @return Generated JWT refresh token.
@@ -50,51 +52,52 @@ public class AuthorizationService {
   }
 
   /**
-   * <p>Saves specified JWT access token, or deletes it if <code>null</code> is specified.</p>
+   * Saves specified JWT access token, or deletes it if <code>null</code> is specified.
    *
    * @param token JWT token to save, or null to delete.
    * @param request HttpServletRequest to use.
    * @param response HttpServletResponse to use.
    */
-  public void saveAccessToken(JwtAccessToken token, HttpServletRequest request, HttpServletResponse response) {
+  public void saveAccessToken(
+      JwtAccessToken token, HttpServletRequest request, HttpServletResponse response) {
     this.jwtAccessTokenRepository.saveToken(token, request, response);
   }
 
   /**
-   * <p>Saves specified JWT refresh token, or deletes it if <code>null</code> is specified.</p>
+   * Saves specified JWT refresh token, or deletes it if <code>null</code> is specified.
    *
    * @param token JWT refresh token to save, or null to delete.
    * @param request HttpServletRequest to use.
    * @param response HttpServletResponse to use.
    */
-  public void saveRefreshToken(JwtRefreshToken token, HttpServletRequest request, HttpServletResponse response) {
+  public void saveRefreshToken(
+      JwtRefreshToken token, HttpServletRequest request, HttpServletResponse response) {
     this.jwtRefreshTokenRepository.saveToken(token, request, response);
   }
 
   /**
-   * <p>Loads JWT access token.</p>
+   * Loads JWT access token.
    *
    * @param request HTTP request to use.
-   * @return Loaded JWT access token,
-   * or <code>null</code> if it doesn't exist.
+   * @return Loaded JWT access token, or <code>null</code> if it doesn't exist.
    */
   public JwtAccessToken loadAccessToken(HttpServletRequest request) {
     return this.jwtAccessTokenRepository.loadToken(request);
   }
 
   /**
-   * <p>Loads JWT refresh token.</p>
+   * Loads JWT refresh token.
    *
    * @param request HTTP request to use.
-   * @return Loaded JWT refresh token,
-   * or <code>null</code> if it doesn't exist.
+   * @return Loaded JWT refresh token, or <code>null</code> if it doesn't exist.
    */
   public JwtRefreshToken loadRefreshToken(HttpServletRequest request) {
     return this.jwtRefreshTokenRepository.loadToken(request);
   }
 
   /**
-   * <p>Returns expiration time for JWT access token based on the application configuration (in seconds).<./p>
+   * Returns expiration time for JWT access token based on the application configuration (in
+   * seconds).<./p>
    *
    * @return Expiration time for JWT access token.
    */
@@ -103,7 +106,8 @@ public class AuthorizationService {
   }
 
   /**
-   * <p>Returns expiration time for JWT refresh token based on the application configuration (in seconds).<./p>
+   * Returns expiration time for JWT refresh token based on the application configuration (in
+   * seconds).<./p>
    *
    * @return Expiration time for JWT refresh token.
    */

@@ -6,14 +6,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import team.zavod.handy.configuration.ApplicationConfiguration;
 
-/**
- * <p>Entry point for server application.</p>
- */
+/** Entry point for server application. */
 @SpringBootApplication
 @EnableConfigurationProperties(ApplicationConfiguration.class)
 public class HandyServer {
   /**
-   * <p>Starts Spring WEB-Server.</p>
+   * Starts Spring WEB-Server.
    *
    * @param args Command line arguments.
    */

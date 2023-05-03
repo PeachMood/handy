@@ -6,13 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import team.zavod.handy.model.entity.user.SettingsEntity;
 
-/**
- * <p>Provides functionality to manage settings.</p>
- */
+/** Provides functionality to manage settings. */
 @Repository
 public interface SettingsRepository extends JpaRepository<SettingsEntity, Long> {
   /**
-   * <p>Creates new settings with the specified data.</p>
+   * Creates new settings with the specified data.
    *
    * @param settings User settings to be saved.
    */
@@ -20,7 +18,7 @@ public interface SettingsRepository extends JpaRepository<SettingsEntity, Long> 
   SettingsEntity save(SettingsEntity settings);
 
   /**
-   * <p>Finds settings by id.</p>
+   * Finds settings by id.
    *
    * @param id Settings id to be found.
    * @param type Class to be returned.
@@ -30,7 +28,7 @@ public interface SettingsRepository extends JpaRepository<SettingsEntity, Long> 
   <T> Optional<T> findById(Long id, Class<T> type);
 
   /**
-   * <p>Gets <code>List</code> of all settings.</p>
+   * Gets <code>List</code> of all settings.
    *
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
@@ -39,7 +37,7 @@ public interface SettingsRepository extends JpaRepository<SettingsEntity, Long> 
   <T> List<T> findAllProjectedBy(Class<T> type);
 
   /**
-   * <p>Deletes settings by id.</p>
+   * Deletes settings by id.
    *
    * @param id Settings id to be deleted.
    */

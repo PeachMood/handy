@@ -31,9 +31,7 @@ import team.zavod.handy.security.jwt.JwtAuthenticationProvider;
 import team.zavod.handy.security.usernamepassword.UsernamePasswordDtoAuthenticationFilter;
 import team.zavod.handy.service.user.UserService;
 
-/**
- * <p>Configures various security related aspects.</p>
- */
+/** Configures various security related aspects. */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -42,32 +40,46 @@ public class SecurityConfiguration {
       HttpSecurity http,
       JwtAuthenticationProvider jwtAuthenticationProvider,
       FilterRegistrationBean<JwtAuthenticationFilter> jwtAuthenticationFilter,
-      FilterRegistrationBean<UsernamePasswordDtoAuthenticationFilter> usernamePasswordDtoAuthenticationFilter,
-      LogoutSuccessHandler logoutSuccessHandler) throws Exception {
-    http
-        .headers((headers) -> headers
-            .frameOptions(FrameOptionsConfig::sameOrigin)
-            .cacheControl(CacheControlConfig::disable))
+      FilterRegistrationBean<UsernamePasswordDtoAuthenticationFilter>
+          usernamePasswordDtoAuthenticationFilter,
+      LogoutSuccessHandler logoutSuccessHandler)
+      throws Exception {
+    http.headers(
+            (headers) ->
+                headers
+                    .frameOptions(FrameOptionsConfig::sameOrigin)
+                    .cacheControl(CacheControlConfig::disable))
         .cors(Customizer.withDefaults())
-        .sessionManagement((sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-            .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/user/**").hasRole("ADMIN")
-            .anyRequest().authenticated())
+        .sessionManagement(
+            (sessionManagement) ->
+                sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authorizeHttpRequests(
+            (authorizeHttpRequests) ->
+                authorizeHttpRequests
+                    .requestMatchers(HttpMethod.POST, "/api/auth/**")
+                    .permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/user/**")
+                    .hasRole("ADMIN")
+                    .anyRequest()
+                    .authenticated())
         .csrf(AbstractHttpConfigurer::disable)
-        .logout((logout) -> logout
-            .logoutUrl("/api/user/logout")
-            .permitAll()
-            .logoutSuccessHandler(logoutSuccessHandler))
+        .logout(
+            (logout) ->
+                logout
+                    .logoutUrl("/api/user/logout")
+                    .permitAll()
+                    .logoutSuccessHandler(logoutSuccessHandler))
         .httpBasic(AbstractHttpConfigurer::disable)
         .authenticationProvider(jwtAuthenticationProvider)
         .addFilterBefore(jwtAuthenticationFilter.getFilter(), RequestCacheAwareFilter.class)
-        .addFilterBefore(usernamePasswordDtoAuthenticationFilter.getFilter(), RequestCacheAwareFilter.class);
+        .addFilterBefore(
+            usernamePasswordDtoAuthenticationFilter.getFilter(), RequestCacheAwareFilter.class);
     return http.build();
   }
 
   @Bean
-  public JwtAuthenticationProvider jwtAuthenticationProvider(ApplicationConfiguration applicationConfiguration, UserService userService) {
+  public JwtAuthenticationProvider jwtAuthenticationProvider(
+      ApplicationConfiguration applicationConfiguration, UserService userService) {
     return new JwtAuthenticationProvider(applicationConfiguration, userService);
   }
 
@@ -78,24 +90,32 @@ public class SecurityConfiguration {
       JwtRefreshTokenRepository jwtRefreshTokenRepository,
       AuthenticationSuccessHandler authenticationSuccessHandler,
       AuthenticationFailureHandler authenticationFailureHandler) {
-    JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtAccessTokenRepository, jwtRefreshTokenRepository);
+    JwtAuthenticationFilter jwtAuthenticationFilter =
+        new JwtAuthenticationFilter(
+            authenticationManager, jwtAccessTokenRepository, jwtRefreshTokenRepository);
     jwtAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
     jwtAuthenticationFilter.setAuthenticationFailureHandler(authenticationFailureHandler);
-    FilterRegistrationBean<JwtAuthenticationFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+    FilterRegistrationBean<JwtAuthenticationFilter> filterRegistrationBean =
+        new FilterRegistrationBean<>();
     filterRegistrationBean.setFilter(jwtAuthenticationFilter);
     filterRegistrationBean.setEnabled(false);
     return filterRegistrationBean;
   }
 
   @Bean
-  public FilterRegistrationBean<UsernamePasswordDtoAuthenticationFilter> usernamePasswordDtoAuthenticationFilter(
-      AuthenticationManager authenticationManager,
-      AuthenticationSuccessHandler authenticationSuccessHandler,
-      AuthenticationFailureHandler authenticationFailureHandler) {
-    UsernamePasswordDtoAuthenticationFilter usernamePasswordDtoAuthenticationFilter = new UsernamePasswordDtoAuthenticationFilter(authenticationManager);
-    usernamePasswordDtoAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
-    usernamePasswordDtoAuthenticationFilter.setAuthenticationFailureHandler(authenticationFailureHandler);
-    FilterRegistrationBean<UsernamePasswordDtoAuthenticationFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+  public FilterRegistrationBean<UsernamePasswordDtoAuthenticationFilter>
+      usernamePasswordDtoAuthenticationFilter(
+          AuthenticationManager authenticationManager,
+          AuthenticationSuccessHandler authenticationSuccessHandler,
+          AuthenticationFailureHandler authenticationFailureHandler) {
+    UsernamePasswordDtoAuthenticationFilter usernamePasswordDtoAuthenticationFilter =
+        new UsernamePasswordDtoAuthenticationFilter(authenticationManager);
+    usernamePasswordDtoAuthenticationFilter.setAuthenticationSuccessHandler(
+        authenticationSuccessHandler);
+    usernamePasswordDtoAuthenticationFilter.setAuthenticationFailureHandler(
+        authenticationFailureHandler);
+    FilterRegistrationBean<UsernamePasswordDtoAuthenticationFilter> filterRegistrationBean =
+        new FilterRegistrationBean<>();
     filterRegistrationBean.setFilter(usernamePasswordDtoAuthenticationFilter);
     filterRegistrationBean.setEnabled(false);
     return filterRegistrationBean;
@@ -117,7 +137,9 @@ public class SecurityConfiguration {
   }
 
   @Bean
-  public AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) throws Exception {
+  public AuthenticationManager authenticationManager(
+      HttpSecurity http, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService)
+      throws Exception {
     return http.getSharedObject(AuthenticationManagerBuilder.class)
         .userDetailsService(userDetailsService)
         .passwordEncoder(passwordEncoder)

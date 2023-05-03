@@ -13,16 +13,14 @@ import team.zavod.handy.model.entity.jwt.JwtAccessToken;
 import team.zavod.handy.model.entity.jwt.JwtRefreshToken;
 import team.zavod.handy.service.AuthorizationService;
 
-/**
- * <p>Handles endpoints related to authorization.</p>
- */
+/** Handles endpoints related to authorization. */
 @RestController
 @RequestMapping(value = "/api/auth")
 public class AuthorizationController {
-  private final AuthorizationService authorizationService;    // Instance of AuthorizationService
+  private final AuthorizationService authorizationService; // Instance of AuthorizationService
 
   /**
-   * <p>Constructs new instance of <code>AuthorizationController</code> class.</p>
+   * Constructs new instance of <code>AuthorizationController</code> class.
    *
    * @param authorizationService Instance of AuthorizationService.
    */
@@ -32,18 +30,21 @@ public class AuthorizationController {
   }
 
   /**
-   * <p>Generates JWT tokens for authorized user.</p>
+   * Generates JWT tokens for authorized user.
    *
    * @param request HTTP request to use.
    * @param response HTTP response to use.
    */
-  @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(
+      value = "/login",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
   public JwtTokenDto login(HttpServletRequest request, HttpServletResponse response) {
     return sendToken(request, response);
   }
 
   /**
-   * <p>Refreshes JWT tokens for authorized user.</p>
+   * Refreshes JWT tokens for authorized user.
    *
    * @param request HTTP request to use.
    * @param response HTTP response to use.
@@ -59,6 +60,10 @@ public class AuthorizationController {
     JwtRefreshToken jwtRefreshToken = this.authorizationService.generateRefreshToken(request);
     this.authorizationService.saveAccessToken(jwtAccessToken, request, response);
     this.authorizationService.saveRefreshToken(jwtRefreshToken, request, response);
-    return new JwtTokenDto(jwtAccessToken.getType(), (int) this.authorizationService.getAccessTokenExpirationTime(), jwtAccessToken.getToken(), jwtRefreshToken.getToken());
+    return new JwtTokenDto(
+        jwtAccessToken.getType(),
+        (int) this.authorizationService.getAccessTokenExpirationTime(),
+        jwtAccessToken.getToken(),
+        jwtRefreshToken.getToken());
   }
 }

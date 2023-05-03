@@ -11,15 +11,13 @@ import team.zavod.handy.model.entity.note.NoteState;
 import team.zavod.handy.model.entity.user.UserEntity;
 import team.zavod.handy.repository.NoteRepository;
 
-/**
- * <p>Implements complex logic related to notes.</p>
- */
+/** Implements complex logic related to notes. */
 @Service
 public class NoteService {
-  private final NoteRepository noteRepository;    // Instance of NoteRepository
+  private final NoteRepository noteRepository; // Instance of NoteRepository
 
   /**
-   * <p>Constructs new instance of <code>NoteService</code> class.</p>
+   * Constructs new instance of <code>NoteService</code> class.
    *
    * @param noteRepository Instance of NoteRepository.
    */
@@ -29,15 +27,15 @@ public class NoteService {
   }
 
   /**
-   * <p>Creates new note with the specified data.</p>
+   * Creates new note with the specified data.
    *
    * @param note Note to be created.
-   * @return <code>true</code> if NoteRepository was changed as a result of this call,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if NoteRepository was changed as a result of this call, or <code>
+   *     false</code> otherwise.
    */
   @Transactional
   public boolean createNote(NoteEntity note) {
-    if(isUserNoteExists(note.getUser(), note.getName())) {
+    if (isUserNoteExists(note.getUser(), note.getName())) {
       return false;
     }
     note.setState(NoteState.ACTIVE);
@@ -46,21 +44,19 @@ public class NoteService {
   }
 
   /**
-   * <p>Finds note by id.</p>
+   * Finds note by id.
    *
    * @param id Note id to be found.
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
-   * @return Note with the specified id if such note exists,
-   * or <code>null</code> otherwise.
+   * @return Note with the specified id if such note exists, or <code>null</code> otherwise.
    */
   public <T> T findNote(Long id, Class<T> type) {
-    return this.noteRepository.findById(id, type)
-        .orElse(null);
+    return this.noteRepository.findById(id, type).orElse(null);
   }
 
   /**
-   * <p>Gets <code>List</code> of all notes.</p>
+   * Gets <code>List</code> of all notes.
    *
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
@@ -71,34 +67,31 @@ public class NoteService {
   }
 
   /**
-   * <p>Checks weather note with the specified name exists.</p>
+   * Checks weather note with the specified name exists.
    *
    * @param user User whose note will be checked.
    * @param name Note name to be checked.
-   * @return <code>true</code> if note with such name exists,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if note with such name exists, or <code>false</code> otherwise.
    */
   public boolean isUserNoteExists(UserEntity user, String name) {
     return this.noteRepository.existsByUserAndName(user, name);
   }
 
   /**
-   * <p>Finds note by name.</p>
+   * Finds note by name.
    *
    * @param user User whose note will be found.
    * @param name Note name to be found.
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
-   * @return Note with the specified name if such note exists,
-   * or <code>null</code> otherwise.
+   * @return Note with the specified name if such note exists, or <code>null</code> otherwise.
    */
   public <T> T findUserNote(UserEntity user, String name, Class<T> type) {
-    return this.noteRepository.findByUserAndName(user, name, type)
-        .orElse(null);
+    return this.noteRepository.findByUserAndName(user, name, type).orElse(null);
   }
 
   /**
-   * <p>Gets <code>List</code> of all notes for the specified user.</p>
+   * Gets <code>List</code> of all notes for the specified user.
    *
    * @param user User whose notes will be returned.
    * @param type Class to be returned.
@@ -110,7 +103,7 @@ public class NoteService {
   }
 
   /**
-   * <p>Gets <code>List</code> of all notes for the specified user and state.</p>
+   * Gets <code>List</code> of all notes for the specified user and state.
    *
    * @param user User whose notes will be returned.
    * @param state Note state to be found.
@@ -123,16 +116,16 @@ public class NoteService {
   }
 
   /**
-   * <p>Updates note with the specified data.</p>
+   * Updates note with the specified data.
    *
    * @param with Note to be updated.
-   * @return <code>true</code> if NoteRepository was changed as a result of this call,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if NoteRepository was changed as a result of this call, or <code>
+   *     false</code> otherwise.
    */
   @Transactional
   public boolean updateNote(NoteEntity with) {
     NoteEntity current = findNote(with.getId(), NoteEntity.class);
-    if(Objects.isNull(current)) {
+    if (Objects.isNull(current)) {
       return false;
     }
     with.setUser(current.getUser());
@@ -141,7 +134,8 @@ public class NoteService {
     with.setModificationDate(LocalDateTime.now());
     with.setTrashedDate(current.getTrashedDate());
     with.setState(current.getState());
-    if(!with.getName().equals(current.getName()) && isUserNoteExists(with.getUser(), with.getName())) {
+    if (!with.getName().equals(current.getName())
+        && isUserNoteExists(with.getUser(), with.getName())) {
       return false;
     }
     this.noteRepository.save(with);
@@ -149,15 +143,15 @@ public class NoteService {
   }
 
   /**
-   * <p>Deletes note by id.</p>
+   * Deletes note by id.
    *
    * @param id Note id to be deleted.
-   * @return <code>true</code> if NoteRepository was changed as a result of this call,
-   * or <code>false</code> otherwise.
+   * @return <code>true</code> if NoteRepository was changed as a result of this call, or <code>
+   *     false</code> otherwise.
    */
   @Transactional
   public boolean deleteNote(Long id) {
-    if(Objects.isNull(findNote(id, NoteEntity.class))) {
+    if (Objects.isNull(findNote(id, NoteEntity.class))) {
       return false;
     }
     this.noteRepository.deleteById(id);

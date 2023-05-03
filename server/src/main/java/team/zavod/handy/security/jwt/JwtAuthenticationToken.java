@@ -4,15 +4,13 @@ import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
-/**
- * <p>Represents authentication token.</p>
- */
+/** Represents authentication token. */
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {
-  private final Object principal;    // Represents abstract notion of the user's principal
-  private Object credentials;    // Represents abstract notion of the user's credentials
+  private final Object principal; // Represents abstract notion of the user's principal
+  private Object credentials; // Represents abstract notion of the user's credentials
 
   /**
-   * <p>Constructs new instance of <code>JwtAuthenticationToken</code> class.</p>
+   * Constructs new instance of <code>JwtAuthenticationToken</code> class.
    *
    * @param principal Represents abstract notion of the user's principal.
    * @param credentials Represents abstract notion of the user's credentials.
@@ -23,13 +21,14 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
   }
 
   /**
-   * <p>Constructs new instance of <code>JwtAuthenticationToken</code> class.</p>
+   * Constructs new instance of <code>JwtAuthenticationToken</code> class.
    *
    * @param principal Represents abstract notion of the user's principal.
    * @param credentials Represents abstract notion of the user's credentials.
    * @param authorities Represents user authorities.
    */
-  public JwtAuthenticationToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
+  public JwtAuthenticationToken(
+      Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
     super(authorities);
     this.principal = principal;
     this.credentials = credentials;
@@ -37,7 +36,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
   }
 
   /**
-   * <p>Factory method to initialize unauthenticated JWT authentication token.</p>
+   * Factory method to initialize unauthenticated JWT authentication token.
    *
    * @param principal Represents abstract notion of the user's principal.
    * @param credentials Represents abstract notion of the user's credentials.
@@ -48,19 +47,20 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
   }
 
   /**
-   * <p>Factory method to initialize authenticated JWT authentication token.</p>
+   * Factory method to initialize authenticated JWT authentication token.
    *
    * @param principal Represents abstract notion of the user's principal.
    * @param credentials Represents abstract notion of the user's credentials.
    * @param authorities Represents user authorities.
    * @return New instance of the <code>JwtAuthenticationToken</code> class.
    */
-  public static JwtAuthenticationToken authenticated(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
+  public static JwtAuthenticationToken authenticated(
+      Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
     return new JwtAuthenticationToken(principal, credentials, authorities);
   }
 
   /**
-   * <p>Getter for <code>principal</code> field.</p>
+   * Getter for <code>principal</code> field.
    *
    * @return Abstract notion of the user's principal.
    */
@@ -70,7 +70,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
   }
 
   /**
-   * <p>Getter for <code>credentials</code> field.</p>
+   * Getter for <code>credentials</code> field.
    *
    * @return Abstract notion of the user's credentials.
    */
@@ -79,9 +79,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
     return this.credentials;
   }
 
-  /**
-   * <p>Clears user's credentials.</p>
-   */
+  /** Clears user's credentials. */
   @Override
   public void eraseCredentials() {
     super.eraseCredentials();
