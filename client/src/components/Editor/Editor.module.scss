@@ -1,0 +1,114 @@
+@import 'assets/styles/colors';
+
+@mixin text {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.5em;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+@mixin paragraph {
+  @include text;
+  font-weight: 400;
+  font-size: 18px;
+  color: $primary;
+  margin: .8em 0;
+}
+
+@mixin heading {
+  @include text;
+  font-weight: 700;
+  color: $primary;
+  margin: 1em 0 .8em;
+}
+
+.editor {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  min-height: 100%;
+  padding: 60px;
+  box-sizing: border-box;
+  background-color: $surface;
+
+  .content {
+    max-width: 700px;
+    min-width: 100px;
+    width: 100%;
+  }
+
+  .content:focus {
+    outline: none;
+  }
+
+  .placeholder {
+    @include paragraph;
+    color: $accent;
+    position: absolute;
+    max-width: 700px;
+    min-width: 100px;
+    width: calc(100% - 120px);
+    user-select: none;
+    pointer-events: none;
+    margin: 0;
+  }
+
+  .h1 {
+    @include heading;
+    font-size: 32px;
+  }
+
+  .h2 {
+    @include heading;
+    font-size: 24px;
+  }
+
+  .h3 {
+    @include heading;
+    font-size: 20px;
+  }
+
+  .h4 {
+    @include heading;
+    font-size: 18px;
+  }
+
+  .h5 {
+    @include heading;
+    font-size: 16px;
+  }
+
+  .h6 {
+    @include heading;
+    font-size: 12px;
+  }
+
+  .paragraph {
+    @include paragraph;
+  }
+
+  .quote {
+    @include paragraph;
+    color: $accent;
+    border-left: 2px solid $accent;
+    padding-left: 24px;
+  }
+
+  .listitem {
+    @include paragraph;
+  }
+
+  .link {
+    @include paragraph;
+    color: $accent;
+    cursor: pointer;
+    transition: color linear .2s;
+    padding: 0;
+  }
+
+  .link:hover {
+    color: $darkAccent;
+  }
+}
