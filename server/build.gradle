@@ -25,8 +25,8 @@ spotless {
 
 dependencies {
     implementation 'com.nimbusds:nimbus-jose-jwt:9.31'
-    implementation 'org.flywaydb:flyway-core'
-    implementation 'org.flywaydb:flyway-mysql'
+    implementation 'org.flywaydb:flyway-core:9.5.1'
+    implementation 'org.flywaydb:flyway-mysql:9.5.1'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
