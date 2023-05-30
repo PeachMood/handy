@@ -8,4 +8,4 @@ package team.zavod.handy.model.dto.user;
  * @param email User's e-mail address.
  * @param password Hash of user's password.
  */
-public record UserRequestDto(Long id, String username, String email, String password) {}
+public record UserRequestDto(String username, String email, String password) {}

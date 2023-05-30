@@ -1,5 +1,6 @@
 package team.zavod.handy.model.entity.user;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,9 +32,10 @@ public class UserEntity implements UserDetails {
   @Column(name = "password_hash")
   private String password; // Hash of user's password
 
-  @OneToOne private SettingsEntity settings; // Instance of user SettingsEntity
+  @OneToOne(cascade = CascadeType.ALL)
+  private SettingsEntity settings; // Instance of user SettingsEntity
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<RoleEntity> roles; // Set with user RoleEntity instances
 
   /** Constructs new instance of <code>UserEntity</code> class. */

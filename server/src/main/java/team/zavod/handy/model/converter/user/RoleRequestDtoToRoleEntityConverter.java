@@ -15,7 +15,6 @@ public class RoleRequestDtoToRoleEntityConverter implements Converter<RoleReques
   @Override
   public RoleEntity convert(RoleRequestDto source) {
     RoleEntity target = new RoleEntity();
-    target.setId(source.id());
     target.setName(source.name());
     return target;
   }

@@ -15,7 +15,6 @@ public class UserRequestDtoToUserEntityConverter implements Converter<UserReques
   @Override
   public UserEntity convert(UserRequestDto source) {
     UserEntity target = new UserEntity();
-    target.setId(source.id());
     target.setUsername(source.username());
     target.setEmail(source.email());
     target.setPassword(source.password());

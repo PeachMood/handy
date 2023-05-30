@@ -6,4 +6,4 @@ package team.zavod.handy.model.dto.user;
  * @param id Unique role identifier.
  * @param name Role name.
  */
-public record RoleRequestDto(Long id, String name) {}
+public record RoleRequestDto(String name) {}

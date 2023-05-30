@@ -16,7 +16,6 @@ public class SettingsRequestDtoToSettingsEntityConverter
   @Override
   public SettingsEntity convert(SettingsRequestDto source) {
     SettingsEntity target = new SettingsEntity();
-    target.setId(source.id());
     target.setTrashedPeriod(source.trashedPeriod());
     return target;
   }

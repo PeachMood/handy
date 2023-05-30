@@ -15,6 +15,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
+import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import team.zavod.handy.model.entity.jwt.AbstractJwtToken;
 import team.zavod.handy.repository.jwt.JwtAccessTokenRepository;
 import team.zavod.handy.repository.jwt.JwtRefreshTokenRepository;
@@ -35,7 +36,10 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
   public JwtAuthenticationFilter(
       JwtAccessTokenRepository jwtAccessTokenRepository,
       JwtRefreshTokenRepository jwtRefreshTokenRepository) {
-    super(new NegatedRequestMatcher(new AntPathRequestMatcher("/api/auth/login")));
+    super(
+        new OrRequestMatcher(
+            new NegatedRequestMatcher(new AntPathRequestMatcher("/api/auth/**")),
+            new AntPathRequestMatcher("/api/auth/refresh_token")));
     this.jwtAccessTokenRepository = jwtAccessTokenRepository;
     this.jwtRefreshTokenRepository = jwtRefreshTokenRepository;
   }
@@ -53,7 +57,9 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
       JwtAccessTokenRepository jwtAccessTokenRepository,
       JwtRefreshTokenRepository jwtRefreshTokenRepository) {
     super(
-        new NegatedRequestMatcher(new AntPathRequestMatcher("/api/auth/login")),
+        new OrRequestMatcher(
+            new NegatedRequestMatcher(new AntPathRequestMatcher("/api/auth/**")),
+            new AntPathRequestMatcher("/api/auth/refresh_token")),
         authenticationManager);
     this.jwtAccessTokenRepository = jwtAccessTokenRepository;
     this.jwtRefreshTokenRepository = jwtRefreshTokenRepository;

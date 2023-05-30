@@ -15,7 +15,6 @@ public class NoteRequestDtoToNoteEntityConverter implements Converter<NoteReques
   @Override
   public NoteEntity convert(NoteRequestDto source) {
     NoteEntity target = new NoteEntity();
-    target.setId(source.id());
     target.setName(source.name());
     return target;
   }

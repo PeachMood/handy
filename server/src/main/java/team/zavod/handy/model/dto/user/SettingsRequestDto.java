@@ -6,4 +6,4 @@ package team.zavod.handy.model.dto.user;
  * @param id Unique settings identifier.
  * @param trashedPeriod Time for storing data in trash.
  */
-public record SettingsRequestDto(Long id, int trashedPeriod) {}
+public record SettingsRequestDto(int trashedPeriod) {}
