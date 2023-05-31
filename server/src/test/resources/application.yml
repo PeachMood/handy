@@ -1,10 +1,16 @@
-jdbc:
-  driverClassName: org.h2.Driver
-  url: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1
-hibernate:
-  dialect: org.hibernate.dialect.H2Dialect
-  hbm2ddl:
-    auto: create
+spring:
+  application:
+    name: handy-server
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1
+  hibernate:
+    dialect: org.hibernate.dialect.H2Dialect
+    hbm2ddl:
+      auto: create
+  mail:
+    host: localhost
+    port: 25
 application:
   config:
     domain: localhost
@@ -16,3 +22,6 @@ application:
       access-token-expiration-time: 60
       refresh-token-expiration-time: 30
       secret: handysecret
+    verification:
+      token-expiration-time: 24
+      email: handyemail

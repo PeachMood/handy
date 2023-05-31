@@ -32,6 +32,8 @@ public class UserEntity implements UserDetails {
   @Column(name = "password_hash")
   private String password; // Hash of user's password
 
+  private boolean enabled; // Indicates weather user is enabled
+
   @OneToOne(cascade = CascadeType.ALL)
   private SettingsEntity settings; // Instance of user SettingsEntity
 
@@ -49,6 +51,7 @@ public class UserEntity implements UserDetails {
    * @param email User's e-mail address.
    * @param avatar Path to user's avatar.
    * @param password Hash of user's password.
+   * @param enabled Indicates weather user is enabled.
    * @param settings Instance of user SettingsEntity.
    * @param roles Set with user RoleEntity instances.
    */
@@ -58,6 +61,7 @@ public class UserEntity implements UserDetails {
       String email,
       String avatar,
       String password,
+      boolean enabled,
       SettingsEntity settings,
       Set<RoleEntity> roles) {
     this.id = id;
@@ -65,6 +69,7 @@ public class UserEntity implements UserDetails {
     this.email = email;
     this.avatar = avatar;
     this.password = password;
+    this.enabled = enabled;
     this.settings = settings;
     this.roles = roles;
   }
@@ -162,6 +167,25 @@ public class UserEntity implements UserDetails {
   }
 
   /**
+   * Getter for <code>enabled</code> field.
+   *
+   * @return Weather user is enabled.
+   */
+  @Override
+  public boolean isEnabled() {
+    return this.enabled;
+  }
+
+  /**
+   * Setter for <code>enabled</code> field.
+   *
+   * @param enabled Indicates weather user is enabled.
+   */
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
+
+  /**
    * Getter for <code>settings</code> field.
    *
    * @return Instance of user SettingsEntity.
@@ -234,16 +258,6 @@ public class UserEntity implements UserDetails {
    */
   @Override
   public boolean isCredentialsNonExpired() {
-    return true;
-  }
-
-  /**
-   * Indicates whether the user is enabled or disabled.
-   *
-   * @return <code>true</code> if the user is enabled.
-   */
-  @Override
-  public boolean isEnabled() {
     return true;
   }
 }

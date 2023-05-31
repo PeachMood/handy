@@ -1,6 +1,5 @@
 package team.zavod.handy.model.entity.note;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -21,8 +20,7 @@ public class NoteEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id; // Unique note identifier
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  private UserEntity user; // Instance of UserEntity
+  @ManyToOne private UserEntity user; // Instance of UserEntity
 
   private String name; // Note name
   private String content; // Path to note content

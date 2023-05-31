@@ -9,3 +9,6 @@ application:
       access-token-expiration-time: 60
       refresh-token-expiration-time: 30
       secret: ${HANDY_JWT_SECRET}
+    verification:
+      token-expiration-time: 24
+      email: ${HANDY_VERIFICATION_EMAIL}

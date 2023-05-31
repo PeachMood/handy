@@ -1,5 +1,7 @@
 package team.zavod.handy.service.user;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -12,9 +14,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import team.zavod.handy.configuration.ApplicationConfiguration;
 import team.zavod.handy.model.entity.user.RoleEntity;
 import team.zavod.handy.model.entity.user.SettingsEntity;
 import team.zavod.handy.model.entity.user.UserEntity;
+import team.zavod.handy.model.entity.user.VerificationTokenEntity;
 import team.zavod.handy.repository.user.UserRepository;
 
 /** Implements complex logic related to user. */
@@ -22,6 +26,10 @@ import team.zavod.handy.repository.user.UserRepository;
 public class UserService implements UserDetailsService {
   private final UserRepository userRepository; // Instance of UserRepository
   private final RoleService roleService; // Instance of user RoleService
+  private final VerificationTokenService
+      verificationTokenService; // Instance of VerificationTokenService
+  private final ApplicationConfiguration
+      applicationConfiguration; // Instance of ApplicationConfiguration
   private final PasswordEncoder passwordEncoder; // Instance of PasswordEncoder
 
   /**
@@ -29,13 +37,21 @@ public class UserService implements UserDetailsService {
    *
    * @param userRepository Instance of UserRepository.
    * @param roleService Instance of user RoleService.
+   * @param verificationTokenService Instance of VerificationTokenService.
+   * @param applicationConfiguration Instance of ApplicationConfiguration.
    * @param passwordEncoder Instance of BCryptPasswordEncoder.
    */
   @Autowired
   public UserService(
-      UserRepository userRepository, RoleService roleService, PasswordEncoder passwordEncoder) {
+      UserRepository userRepository,
+      RoleService roleService,
+      VerificationTokenService verificationTokenService,
+      ApplicationConfiguration applicationConfiguration,
+      PasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
     this.roleService = roleService;
+    this.verificationTokenService = verificationTokenService;
+    this.applicationConfiguration = applicationConfiguration;
     this.passwordEncoder = passwordEncoder;
   }
 
@@ -57,6 +73,9 @@ public class UserService implements UserDetailsService {
         Stream.ofNullable(this.roleService.findRole(RoleEntity.DEFAULT_ROLE, RoleEntity.class))
             .collect(Collectors.toCollection(HashSet::new)));
     this.userRepository.save(user);
+    VerificationTokenEntity verificationToken = new VerificationTokenEntity();
+    verificationToken.setUser(user);
+    this.verificationTokenService.createVerificationToken(verificationToken);
     return true;
   }
 
@@ -157,6 +176,28 @@ public class UserService implements UserDetailsService {
       return false;
     }
     this.userRepository.deleteById(id);
+    return true;
+  }
+
+  /**
+   * Tries to verify user.
+   *
+   * @param token Token to be verified.
+   * @return <code>True</code> if verification succeeded, or <code>false</code> otherwise.
+   */
+  @Transactional
+  public boolean verifyUser(String token) {
+    VerificationTokenEntity verificationToken =
+        this.verificationTokenService.findVerificationToken(token, VerificationTokenEntity.class);
+    if (Objects.isNull(verificationToken)
+        || Duration.between(verificationToken.getCreationDate(), LocalDateTime.now()).toHours()
+            >= this.applicationConfiguration.verification().tokenExpirationTime()) {
+      return false;
+    }
+    UserEntity user = verificationToken.getUser();
+    user.setEnabled(true);
+    updateUser(user);
+    this.verificationTokenService.deleteVerificationToken(verificationToken.getId());
     return true;
   }
 

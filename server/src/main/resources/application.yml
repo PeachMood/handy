@@ -14,7 +14,18 @@ spring:
     password: ${MYSQL_PASSWORD}
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: update
     flyway:
       locations: classpath:/db/migration
+    hibernate:
+      ddl-auto: update
+  mail:
+    host: ${MAIL_HOST}
+    PORT: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
