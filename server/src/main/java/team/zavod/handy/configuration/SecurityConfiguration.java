@@ -17,11 +17,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.web.savedrequest.RequestCacheAwareFilter;
 import team.zavod.handy.repository.jwt.JwtAccessTokenRepository;
 import team.zavod.handy.repository.jwt.JwtRefreshTokenRepository;
 import team.zavod.handy.security.HttpStatusReturningAuthenticationFailureHandler;
@@ -71,9 +71,9 @@ public class SecurityConfiguration {
                     .logoutSuccessHandler(logoutSuccessHandler))
         .httpBasic(AbstractHttpConfigurer::disable)
         .authenticationProvider(jwtAuthenticationProvider)
-        .addFilterBefore(jwtAuthenticationFilter.getFilter(), RequestCacheAwareFilter.class)
-        .addFilterBefore(
-            usernamePasswordDtoAuthenticationFilter.getFilter(), RequestCacheAwareFilter.class);
+        .addFilterAfter(
+            usernamePasswordDtoAuthenticationFilter.getFilter(), AuthorizationFilter.class)
+        .addFilterAfter(jwtAuthenticationFilter.getFilter(), AuthorizationFilter.class);
     return http.build();
   }
 
