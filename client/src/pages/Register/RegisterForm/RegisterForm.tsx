@@ -35,7 +35,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSuccess }) => {
   const handleRegister = async ({ username, email, confirm }: FormData) => {
     try {
       await authApi.register(username, email, confirm);
-      onSuccess(username);
+      onSuccess(email);
     } catch (error) {
       if (!error.response) {
         setAlertMessage('The server is not responding.');

@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
@@ -71,9 +72,9 @@ public class SecurityConfiguration {
                     .logoutSuccessHandler(logoutSuccessHandler))
         .httpBasic(AbstractHttpConfigurer::disable)
         .authenticationProvider(jwtAuthenticationProvider)
-        .addFilterBefore(jwtAuthenticationFilter.getFilter(), RequestCacheAwareFilter.class)
-        .addFilterBefore(
-            usernamePasswordDtoAuthenticationFilter.getFilter(), RequestCacheAwareFilter.class);
+        .addFilterAfter(
+            usernamePasswordDtoAuthenticationFilter.getFilter(), AuthorizationFilter.class)
+        .addFilterAfter(jwtAuthenticationFilter.getFilter(), AuthorizationFilter.class);
     return http.build();
   }
 
