@@ -1,0 +1,46 @@
+@import 'assets/styles/colors';
+
+.popup {
+  background-color: $surface;
+  max-width: 430px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px;
+
+  .icon {
+    width: 120px;
+    height: 120px;
+    background: url(assets/images/checkCircleIcon.svg) 0 0 / contain no-repeat;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 40px;
+    color: $onSurface;
+    margin: 0 0 30px;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: $onSurface;
+    width: 100%;
+
+    .accent {
+      font-weight: bold;
+    }
+  }
+
+  .button {
+    width: 100%;
+    margin-top: 40px;
+  }
+}

@@ -48,6 +48,7 @@
         "tsx": "never"
       }
     ],
+    "no-shadow": "off",
     // Yandex said that both options are valid, so we exclude the rule!
     "jsx-a11y/label-has-associated-control": "off"
   },

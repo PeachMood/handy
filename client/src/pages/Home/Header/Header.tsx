@@ -16,7 +16,7 @@ export const Header: FC = () => {
       <Logo />
       <List listStyles={styles.buttons}>
         <Button type="button" onClick={() => navigate('/login')}>Login</Button>
-        <TextButton>Register</TextButton>
+        <TextButton onClick={() => navigate('/register')}>Register</TextButton>
       </List>
     </header>
   );
