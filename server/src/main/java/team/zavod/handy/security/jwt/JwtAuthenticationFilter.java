@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     super(
         new OrRequestMatcher(
             new NegatedRequestMatcher(new AntPathRequestMatcher("/api/auth/**")),
-            new AntPathRequestMatcher("/api/auth/refresh_token")));
+            new AntPathRequestMatcher("/api/auth/refresh-token")));
     this.jwtAccessTokenRepository = jwtAccessTokenRepository;
     this.jwtRefreshTokenRepository = jwtRefreshTokenRepository;
   }
@@ -59,7 +59,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     super(
         new OrRequestMatcher(
             new NegatedRequestMatcher(new AntPathRequestMatcher("/api/auth/**")),
-            new AntPathRequestMatcher("/api/auth/refresh_token")),
+            new AntPathRequestMatcher("/api/auth/refresh-token")),
         authenticationManager);
     this.jwtAccessTokenRepository = jwtAccessTokenRepository;
     this.jwtRefreshTokenRepository = jwtRefreshTokenRepository;

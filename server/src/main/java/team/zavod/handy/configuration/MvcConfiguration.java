@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -45,6 +46,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
     registry
         .addMapping("/**")
         .allowedOrigins(this.applicationConfiguration.cors().allowedOrigins())
+        .allowedMethods(CorsConfiguration.ALL)
         .allowCredentials(true)
         .maxAge(TimeUnit.MINUTES.toSeconds(MAX_AGE));
   }

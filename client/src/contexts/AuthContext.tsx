@@ -32,7 +32,9 @@ export const AuthProvider: FC = ({ children }) => {
         navigate('/notes', { replace: true });
       } catch (error) {
         if (error.response?.status === 401) {
-          navigate('/login', { replace: true });
+          // with this redirect new user (without saved refresh token)
+          // can't open main page
+          // navigate('/login', { replace: true });
         } else {
           console.log(error);
         }

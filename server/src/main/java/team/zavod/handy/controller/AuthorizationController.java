@@ -120,7 +120,7 @@ public class AuthorizationController {
     JwtAccessToken jwtAccessToken = this.authorizationService.generateAccessToken(request);
     JwtRefreshToken jwtRefreshToken = this.authorizationService.generateRefreshToken(request);
     if (Objects.isNull(jwtAccessToken) || Objects.isNull(jwtRefreshToken)) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid jwt refresh token");
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("jwtAccessToken or jwtRefreshToken not set");
     }
     this.authorizationService.saveAccessToken(jwtAccessToken, request, response);
     this.authorizationService.saveRefreshToken(jwtRefreshToken, request, response);
