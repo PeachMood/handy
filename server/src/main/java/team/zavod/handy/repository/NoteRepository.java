@@ -4,20 +4,20 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import team.zavod.handy.model.entity.note.NoteEntity;
+import team.zavod.handy.model.entity.note.Note;
 import team.zavod.handy.model.entity.note.NoteState;
 import team.zavod.handy.model.entity.user.UserEntity;
 
 /** Provides functionality to manage notes. */
 @Repository
-public interface NoteRepository extends JpaRepository<NoteEntity, Long> {
+public interface NoteRepository extends JpaRepository<Note, Long> {
   /**
    * Creates new note with the specified data.
    *
    * @param note Note to be saved.
    */
   @SuppressWarnings("unchecked")
-  NoteEntity save(NoteEntity note);
+  Note save(Note note);
 
   /**
    * Finds note by id.
@@ -48,15 +48,15 @@ public interface NoteRepository extends JpaRepository<NoteEntity, Long> {
   boolean existsByUserAndName(UserEntity user, String name);
 
   /**
-   * Finds note by name.
+   * Finds note by id.
    *
    * @param user User whose note will be found.
-   * @param name Note name to be found.
+   * @param id Note id to be found.
    * @param type Class to be returned.
    * @param <T> Type parameter for returning class.
    * @return <code>Optional&lt;T&gt;</code> instance with the specified name.
    */
-  <T> Optional<T> findByUserAndName(UserEntity user, String name, Class<T> type);
+  <T> Optional<T> findByUserAndId(UserEntity user, Long id, Class<T> type);
 
   /**
    * Gets <code>List</code> of all notes for the specified user.

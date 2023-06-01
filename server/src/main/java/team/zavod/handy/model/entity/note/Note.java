@@ -15,7 +15,7 @@ import team.zavod.handy.model.entity.user.UserEntity;
 /** Represents single note. */
 @Entity(name = "Note")
 @Table(name = "note")
-public class NoteEntity {
+public class Note {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id; // Unique note identifier
@@ -38,7 +38,7 @@ public class NoteEntity {
   private NoteState state; // Current note state
 
   /** Creates instance of <code>NoteEntity</code> class. */
-  public NoteEntity() {}
+  public Note() {}
 
   /**
    * Creates instance of <code>NoteEntity</code> class.
@@ -49,7 +49,7 @@ public class NoteEntity {
    * @param content Path to note content.
    * @param state Current note state.
    */
-  public NoteEntity(Long id, UserEntity user, String name, String content, NoteState state) {
+  public Note(Long id, UserEntity user, String name, String content, NoteState state) {
     this(id, user, name, content, null, null, null, state);
     LocalDateTime now = LocalDateTime.now();
     this.creationDate = now;
@@ -68,7 +68,7 @@ public class NoteEntity {
    * @param trashedDate Date of permanent note deletion.
    * @param state Current note state.
    */
-  public NoteEntity(
+  public Note(
       Long id,
       UserEntity user,
       String name,

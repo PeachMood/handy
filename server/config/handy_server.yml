@@ -3,7 +3,7 @@ application:
     domain: ${HANDY_DOMAIN}
     cors:
       allowed-origins:
-        - https://${HANDY_DOMAIN}:3000
+        - https://${HANDY_DOMAIN}
         - http://${HANDY_DOMAIN}:3000
     jwt:
       access-token-expiration-time: 60

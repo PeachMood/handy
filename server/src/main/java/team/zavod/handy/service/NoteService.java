@@ -6,7 +6,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import team.zavod.handy.model.entity.note.NoteEntity;
+import team.zavod.handy.model.entity.note.Note;
 import team.zavod.handy.model.entity.note.NoteState;
 import team.zavod.handy.model.entity.user.UserEntity;
 import team.zavod.handy.repository.NoteRepository;
@@ -26,21 +26,10 @@ public class NoteService {
     this.noteRepository = noteRepository;
   }
 
-  /**
-   * Creates new note with the specified data.
-   *
-   * @param note Note to be created.
-   * @return <code>true</code> if NoteRepository was changed as a result of this call, or <code>
-   *     false</code> otherwise.
-   */
   @Transactional
-  public boolean createNote(NoteEntity note) {
-    if (isUserNoteExists(note.getUser(), note.getName())) {
-      return false;
-    }
+  public Note createNote(Note note) {
     note.setState(NoteState.ACTIVE);
-    this.noteRepository.save(note);
-    return true;
+    return noteRepository.save(note);
   }
 
   /**
@@ -86,8 +75,8 @@ public class NoteService {
    * @param <T> Type parameter for returning class.
    * @return Note with the specified name if such note exists, or <code>null</code> otherwise.
    */
-  public <T> T findUserNote(UserEntity user, String name, Class<T> type) {
-    return this.noteRepository.findByUserAndName(user, name, type).orElse(null);
+  public <T> T findUserNote(UserEntity user, Long id, Class<T> type) {
+    return this.noteRepository.findByUserAndId(user, id, type).orElse(null);
   }
 
   /**
@@ -98,7 +87,7 @@ public class NoteService {
    * @param <T> Type parameter for returning class.
    * @return <code>List</code> of all notes for the specified user.
    */
-  public <T> List<T> FindAllUserNotes(UserEntity user, Class<T> type) {
+  public <T> List<T> findAllUserNotes(UserEntity user, Class<T> type) {
     return this.noteRepository.findAllByUser(user, type);
   }
 
@@ -123,8 +112,8 @@ public class NoteService {
    *     false</code> otherwise.
    */
   @Transactional
-  public boolean updateNote(NoteEntity with) {
-    NoteEntity current = findNote(with.getId(), NoteEntity.class);
+  public boolean updateNote(Note with) {
+    Note current = findNote(with.getId(), Note.class);
     if (Objects.isNull(current)) {
       return false;
     }
@@ -151,7 +140,7 @@ public class NoteService {
    */
   @Transactional
   public boolean deleteNote(Long id) {
-    if (Objects.isNull(findNote(id, NoteEntity.class))) {
+    if (Objects.isNull(findNote(id, Note.class))) {
       return false;
     }
     this.noteRepository.deleteById(id);
