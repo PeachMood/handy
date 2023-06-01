@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react';
-import { $convertFromMarkdownString } from '@lexical/markdown';
+import { $convertFromMarkdownString, TRANSFORMERS } from '@lexical/markdown';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
-import { TRANSFORMERS } from './TRANSFORMERS';
+// import { TRANSFORMERS } from './TRANSFORMERS';
 
 interface ControlledEditorPluginProps {
   content?: string,

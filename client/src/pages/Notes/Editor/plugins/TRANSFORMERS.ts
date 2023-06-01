@@ -397,7 +397,6 @@ const TEXT_FORMAT_TRANSFORMERS: Array<TextFormatTransformer> = [
   ITALIC_UNDERSCORE,
   STRIKETHROUGH,
 ];
-
 export const BR: TextMatchTransformer = {
   dependencies: [LineBreakNode],
   export: (node) => {
@@ -408,7 +407,7 @@ export const BR: TextMatchTransformer = {
   replace: (textNode) => {
     const parentNode = textNode.getParent();
     if (parentNode.getChildrenSize() === 1) {
-      textNode.replace($createLineBreakNode());
+      textNode.remove();
     } else {
       textNode.replace($createLineBreakNode());
     }
@@ -420,6 +419,7 @@ export const BR: TextMatchTransformer = {
 const TEXT_MATCH_TRANSFORMERS: Array<TextMatchTransformer> = [LINK];
 
 export const TRANSFORMERS: Array<Transformer> = [
+  BR,
   ...ELEMENT_TRANSFORMERS,
   ...TEXT_FORMAT_TRANSFORMERS,
   ...TEXT_MATCH_TRANSFORMERS,

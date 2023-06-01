@@ -8,13 +8,13 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
-import { $convertToMarkdownString } from '@lexical/markdown';
+import { $convertToMarkdownString, TRANSFORMERS } from '@lexical/markdown';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import LexicalClickableLinkPlugin from '@lexical/react/LexicalClickableLinkPlugin';
 
 import { initialConfig } from './config/initialConfig';
 import { ControlledEditorPlugin } from './plugins/ControlledEditorPlugin';
-import { TRANSFORMERS } from './plugins/TRANSFORMERS';
+// import { TRANSFORMERS } from './plugins/TRANSFORMERS';
 
 import styles from './Editor.module.scss';
 
