@@ -13,13 +13,10 @@ services:
       - 443:443
     env_file:
       - .env
-    expose:
-      - 8080
     volumes:
       - ./deploy/nginx.conf:/etc/nginx/nginx.conf
       - ${BUILD_DIR}:/site
       - ${LETSENCRYPT_DIR}:/etc/letsencrypt
-      - /var/www/html:/var/www/html
 
   backend:
     build: ./server
@@ -28,14 +25,10 @@ services:
       - .env
     depends_on:
       - db
-    ports:
-      - 8080:8080
 
   db:
     image: mysql:8.0
     restart: always
-    ports:
-      - 3306:3306
     env_file:
       - .env
     volumes:
