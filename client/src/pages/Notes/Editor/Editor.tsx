@@ -14,6 +14,7 @@ import LexicalClickableLinkPlugin from '@lexical/react/LexicalClickableLinkPlugi
 
 import { initialConfig } from './config/initialConfig';
 import { ControlledEditorPlugin } from './plugins/ControlledEditorPlugin';
+// import { TRANSFORMERS } from './plugins/TRANSFORMERS';
 
 import styles from './Editor.module.scss';
 

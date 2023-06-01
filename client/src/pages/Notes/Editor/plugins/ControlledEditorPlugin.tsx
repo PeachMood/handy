@@ -1,7 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { $convertFromMarkdownString, TRANSFORMERS } from '@lexical/markdown';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $getRoot } from 'lexical';
+
+// import { TRANSFORMERS } from './TRANSFORMERS';
 
 interface ControlledEditorPluginProps {
   content?: string,
@@ -19,4 +20,4 @@ export const ControlledEditorPlugin: FC<ControlledEditorPluginProps> = ({ conten
   }, [content]);
 
   return null;
-};
+}
