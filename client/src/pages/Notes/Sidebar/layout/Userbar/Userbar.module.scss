@@ -1,0 +1,17 @@
+@import 'assets/styles/colors';
+
+.panel {
+  background-color: $background;
+  border-right: 1px solid $lightPrimary;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+  }
+}

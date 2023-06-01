@@ -30,7 +30,6 @@ export const Footer: FC = () => {
         <List itemStyles={styles.item}>
           {socialIcons.map((icon) => (
             <IconButton
-              className={styles.button}
               key={icon.image}
               image={icon.image}
               type="button"

@@ -14,7 +14,6 @@ import LexicalClickableLinkPlugin from '@lexical/react/LexicalClickableLinkPlugi
 
 import { initialConfig } from './config/initialConfig';
 import { ControlledEditorPlugin } from './plugins/ControlledEditorPlugin';
-import { PLAYGROUND_TRANSFORMERS } from './plugins/MarkdownTransformers';
 
 import styles from './Editor.module.scss';
 
@@ -31,7 +30,7 @@ const Placeholder = () => (
 export const Editor: FC<EditorProps> = ({ content, className, onChange }) => {
   const handleContentChange = (editorState: EditorState) => {
     editorState.read(() => {
-      const markdown = $convertToMarkdownString(PLAYGROUND_TRANSFORMERS);
+      const markdown = $convertToMarkdownString(TRANSFORMERS);
       onChange(markdown);
     });
   };
@@ -46,7 +45,7 @@ export const Editor: FC<EditorProps> = ({ content, className, onChange }) => {
         <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
         <ControlledEditorPlugin content={content} />
         <RichTextPlugin
-          contentEditable={<ContentEditable />}
+          contentEditable={<ContentEditable spellCheck={false} />}
           placeholder={<Placeholder />}
           ErrorBoundary={LexicalErrorBoundary}
         />

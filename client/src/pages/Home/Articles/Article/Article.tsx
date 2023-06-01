@@ -3,13 +3,12 @@ import classNames from 'classnames';
 
 import styles from './Article.module.scss';
 
-export interface ArticleProps {
+export interface ArticleProps extends Styleable {
   title: string;
   subtitle: string;
   image: Image;
   theme?: 'dark' | 'light';
   side?: 'left' | 'right';
-  className?: string;
 }
 
 export const Article: FC<ArticleProps> = ({

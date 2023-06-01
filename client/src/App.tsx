@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 
-import { AuthProvider } from 'contexts/AuthContext';
+import { GlobalProvider } from 'contexts/GlobalContext';
 import { Router } from 'routes/Router';
 
 import './App.scss';
 
 export const App: FC = () => (
-  <AuthProvider>
+  <GlobalProvider>
     <Router />
-  </AuthProvider>
+  </GlobalProvider>
 );

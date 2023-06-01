@@ -1,0 +1,63 @@
+@import 'assets/styles/colors';
+
+.item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  list-style: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  outline: 1px solid transparent;
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 11px;
+  }
+
+  .text {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: $accent;
+    margin: 0 0 0 11px;
+  }
+
+  &.delete {
+    border-top: 1px solid $accent;
+
+    .icon {
+      filter: invert(54%) sepia(35%) saturate(334%) hue-rotate(347deg) brightness(96%) contrast(91%);
+    }
+  }
+
+  &.delete:hover {
+    border-top: 1px solid transparent;
+    outline: 1px solid $error;
+
+    .text {
+      color: $error;
+    }
+
+    .icon {
+      filter: invert(74%) sepia(81%) saturate(7067%) hue-rotate(337deg) brightness(87%) contrast(88%);
+    }
+  }
+}
+
+.item:hover {
+  outline: 1px solid $darkAccent;
+
+  .text {
+    color: $darkAccent;
+  }
+
+  .icon {
+    filter: brightness(80%);
+  }
+}

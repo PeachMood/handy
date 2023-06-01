@@ -1,0 +1,12 @@
+@import 'assets/styles/colors';
+
+.menu {
+  position: absolute;
+  width: 160px;
+  box-sizing: border-box;
+  background-color: $surface;
+  border: 1px solid $accent;
+  filter: drop-shadow(1px 1px 8px rgba(0, 0, 0, 0.1));
+  padding: 0;
+  z-index: 1;
+}

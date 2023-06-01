@@ -25,10 +25,13 @@
 }
 
 .editor {
+  grid-column: 2/3;
+  flex: 1 1 0%;
   display: flex;
   justify-content: center;
-  position: relative;
-  min-height: 100%;
+  align-items: stretch;
+  min-height: calc(100% - 40px);
+  max-width: 100%;
   padding: 60px;
   box-sizing: border-box;
   background-color: $surface;

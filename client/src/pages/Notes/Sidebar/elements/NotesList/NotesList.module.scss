@@ -1,0 +1,8 @@
+.notes {
+  margin-top: 20px;
+  overflow: hidden auto;
+
+  .note+.note {
+    margin-top: 5px;
+  }
+}

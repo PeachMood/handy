@@ -1,14 +1,19 @@
 @import 'assets/styles/colors';
 
 .button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: none;
   outline: none;
   padding: 0;
   cursor: pointer;
-  transition: background-color linear .2s;
   background-position: center;
   background-repeat: no-repeat;
+  background-size: contain;
+  background-color: transparent;
+  transition: filter linear .2s;
+  width: 24px;
+  height: 24px;
+}
+
+.button:hover {
+  filter: brightness(80%);
 }

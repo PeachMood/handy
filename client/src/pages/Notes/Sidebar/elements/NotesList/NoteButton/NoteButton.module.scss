@@ -1,0 +1,29 @@
+@import 'assets/styles/colors';
+
+.note {
+  position: relative;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: left;
+  color: $accent;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border: none;
+  outline: none;
+  padding-left: 20px;
+  height: 30px;
+  background-color: transparent;
+  transition: background-color linear .2s;
+  cursor: pointer;
+}
+
+.note:hover {
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.note:focus {
+  background-color: rgba(255, 255, 255, .5);
+}

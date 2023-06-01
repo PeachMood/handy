@@ -1,0 +1,19 @@
+@import 'assets/styles/colors';
+
+.sidebar {
+  grid-row: 1/3;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  grid-template-rows: 40px 1fr;
+  height: 100%;
+  max-width: 41px;
+  width: 41px;
+  overflow: hidden;
+  transition: all .6s;
+  z-index: 1;
+
+  &.opened {
+    max-width: 380px;
+    width: 100%;
+  }
+}

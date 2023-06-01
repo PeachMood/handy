@@ -1,0 +1,49 @@
+@import 'assets/styles/colors';
+
+.popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  visibility: hidden;
+  cursor: pointer;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, .3);
+  transition: visibility 0s .3s, opacity .3s linear;
+
+  &.opened {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity .3s linear;
+  }
+
+  .container {
+    position: relative;
+    cursor: default;
+    max-width: 500px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 40px;
+    background-color: $surface;
+  }
+
+  .close {
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 11px;
+    right: 11px;
+    transition: filter linear .3s;
+    filter: invert(32%) sepia(24%) saturate(605%) hue-rotate(346deg) brightness(97%) contrast(90%);
+  }
+
+  .close:hover {
+    filter: invert(24%) sepia(15%) saturate(951%) hue-rotate(346deg) brightness(88%) contrast(92%);
+  }
+}

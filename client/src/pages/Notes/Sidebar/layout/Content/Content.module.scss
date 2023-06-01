@@ -1,0 +1,16 @@
+@import 'assets/styles/colors';
+
+.container {
+  background-color: $background;
+  border-right: 1px solid $lightPrimary;
+  padding: 10px 20px 20px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0s linear, visibility 0s linear;
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0s linear .6s, visibility 0s linear .6s;
+  }
+}

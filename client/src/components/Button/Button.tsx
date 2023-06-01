@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import styles from './Button.module.scss';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: 'primary' | 'accent';
-  size?: 'medium' | 'large' | 'huge';
+  color?: 'primary' | 'accent' | 'error';
+  size?: 'small' | 'medium' | 'large' | 'huge';
 }
 
 export const Button: FC<ButtonProps> = ({

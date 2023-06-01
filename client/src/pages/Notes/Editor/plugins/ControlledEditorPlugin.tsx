@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
-import { $convertFromMarkdownString } from '@lexical/markdown';
+import { $convertFromMarkdownString, TRANSFORMERS } from '@lexical/markdown';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { PLAYGROUND_TRANSFORMERS } from './MarkdownTransformers';
+import { $getRoot } from 'lexical';
 
 interface ControlledEditorPluginProps {
   content?: string,
@@ -11,9 +11,9 @@ export const ControlledEditorPlugin: FC<ControlledEditorPluginProps> = ({ conten
   const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
-    if (content) {
+    if (content !== null && content !== undefined) {
       editor.update(() => {
-        $convertFromMarkdownString(content, PLAYGROUND_TRANSFORMERS);
+        $convertFromMarkdownString(content, TRANSFORMERS);
       });
     }
   }, [content]);

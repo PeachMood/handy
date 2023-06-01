@@ -67,7 +67,7 @@ export const LoginForm: FC = () => {
       />
       <div className={styles.field}>
         <Checkbox label="Remember me" />
-        <TextButton color="accent" size="small">Forgot password?</TextButton>
+        <TextButton color="accent" size="small" type="button">Forgot password?</TextButton>
       </div>
     </Form>
   );

@@ -6,11 +6,10 @@ import { IconButton } from 'components/IconButton/IconButton';
 
 import styles from './Alert.module.scss';
 
-export interface AlertProps {
+export interface AlertProps extends Styleable {
   text?: string;
-  type?: 'error' | 'waring' | 'success';
+  type?: 'error' | 'warning' | 'success';
   onClose?: () => void;
-  className?: string;
 }
 
 export const Alert: FC<AlertProps> = ({

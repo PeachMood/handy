@@ -8,12 +8,12 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { isInvalid, ...otherProps } = props;
+  const { isInvalid, className, ...otherProps } = props;
 
   const classes = classNames(
     styles.input,
     { [styles.invalid]: isInvalid },
-    props.className,
+    className,
   );
 
   return (

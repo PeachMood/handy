@@ -34,10 +34,26 @@
     background-color: $darkAccent;
   }
 
-  &.primary:disabled {
+  &.accent:disabled {
     background-color: transparent;
     color: $accent;
     border: 1px solid $accent;
+  }
+
+  &.error {
+    background-color: $error;
+    color: $onError;
+  }
+
+  &.error:hover {
+    background-color: $darkError;
+  }
+
+  &.small {
+    font-size: 14px;
+    line-height: 20px;
+    width: 80px;
+    height: 30px;
   }
 
   &.medium {

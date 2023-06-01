@@ -1,0 +1,33 @@
+@import 'assets/styles/colors';
+
+.popup {
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 40px;
+    color: $onSurface;
+    margin: 0 0 30px;
+  }
+
+  .paragraph {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: $onSurface;
+    width: 100%;
+    margin: 0;
+  }
+
+  .paragraph+.paragraph {
+    margin-top: 10px;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    margin-top: 40px;
+  }
+}

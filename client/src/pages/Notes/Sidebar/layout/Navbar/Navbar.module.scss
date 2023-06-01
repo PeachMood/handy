@@ -1,0 +1,27 @@
+@import 'assets/styles/colors';
+
+.navbar {
+  display: flex;
+  grid-column: 1 / 3;
+  background-color: $lightBackground;
+  border-bottom: 1px solid $lightPrimary;
+  padding: 0 8px;
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .button {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0s linear, visibility 0s linear;
+
+    &.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0s linear .6s, visibility 0s linear .6s;
+    }
+  }
+}

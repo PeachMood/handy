@@ -6,5 +6,9 @@ declare global {
     alt: string;
   }
 
+  interface Styleable {
+    className?: string
+  }
+
   type FormOptions<T> = Partial<Record<keyof T, RegisterOptions<T, Path<T>>>>;
 }
