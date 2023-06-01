@@ -61,7 +61,7 @@ public class AuthorizationController {
    * @return Response indicating status of registration.
    */
   @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<String> register(@RequestBody UserRequestDto userRequestDto) {
+  public ResponseEntity<?> register(@RequestBody UserRequestDto userRequestDto) {
     UserEntity user = this.conversionService.convert(userRequestDto, UserEntity.class);
     if (Objects.isNull(user)) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid userdata");
@@ -79,7 +79,7 @@ public class AuthorizationController {
    * @return Response indicating status of verification.
    */
   @GetMapping(value = "/activate")
-  public ResponseEntity<String> activate(@RequestParam(name = "token") String token) {
+  public ResponseEntity<?> activate(@RequestParam(name = "token") String token) {
     if (!this.userService.verifyUser(token)) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid verification token");
     }
@@ -99,7 +99,7 @@ public class AuthorizationController {
       value = "/login",
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public JwtTokenDto login(HttpServletRequest request, HttpServletResponse response) {
+  public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response) {
     return sendToken(request, response);
   }
 
@@ -111,20 +111,25 @@ public class AuthorizationController {
    * @return Tokens for authorized user.
    */
   @GetMapping(value = "/refresh-token", produces = MediaType.APPLICATION_JSON_VALUE)
-  public JwtTokenDto refreshToken(HttpServletRequest request, HttpServletResponse response) {
+  public ResponseEntity<?> refreshToken(HttpServletRequest request, HttpServletResponse response) {
     return sendToken(request, response);
   }
 
   /* Tries to send JWT tokens */
-  private JwtTokenDto sendToken(HttpServletRequest request, HttpServletResponse response) {
+  private ResponseEntity<?> sendToken(HttpServletRequest request, HttpServletResponse response) {
     JwtAccessToken jwtAccessToken = this.authorizationService.generateAccessToken(request);
     JwtRefreshToken jwtRefreshToken = this.authorizationService.generateRefreshToken(request);
+    if (Objects.isNull(jwtAccessToken) || Objects.isNull(jwtRefreshToken)) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid jwt refresh token");
+    }
     this.authorizationService.saveAccessToken(jwtAccessToken, request, response);
     this.authorizationService.saveRefreshToken(jwtRefreshToken, request, response);
-    return new JwtTokenDto(
-        jwtAccessToken.getType(),
-        (int) this.authorizationService.getAccessTokenExpirationTime(),
-        jwtAccessToken.getToken(),
-        jwtRefreshToken.getToken());
+    JwtTokenDto jwtTokenDto =
+        new JwtTokenDto(
+            jwtAccessToken.getType(),
+            (int) this.authorizationService.getAccessTokenExpirationTime(),
+            jwtAccessToken.getToken(),
+            jwtRefreshToken.getToken());
+    return ResponseEntity.status(HttpStatus.OK).body(jwtTokenDto);
   }
 }

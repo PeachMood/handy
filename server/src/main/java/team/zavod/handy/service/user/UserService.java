@@ -151,10 +151,7 @@ public class UserService implements UserDetailsService {
     if (Objects.isNull(current)) {
       return false;
     }
-    with.setAvatar(current.getAvatar());
-    with.setPassword(this.passwordEncoder.encode(with.getPassword()));
     with.setSettings(current.getSettings());
-    with.setRoles(current.getRoles());
     if ((!with.getUsername().equals(current.getUsername()) && isUsernameExists(with.getUsername()))
         || (!with.getEmail().equals(current.getEmail()) && isEmailExists(with.getEmail()))) {
       return false;
@@ -189,15 +186,17 @@ public class UserService implements UserDetailsService {
   public boolean verifyUser(String token) {
     VerificationTokenEntity verificationToken =
         this.verificationTokenService.findVerificationToken(token, VerificationTokenEntity.class);
-    if (Objects.isNull(verificationToken)
-        || Duration.between(verificationToken.getCreationDate(), LocalDateTime.now()).toHours()
-            >= this.applicationConfiguration.verification().tokenExpirationTime()) {
+    if (Objects.isNull(verificationToken)) {
+      return false;
+    }
+    this.verificationTokenService.deleteVerificationToken(verificationToken.getId());
+    if (Duration.between(verificationToken.getCreationDate(), LocalDateTime.now()).toHours()
+        >= this.applicationConfiguration.verification().tokenExpirationTime()) {
       return false;
     }
     UserEntity user = verificationToken.getUser();
     user.setEnabled(true);
     updateUser(user);
-    this.verificationTokenService.deleteVerificationToken(verificationToken.getId());
     return true;
   }
 
