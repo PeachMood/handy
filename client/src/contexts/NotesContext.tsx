@@ -27,7 +27,7 @@ interface NotesContext {
 export const NotesContext = createContext<NotesContext>(null);
 
 export const NotesProvider: FC = ({ children }) => {
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<Note[]>([{ id: 1, name: 'Sport', content: '# Sport\n> Sport is life!' }, { id: 2, name: 'Study', content: '# Study\n1. Math\n2. Computer programming' }]);
   const [currentNote, setCurrentNote] = useState<Note>(notes[0]);
   const [renamedNote, setRenamedNote] = useState<Note>(null);
   const { isLoggedIn } = useAuthContext();

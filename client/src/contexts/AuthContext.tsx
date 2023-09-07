@@ -15,7 +15,7 @@ export const AuthContext = createContext<AuthContext>(null);
 
 export const AuthProvider: FC = ({ children }) => {
   const [accessToken, setAccessToken] = useState<string>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const navigate = useNavigate();
   const authApi = useAuthApi();
 
