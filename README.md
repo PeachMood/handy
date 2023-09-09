@@ -79,12 +79,12 @@ It is also necessary to install [Docker Compose](https://docs.docker.com/compose
    DB_DIR=../db
    LETSENCRYPT_DIR=../letsencrypt
 
-   MYSQL_DATABASE=handy
-   MYSQL_USER=handyuser
-   MYSQL_PASSWORD=handypassword
-   MYSQL_ROOT_PASSWORD=handyrootpassword
-   MYSQL_HOST=db
-   MYSQL_PORT=3306
+   MYSQL_DATABASE=database
+   MYSQL_USER=user
+   MYSQL_PASSWORD=password
+   MYSQL_ROOT_PASSWORD=root
+   MYSQL_HOST=host
+   MYSQL_PORT=port
    ```
 3. Change in docker-compose.yml the following sections
    ```
